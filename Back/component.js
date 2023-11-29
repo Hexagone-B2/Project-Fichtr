@@ -3,18 +3,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const executeSQL = require('./mysql.js');
 
-const SECRET_KEY = 'H7o0^N$LYH6Tra.gcPGZ_n2zs&XK.v{D';
-
-function getUsernameByJWT(token){
-    try{
-        const decoded =  jwt.verify(token, SECRET_KEY);
-        return decoded.username
-    }catch(e){
-        console.log(e);
-        return null;
-    }
-}
-
 
 module.exports.hello = (req, res) => {
     res.send('Bonjour !');
@@ -42,7 +30,9 @@ module.exports.getPosts = (req, res) => {
 }
 
 module.exports.echo = (req, res) => {
-    res.json(req.body);
+    res.json(req.session.user)
+    console.log(req.session.user)
+    //res.json(req.body);
 }
 
 
@@ -52,17 +42,28 @@ module.exports.uploadProfilePic = (req, res) => {
 }
 
 
-module.exports.login = async (req, res) => {
+module.exports.login = (req, res) => {
+    console.log(req.body)
     if (!(req.body.email && req.body.password)){
         res.status(403).send('NOT_ALL_DATA');
         return;
     }else{
-        executeSQL('SELECT password,username from User where mail=?',[req.body.email],(error,result)=>{
-            if (bcrypt.compareSync(req.body.password,result[0].password)){
-                const token = jwt.sign({username : result[0].username}, SECRET_KEY);
-                res.status(200).send(token);
+        executeSQL('SELECT * from User where mail=?', [req.body.email], (error, result) => {
+            if (!result[0]) {
+                res.status(403).send('UNKNOWN_MAIL');
             }else{
-                res.status(403).send('WRONG_PASSWORD');
+                if (bcrypt.compareSync(req.body.password, result[0].password)) {
+                    req.session.user = {
+                        id: result[0].id,
+                        firstname: result[0].firstname,
+                        lastname: result[0].lastname,
+                        mail: result[0].mail,
+                        roles: result[0].roles,
+                    };
+                    res.status(200).send('OK');
+                } else {
+                    res.status(403).send('WRONG_PASSWORD');
+                }
             }
         })
     }

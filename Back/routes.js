@@ -24,7 +24,8 @@ router.get("/file/:file", sendFile);
 
 router.get("/getPosts", getPosts);
 
-router.post('/echo', echo)
+router.post('/echo', echo);
+router.get('/echo', echo);
 
 router.get('/', hello);
 
@@ -33,6 +34,10 @@ router.post('/uploadProfilePic', upload.single('forer'), uploadProfilePic)
 router.post('/register', register)
 
 router.post('/login', login)
+
+router.get('/test',(req,res) => {
+    res.sendFile(__dirname+'/test.html');
+})
 
 router.post('/updateUser',upload.single('newPhoto'), updateUser)
 
