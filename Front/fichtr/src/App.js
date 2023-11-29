@@ -1,8 +1,25 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./composant/InscriptionForm";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Toolbar from "./composant/Toolbar.jsx";
 import AppRouter from "./AppRouter";
 
 export default function App() {
-  return (
-    <AppRouter/>
-  );
+    return (
+        <>
+
+        <Toolbar>
+            <div>
+                HexaCorp
+            </div>
+        </Toolbar>
+
+            <div className="App">
+            <header className="App-header">
+
+            </header>
+            </div>
+
+            <AppRouter/>
+        </>
+    );
 }
