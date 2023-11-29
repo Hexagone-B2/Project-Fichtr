@@ -1,0 +1,43 @@
+.my-app-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #310046;
+    color: white;
+}
+
+.forum-name {
+    font-size: 1.5em;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    padding: 8px;
+    margin-right: 8px;
+}
+
+.search-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-connecter {
+    color: white;
+    background-color: #310046;
+    border: none;
+    padding: 15px 32px;
+    font-size: large;
+    font-family: sans-serif;
+    border-radius: 8px;
+}
+
+.btn-connecter:hover {
+    background-color: #41015d;
+    transition-duration: 0.4s;
+}
