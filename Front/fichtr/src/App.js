@@ -1,44 +1,25 @@
-import "./App.css";
-import "./composant/InscriptionForm";
-import InscriptionPage from "./composant/InscriptionPage";
-
-function App() {
-  return <InscriptionPage />;
 import logo from './logo.svg';
 import './App.css';
-import navbarSide from "./Navbar_side.jsx"
-import Toolbar from "./Toolbar.jsx";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Root from "./pages/root";
-import Questions from "./pages/questions";
-import Tags from "./pages/tags";
-import Shoutbox from "./pages/shoutbox";
 
-export default function App() {
+function App() {
   return (
-      <>
-
-        <Toolbar>
-          <div>
-            HexaCorp
-          </div>
-        </Toolbar>
-
     <div className="App">
       <header className="App-header">
-        
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
       </header>
     </div>
-
-      </>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Root />}>
-          <Route path="questions" element={<Questions />} />
-          <Route path="tags" element={<Tags />} />
-          <Route path="shoutbox" element={<Shoutbox />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
   );
 }
+
+export default App;
