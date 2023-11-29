@@ -6,16 +6,21 @@ import Toolbar from "./Toolbar.jsx";
 
 function App() {
   return (
+      <>
+
+        <Toolbar>
+          <div>
+            HexaCorp
+          </div>
+        </Toolbar>
+
     <div className="App">
       <header className="App-header">
         
       </header>
     </div>
-      <Toolbar>
-        <div>
-          HexaCorp
-        </div>
-      </Toolbar>
+
+      </>
   );
 }
 
