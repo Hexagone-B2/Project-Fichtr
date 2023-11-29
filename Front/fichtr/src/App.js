@@ -1,10 +1,7 @@
 import "./composant/InscriptionForm";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Toolbar from "./composant/Toolbar.jsx";
-import Root from "./pages/root";
-import Questions from "./pages/questions";
-import Tags from "./pages/tags";
-import Shoutbox from "./pages/shoutbox";
+import AppRouter from "./AppRouter";
 
 export default function App() {
     return (
@@ -22,16 +19,7 @@ export default function App() {
             </header>
             </div>
 
-            <BrowserRouter>
-            <Routes>
-            <Route path="/" element={<Root/>}>
-        <Route path="questions" element={<Questions/>}/>
-        <Route path="tags" element={<Tags/>}/>
-        <Route path="shoutbox" element={<Shoutbox/>}/>
-        </Route>
-</Routes>
-</BrowserRouter>
+            <AppRouter/>
         </>
     );
-
 }
