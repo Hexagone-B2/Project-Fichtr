@@ -1,7 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import "./root.css";
 
-
 const Root = () => {
     return (
       <>

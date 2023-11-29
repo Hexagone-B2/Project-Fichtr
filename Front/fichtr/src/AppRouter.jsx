@@ -4,7 +4,7 @@ import Questions from "./pages/questions";
 import Tags from "./pages/tags";
 import Shoutbox from "./pages/shoutbox";
 
-export default function navbarSide() {
+export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
