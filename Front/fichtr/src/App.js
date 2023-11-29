@@ -1,6 +1,6 @@
 import "./composant/InscriptionForm";
 import Toolbar from "./composant/Toolbar.jsx";
-import AppRouter from "./AppRouter";
+import AppRouter from "./composant/AppRouter.jsx";
 
 export default function App() {
     return (
