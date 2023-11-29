@@ -9,6 +9,8 @@ export default function InscriptionForm(props) {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [repeatPassword, setRepeatPassword] = useState("");
+  let [passIsWrong, SetPassIsWrong] = useState(false);
+  let [emailIsWrong, setEmailIsWrong] = useState(false);
 
   function handleChange(event) {
     switch (event.target.name) {
@@ -42,10 +44,17 @@ export default function InscriptionForm(props) {
     const email = event.target[3].value;
     const password = event.target[4].value;
     const repeatPassword = event.target[5].value;
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setEmailIsWrong(false);
+    SetPassIsWrong(false);
 
-    // if (password !== repeatPassword) {
-    //   console.log("ahahah");
-    // } else {
+    if (!regexEmail.test(email)){
+      setEmailIsWrong(true);
+    }
+    else if (password !== repeatPassword) {
+      SetPassIsWrong(true)
+    }
+    else {
     var to_send = {
       firstname: firstName,
       lastname: lastName,
@@ -65,7 +74,7 @@ export default function InscriptionForm(props) {
       .catch((error) => {
         console.log(error.response.data);
       });
-    // }
+    }
     event.preventDefault();
   }
 
@@ -83,7 +92,7 @@ export default function InscriptionForm(props) {
           Prénom
         </label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className={`shadow appearance-none border ${firstName === "" ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="text"
           name="firstName"
           id="firstName"
@@ -99,7 +108,7 @@ export default function InscriptionForm(props) {
           Nom de famille
         </label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className={`shadow appearance-none border ${lastName === "" ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="text"
           name="lastName"
           id="lastName"
@@ -115,7 +124,7 @@ export default function InscriptionForm(props) {
           Nom d'utilisateur
         </label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className={`shadow appearance-none border ${userName === "" ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="text"
           name="userName"
           id="userName"
@@ -131,13 +140,14 @@ export default function InscriptionForm(props) {
           Email
         </label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className={`shadow appearance-none border ${email === "" ? 'border-red-500' : ''} ${emailIsWrong ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="text"
           name="email"
           id="email"
           value={email}
           onChange={handleChange}
         />
+        {emailIsWrong && <p class="text-red-500 text-xs italic">Entrez une adresse mail valide</p>}
       </div>
       <div className="mb-4">
         <label
@@ -147,7 +157,7 @@ export default function InscriptionForm(props) {
           Mot de passe
         </label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className={`shadow appearance-none border ${password === "" ? 'border-red-500' : ''} ${passIsWrong ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="password"
           name="password"
           id="password"
@@ -163,13 +173,14 @@ export default function InscriptionForm(props) {
           Répéter mot de passe
         </label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className={`shadow appearance-none border ${repeatPassword === "" ? 'border-red-500' : ''} ${passIsWrong ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="password"
           name="repeatPassword"
           id="repeatPassword"
           value={repeatPassword}
           onChange={handleChange}
         />
+        {passIsWrong && <p class="text-red-500 text-xs italic">Les mots de passe doivent être similaires</p>}
       </div>
       <div className="flex items-center justify-between">
         <button

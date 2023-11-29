@@ -1,6 +1,5 @@
 import "./App.css";
-import "./composant/InscriptionForm";
-import InscriptionPage from "./composant/InscriptionPage";
+import InscriptionPage from "./composant/Inscription/InscriptionPage";
 
 function App() {
   return <InscriptionPage />;
