@@ -4,7 +4,7 @@ export default function InscriptionPage(props) {
   return (
     <div className="flex">
       <InscriptionForm />
-      <img src="./amitier.jpg" alt="" className="w-3/5" />
+      <img src="./amitierv2.PNG" alt="" className="w-3/5" />
     </div>
   );
 }
