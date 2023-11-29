@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const { useState } = require("react");
 
 export default function InscriptionForm(props) {
@@ -6,7 +8,7 @@ export default function InscriptionForm(props) {
   let [userName, setUserName] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let [repeatPasswor, setRepeatPasswor] = useState("");
+  let [repeatPassword, setRepeatPassword] = useState("");
 
   function handleChange(event) {
     switch (event.target.name) {
@@ -25,15 +27,47 @@ export default function InscriptionForm(props) {
       case "password":
         setPassword(event.target.value);
         break;
-      case "repeatPasswor":
-        setRepeatPasswor(event.target.value);
+      case "repeatPassword":
+        setRepeatPassword(event.target.value);
         break;
       default:
         break;
     }
   }
 
-  function handleSubmit() {}
+  function handleSubmit(event) {
+    const firstName = event.target[0].value;
+    const lastName = event.target[1].value;
+    const userName = event.target[2].value;
+    const email = event.target[3].value;
+    const password = event.target[4].value;
+    const repeatPassword = event.target[5].value;
+
+    // if (password !== repeatPassword) {
+    //   console.log("ahahah");
+    // } else {
+    var to_send = {
+      firstname: firstName,
+      lastname: lastName,
+      username: userName,
+      email: email,
+      password: password,
+      repeatpassword: repeatPassword,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    axios
+      .post("http://10.2.7.20:3000/api/register", to_send, { headers })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+    // }
+    event.preventDefault();
+  }
 
   return (
     <form
@@ -59,7 +93,7 @@ export default function InscriptionForm(props) {
       </div>
       <div className="mb-4">
         <label
-          htmlFor="firstName"
+          htmlFor="lastName"
           className="block text-gray-700 text-sm font-bold mb-2"
         >
           Nom de famille
@@ -75,7 +109,7 @@ export default function InscriptionForm(props) {
       </div>
       <div className="mb-4">
         <label
-          htmlFor="firstName"
+          htmlFor="userName"
           className="block text-gray-700 text-sm font-bold mb-2"
         >
           Nom d'utilisateur
@@ -91,7 +125,7 @@ export default function InscriptionForm(props) {
       </div>
       <div className="mb-4">
         <label
-          htmlFor="firstName"
+          htmlFor="email"
           className="block text-gray-700 text-sm font-bold mb-2"
         >
           Email
@@ -107,7 +141,7 @@ export default function InscriptionForm(props) {
       </div>
       <div className="mb-4">
         <label
-          htmlFor="firstName"
+          htmlFor="password"
           className="block text-gray-700 text-sm font-bold mb-2"
         >
           Mot de passe
@@ -123,7 +157,7 @@ export default function InscriptionForm(props) {
       </div>
       <div className="mb-4">
         <label
-          htmlFor="firstName"
+          htmlFor="repeatPassword"
           className="block text-gray-700 text-sm font-bold mb-2"
         >
           Répéter mot de passe
@@ -133,14 +167,14 @@ export default function InscriptionForm(props) {
           type="password"
           name="repeatPassword"
           id="repeatPassword"
-          value={repeatPasswor}
+          value={repeatPassword}
           onChange={handleChange}
         />
       </div>
       <div className="flex items-center justify-between">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="button"
+          type="submit"
         >
           Envoyer
         </button>
