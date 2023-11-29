@@ -7,7 +7,8 @@ const {hello,
     uploadProfilePic,
     register,
     login,
-    updateUser
+    updateUserProfile,
+    getProfile
 } = require('./component.js');
 
 const storage = multer.diskStorage({
@@ -39,6 +40,8 @@ router.get('/test',(req,res) => {
     res.sendFile(__dirname+'/test.html');
 })
 
-router.post('/updateUser',upload.single('newPhoto'), updateUser)
+router.post('/updateUser',upload.single('newPhoto'), updateUserProfile)
+
+router.post('/getProfile',getProfile);
 
 module.exports = router;

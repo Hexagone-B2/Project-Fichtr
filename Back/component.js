@@ -1,5 +1,4 @@
 const fs = require('fs')
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const executeSQL = require('./mysql.js');
 
@@ -22,7 +21,7 @@ module.exports.getPosts = (req, res) => {
     executeSQL("SELECT * FROM Post", [], (error, results) => {
         if (error) {
             console.log(error);
-            res.status(500).send('Erreur interne');
+            res.status(500).send('INTERNAL_ERROR');
         } else {
             res.json(results)
         }
@@ -43,12 +42,10 @@ module.exports.uploadProfilePic = (req, res) => {
 
 
 module.exports.login = (req, res) => {
-    console.log(req.body)
-    if (!(req.body.email && req.body.password)){
+    if (!(req.body.mail && req.body.password)){
         res.status(403).send('NOT_ALL_DATA');
-        return;
     }else{
-        executeSQL('SELECT * from User where mail=?', [req.body.email], (error, result) => {
+        executeSQL('SELECT * from User where mail=?', [req.body.mail], (error, result) => {
             if (!result[0]) {
                 res.status(403).send('UNKNOWN_MAIL');
             }else{
@@ -70,11 +67,11 @@ module.exports.login = (req, res) => {
 }
 
 module.exports.register = (req, res) => {
-    if (req.body.username && req.body.lastname && req.body.firstname && req.body.email && req.body.password && req.body.repeatpassword) {
+    if (req.body.username && req.body.lastname && req.body.firstname && req.body.mail && req.body.password && req.body.repeatpassword) {
         if (req.body.password === req.body.repeatpassword) {
             bcrypt.hash(req.body.password, 10).then(password => {
                 executeSQL("INSERT INTO User (username, firstname, lastname, mail, password) VALUES (?,?,?,?,?);",
-                           [req.body.username, req.body.firstname, req.body.lastname, req.body.email, password],
+                           [req.body.username, req.body.firstname, req.body.lastname, req.body.mail, password],
                            (error) => {
                                 if (error){
                                     console.log(error);
@@ -102,8 +99,21 @@ module.exports.register = (req, res) => {
 }
 
 
-module.exports.updateUser = (req,res) => {
-    console.log(req.body);
-    console.log(req.file)
-    res.status(200).send('OK');
+module.exports.updateUserProfile = (req,res) => {
+    if (req.body.username && req.body.bio && req.body.mail && req.body.url_personnal_site && req.session.user){
+        //dire a marine de faire au moins 3 formulaires.
+    }
+}
+
+module.exports.getProfile = (req,res) => {
+    if (req.session.user){
+        const id = req.session.user.id;
+        executeSQL("SELECT * FROM Profile where user_id=?",[id],(error,result) => {
+            if (result[0]){
+                res.json(result[0]);
+            }
+            res.status(500).send('INTERNAL_ERROR');
+        })
+    }
+
 }
