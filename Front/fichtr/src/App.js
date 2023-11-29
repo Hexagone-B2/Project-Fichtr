@@ -1,5 +1,4 @@
 import "./composant/InscriptionForm";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Toolbar from "./composant/Toolbar.jsx";
 import AppRouter from "./AppRouter";
 
