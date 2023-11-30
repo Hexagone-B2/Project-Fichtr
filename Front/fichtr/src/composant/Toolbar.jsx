@@ -3,10 +3,10 @@ import './Toolbar.css';
 
 function Toolbar(props) {
     return (
-        <div className="my-app-bar">
+        <div className="my-app-bar flex justify-between items-center px-6 py-4">
             <div className="forum-name">Fichtr</div>
 
-            <form>
+            <form className="flex items-center">
                 <label
                     htmlFor="default-search"
                     className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -38,20 +38,26 @@ function Toolbar(props) {
                         placeholder="Faire une recherche..."
                         required=""
                     />
-
                 </div>
             </form>
 
-            <button type="button" className="btn-connecter focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-                Se connecter</button>
+            <div className="flex items-center space-x-4">
+                <button
+                    type="button"
+                    className="btn-connecter focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                >
+                    Se connecter
+                </button>
 
-
-
-
+                <button
+                    type="button"
+                    className="btn-inscription focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                >
+                    Inscription
+                </button>
+            </div>
         </div>
-
-
-);
+    );
 }
 
 export default Toolbar;
