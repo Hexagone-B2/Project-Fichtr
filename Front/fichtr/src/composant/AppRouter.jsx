@@ -5,7 +5,7 @@ import ConnectedNavbarLeft from "./ConnectedNavbarLeft";
 export default function AppRouter() {
   return (
     <BrowserRouter>
-      <ConnectedNavbarLeft/>
+      <NonConnectedNavbarLeft/>
     </BrowserRouter>
   );
 }
