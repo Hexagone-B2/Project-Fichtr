@@ -10,7 +10,11 @@ export default function InscriptionForm(props) {
   let [password, setPassword] = useState("");
   let [repeatPassword, setRepeatPassword] = useState("");
   let [passIsWrong, setPassIsWrong] = useState(false);
+  let [repeatPassIsWrong, setRepeatPassIsWrong] = useState(false);
   let [emailIsWrong, setEmailIsWrong] = useState(false);
+  let [userNameIsWrong, setUserNameIsWrong] = useState(false);
+  let [firstNameIsWrong, setFirstNameIsWrong] = useState(false);
+  let [lastNameIsWrong, setLastNameIsWrong] = useState(false);
 
   function handleChange(event) {
     switch (event.target.name) {
@@ -44,10 +48,26 @@ export default function InscriptionForm(props) {
     const email = event.target[3].value;
     const password = event.target[4].value;
     const repeatPassword = event.target[5].value;
-    const regexEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+    const regexEmail =
+      /^(?=[\s\S]{1,300}$)[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i;
+    const regexPassword =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!?,.;/:*])[A-Za-z\d!?,.;/:*]{10,1024}$/;
+    setPassIsWrong(!regexPassword.test(password));
     setEmailIsWrong(!regexEmail.test(email));
-    setPassIsWrong(password !== repeatPassword);
-    if (!(passIsWrong || emailIsWrong)) {
+    setRepeatPassIsWrong(password !== repeatPassword);
+    setUserNameIsWrong(userName.length > 50);
+    setFirstNameIsWrong(firstName.length > 50);
+    setLastNameIsWrong(lastName.length > 50);
+    if (
+      !(
+        repeatPassIsWrong ||
+        emailIsWrong ||
+        userNameIsWrong ||
+        passIsWrong ||
+        firstNameIsWrong ||
+        lastNameIsWrong
+      )
+    ) {
       var to_send = {
         firstname: firstName,
         lastname: lastName,
@@ -63,6 +83,11 @@ export default function InscriptionForm(props) {
         .post("http://10.2.7.20:3000/api/register", to_send, { headers })
         .then((res) => {
           console.log(res.data);
+          if (res.code === 200) {
+            console.log("succes");
+          }
+          //code username non dispo
+          //mail non dispo
         })
         .catch((error) => {
           console.log(error.response.data);
@@ -77,15 +102,11 @@ export default function InscriptionForm(props) {
       onSubmit={handleSubmit}
       className="inscription-form w-2/5 m-24 flex flex-col"
     >
-      <div className="mb-8">
-        <label
-          htmlFor="userName"
-          className="block text-gray-700 text-sm font-bold mb-2"
-        >
-          Nom d'utilisateur
-        </label>
+      <div className="mb-4">
         <input
-          className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`shadow appearance-none border ${
+            userNameIsWrong ? "border-red-500" : ""
+          } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="text"
           name="userName"
           id="userName"
@@ -94,10 +115,15 @@ export default function InscriptionForm(props) {
           placeholder="Nom d'utilisateur"
           required
         />
+        <p class="text-red-500 text-xs italic">
+          {userNameIsWrong ? "Votre nom d'utilisateur est trop long" : <br />}
+        </p>
       </div>
-      <div className="mb-8">
+      <div className="mb-4">
         <input
-          className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`shadow appearance-none border ${
+            firstNameIsWrong ? "border-red-500" : ""
+          } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="text"
           name="firstName"
           id="firstName"
@@ -106,10 +132,15 @@ export default function InscriptionForm(props) {
           placeholder="Prénom"
           required
         />
+        <p class="text-red-500 text-xs italic">
+          {firstNameIsWrong ? "Votre prenom est trop long" : <br />}
+        </p>
       </div>
-      <div className="mb-8">
+      <div className="mb-4">
         <input
-          className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`shadow appearance-none border ${
+            lastNameIsWrong ? "border-red-500" : ""
+          } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="text"
           name="lastName"
           id="lastName"
@@ -118,8 +149,11 @@ export default function InscriptionForm(props) {
           placeholder="Nom de famille"
           required
         />
+        <p class="text-red-500 text-xs italic">
+          {lastNameIsWrong ? "Votre nom de famille est trop long" : <br />}
+        </p>
       </div>
-      <div className="mb-8">
+      <div className="mb-4">
         <input
           className={`shadow appearance-none border ${
             emailIsWrong ? "border-red-500" : ""
@@ -133,13 +167,13 @@ export default function InscriptionForm(props) {
           required
         />
         <p class="text-red-500 text-xs italic">
-          {emailIsWrong ? "Entrez une adresse mail valide" : ""}
+          {emailIsWrong ? "Entrez une adresse mail valide" : <br />}
         </p>
       </div>
-      <div className="mb-8">
+      <div className="mb-4">
         <input
           className={`shadow appearance-none border ${
-            passIsWrong ? "border-red-500" : ""
+            repeatPassIsWrong ? "border-red-500" : ""
           } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="password"
           name="password"
@@ -151,11 +185,18 @@ export default function InscriptionForm(props) {
           minLength={"password"}
           maxLength={"password"}
         />
+        <p class="text-red-500 text-xs italic">
+          {passIsWrong ? (
+            "Le mot de passe doit contenir au moins 1 chiffre, 1 minuscule, 1 majuscule, 1 caractère spécial (!?,.;/:*) et faire 10 caractères minimum"
+          ) : (
+            <br />
+          )}
+        </p>
       </div>
-      <div className="mb-8">
+      <div className="mb-4">
         <input
           className={`shadow appearance-none border ${
-            passIsWrong ? "border-red-500" : ""
+            repeatPassIsWrong ? "border-red-500" : ""
           } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="password"
           name="repeatPassword"
@@ -168,7 +209,11 @@ export default function InscriptionForm(props) {
           maxLength={"password"}
         />
         <p class="text-red-500 text-xs italic">
-          {passIsWrong ? "Les mots de passe doivent être similaires" : <br />}
+          {repeatPassIsWrong ? (
+            "Les mots de passe doivent être similaires"
+          ) : (
+            <br />
+          )}
         </p>
       </div>
       <div className="flex items-center justify-between">
