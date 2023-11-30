@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Root from "./pages/root";
-import Questions from "./pages/questions";
-import Tags from "./pages/tags";
-import Shoutbox from "./pages/shoutbox";
+import Root from "../pages/root";
+import Questions from "../pages/questions";
+import Tags from "../pages/tags";
+import Shoutbox from "../pages/shoutbox";
 
-export default function navbarSide() {
+export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
