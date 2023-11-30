@@ -1,8 +1,6 @@
-import "./composant/InscriptionForm";
 import ConnectedToolbar from "./composant/ConnectedToolbar.jsx";
 import RightNavBar from "./composant/RightNavBar";
 import Toolbar from "./composant/Toolbar.jsx";
-import ConnectedToolbar from "./composant/ConnectedToolbar.jsx";
 import AppRouter from "./composant/AppRouter.jsx";
 
 
