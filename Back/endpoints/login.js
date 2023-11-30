@@ -1,0 +1,30 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const {executeSQL} = require('../func/mysql');
+
+
+module.exports.login = (req, res) => {
+    if (!(req.body.mail && req.body.password)){
+        res.status(403).send('NOT_ALL_DATA');
+    }else{
+        executeSQL('SELECT * from User where mail=?', [req.body.mail], (error, result) => {
+            if (!result[0]) {
+                res.status(403).send('UNKNOWN_MAIL');
+            }else{
+                if (bcrypt.compareSync(req.body.password, result[0].password)) {
+                    const user = {
+                        id: result[0].id,
+                        firstname: result[0].firstname,
+                        lastname: result[0].lastname,
+                        mail: result[0].mail,
+                        roles: result[0].roles,
+                    };
+                    const token = jwt.sign(user,SECRET_KEY,{expiresIn : '1h'});
+                    res.send(token);
+                } else {
+                    res.status(403).send('WRONG_PASSWORD');
+                }
+            }
+        })
+    }
+}
