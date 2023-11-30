@@ -1,0 +1,1 @@
+module.exports.secret_key = "H7o0^N$LYH6Tra.gcPGZ_n2zs&XK.v{D";

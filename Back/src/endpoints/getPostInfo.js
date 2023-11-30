@@ -1,6 +1,8 @@
 const {executeSQL} = require('../func/mysql.js');
 
-
+/**
+ * @jso @result[] num
+ */
 module.exports.getPostInfo = (req,res)=>{
     if (!(req.body.id)){
         res.status(403).send('NOT_ALL_DATA');
