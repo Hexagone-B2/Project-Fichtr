@@ -1,6 +1,7 @@
 import React from 'react';
 import './ConnectedToolbar.css';
 
+
 function ConnectedToolbar(props) {
     return (
         <div className="my-app-bar flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 bg-white shadow-md">

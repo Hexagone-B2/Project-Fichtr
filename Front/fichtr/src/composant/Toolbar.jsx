@@ -1,13 +1,14 @@
 import React from 'react';
 import './Toolbar.css';
 
+
 function Toolbar(props) {
     return (
         <div className="my-app-bar flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 bg-white shadow-md">
             <button>
                 <img src="./img/logo.png" alt="logo" className="w-44"/>
             </button>
-            
+
             <form className="flex items-center">
                 <label
                     htmlFor="default-search"
