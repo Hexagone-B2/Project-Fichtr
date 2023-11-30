@@ -1,4 +1,5 @@
 import axios from "axios";
+import Field from "../Field";
 
 const { useState } = require("react");
 
@@ -15,31 +16,6 @@ export default function InscriptionForm(props) {
   let [userNameIsWrong, setUserNameIsWrong] = useState(false);
   let [firstNameIsWrong, setFirstNameIsWrong] = useState(false);
   let [lastNameIsWrong, setLastNameIsWrong] = useState(false);
-
-  function handleChange(event) {
-    switch (event.target.name) {
-      case "firstName":
-        setFirstName(event.target.value);
-        break;
-      case "lastName":
-        setLastName(event.target.value);
-        break;
-      case "userName":
-        setUserName(event.target.value);
-        break;
-      case "email":
-        setEmail(event.target.value);
-        break;
-      case "password":
-        setPassword(event.target.value);
-        break;
-      case "repeatPassword":
-        setRepeatPassword(event.target.value);
-        break;
-      default:
-        break;
-    }
-  }
 
   function handleSubmit(event) {
     const firstName = event.target[0].value;
@@ -83,6 +59,7 @@ export default function InscriptionForm(props) {
         .post("http://10.2.7.20:3000/api/register", to_send, { headers })
         .then((res) => {
           console.log(res.data);
+
           if (res.code === 200) {
             console.log("succes");
           }
@@ -102,120 +79,66 @@ export default function InscriptionForm(props) {
       onSubmit={handleSubmit}
       className="inscription-form w-2/5 m-24 flex flex-col"
     >
-      <div className="mb-4">
-        <input
-          className={`shadow appearance-none border ${
-            userNameIsWrong ? "border-red-500" : ""
-          } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-          type="text"
-          name="userName"
-          id="userName"
-          value={userName}
-          onChange={handleChange}
-          placeholder="Nom d'utilisateur"
-          required
-        />
-        <p class="text-red-500 text-xs italic">
-          {userNameIsWrong ? "Votre nom d'utilisateur est trop long" : <br />}
-        </p>
-      </div>
-      <div className="mb-4">
-        <input
-          className={`shadow appearance-none border ${
-            firstNameIsWrong ? "border-red-500" : ""
-          } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-          type="text"
-          name="firstName"
-          id="firstName"
-          value={firstName}
-          onChange={handleChange}
-          placeholder="Prénom"
-          required
-        />
-        <p class="text-red-500 text-xs italic">
-          {firstNameIsWrong ? "Votre prenom est trop long" : <br />}
-        </p>
-      </div>
-      <div className="mb-4">
-        <input
-          className={`shadow appearance-none border ${
-            lastNameIsWrong ? "border-red-500" : ""
-          } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-          type="text"
-          name="lastName"
-          id="lastName"
-          value={lastName}
-          onChange={handleChange}
-          placeholder="Nom de famille"
-          required
-        />
-        <p class="text-red-500 text-xs italic">
-          {lastNameIsWrong ? "Votre nom de famille est trop long" : <br />}
-        </p>
-      </div>
-      <div className="mb-4">
-        <input
-          className={`shadow appearance-none border ${
-            emailIsWrong ? "border-red-500" : ""
-          }rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-          type="text"
-          name="email"
-          id="email"
-          value={email}
-          onChange={handleChange}
-          placeholder="Email"
-          required
-        />
-        <p class="text-red-500 text-xs italic">
-          {emailIsWrong ? "Entrez une adresse mail valide" : <br />}
-        </p>
-      </div>
-      <div className="mb-4">
-        <input
-          className={`shadow appearance-none border ${
-            repeatPassIsWrong ? "border-red-500" : ""
-          } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-          type="password"
-          name="password"
-          id="password"
-          value={password}
-          onChange={handleChange}
-          placeholder="Mot de passe"
-          required
-          minLength={"password"}
-          maxLength={"password"}
-        />
-        <p class="text-red-500 text-xs italic">
-          {passIsWrong ? (
-            "Le mot de passe doit contenir au moins 1 chiffre, 1 minuscule, 1 majuscule, 1 caractère spécial (!?,.;/:*) et faire 10 caractères minimum"
-          ) : (
-            <br />
-          )}
-        </p>
-      </div>
-      <div className="mb-4">
-        <input
-          className={`shadow appearance-none border ${
-            repeatPassIsWrong ? "border-red-500" : ""
-          } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-          type="password"
-          name="repeatPassword"
-          id="repeatPassword"
-          value={repeatPassword}
-          onChange={handleChange}
-          placeholder="Répéter mot de passe"
-          required
-          minLength={"password"}
-          maxLength={"password"}
-        />
-        <p class="text-red-500 text-xs italic">
-          {repeatPassIsWrong ? (
-            "Les mots de passe doivent être similaires"
-          ) : (
-            <br />
-          )}
-        </p>
-      </div>
+      <Field
+        type="text"
+        name="userName"
+        id="userName"
+        value={userName}
+        onChange={setUserName}
+        placeholder="Nom d'utilisateur"
+        boolean={userNameIsWrong}
+        errorText="Nom d'utilisateur trop long"
+      />
+      <Field
+        type="text"
+        name="firstName"
+        id="firstName"
+        value={firstName}
+        onChange={setFirstName}
+        placeholder="Prenom"
+        boolean={firstNameIsWrong}
+        errorText="Prénom trop long"
+      />
+      <Field
+        type="text"
+        name="lastName"
+        id="lastName"
+        value={lastName}
+        onChange={setLastName}
+        placeholder="Nom de famille"
+        boolean={lastNameIsWrong}
+        errorText="Nom de famille trop long"
+      />
+      <Field
+        type="email"
+        name="email"
+        id="email"
+        value={email}
+        onChange={setEmail}
+        placeholder="Email"
+        boolean={emailIsWrong}
+        errorText="Entrez une adresse mail valide"
+      />
+      <Field
+        type="password"
+        name="password"
+        id="password"
+        value={password}
+        onChange={setPassword}
+        placeholder="Mot de passe"
+        boolean={passIsWrong}
+        errorText="Le mot de passe doit contenir au moins 1 chiffre, 1 minuscule, 1 majuscule, 1 caractère spécial (!?,.;/:*) et faire 10 caractères minimum"
+      />
+      <Field
+        type="password"
+        name="repeatPassword"
+        id="repeatPassword"
+        value={repeatPassword}
+        onChange={setRepeatPassword}
+        placeholder="Répéter mot de passe"
+        boolean={repeatPassIsWrong}
+        errorText="Les mots de passe doivent être similaires"
+      />
       <div className="flex items-center justify-between">
         <button
           className="bg-[#310046] hover:bg-[#470863] text-white font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline"

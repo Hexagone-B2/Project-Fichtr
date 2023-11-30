@@ -1,28 +1,20 @@
 import { useState } from "react";
 import axios from "axios";
+import Field from "../Field";
 
 export default function AuthentificationForm(props) {
-  let [mail, setmail] = useState("");
+  let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [authIsWrong, setAuthIsWrong] = useState(false);
 
   function handleClick(event) {
-    axios.post("http://10.2.7.20:3000/api/echo");
+    axios.post(
+      "http://10.2.7.20:3000/api/echo",
+      {},
+      { headers: { Authorization: localStorage.getItem("authorization") } }
+    );
 
     event.preventDefault();
-  }
-
-  function handleChange(event) {
-    switch (event.target.name) {
-      case "mail":
-        setmail(event.target.value);
-        break;
-      case "password":
-        setPassword(event.target.value);
-        break;
-      default:
-        break;
-    }
   }
 
   function handleSubmit(event) {
@@ -39,6 +31,7 @@ export default function AuthentificationForm(props) {
       .post("http://10.2.7.20:3000/api/login", to_send, { headers })
       .then((res) => {
         console.log(res.data);
+        localStorage.setItem("authorization", res.data);
         if (res.code === 403) {
           setAuthIsWrong(true);
         }
@@ -59,42 +52,26 @@ export default function AuthentificationForm(props) {
         onSubmit={handleSubmit}
         className="inscription-form w-2/5 m-24"
       >
-        <div className="mb-4">
-          <label
-            htmlFor="mail"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Nom d'utilisateur
-          </label>
-          <input
-            className={`shadow appearance-none border ${
-              authIsWrong ? "border-red" : ""
-            } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-            type="text"
-            name="mail"
-            id="mail"
-            value={mail}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="password"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Mot de passe
-          </label>
-          <input
-            className={`shadow appearance-none border ${
-              authIsWrong ? "border-red" : ""
-            } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </div>
+        <Field
+          type="text"
+          name="email"
+          id="email"
+          value={email}
+          onChange={setEmail}
+          placeholder="Email"
+          boolean={authIsWrong}
+          errorText=""
+        />
+        <Field
+          type="password"
+          name="password"
+          id="password"
+          value={password}
+          onChange={setPassword}
+          placeholder="Mot de passe"
+          boolean={authIsWrong}
+          errorText=""
+        />
         <div className="flex items-center justify-between">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -105,7 +82,12 @@ export default function AuthentificationForm(props) {
         </div>
       </form>
 
-      <button onClick={handleClick}>butno</button>
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        onClick={handleClick}
+      >
+        button
+      </button>
     </>
   );
 }
