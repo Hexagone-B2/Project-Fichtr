@@ -6,19 +6,19 @@ export default function App() {
     return (
         <>
 
-        <Toolbar>
-            <div>
-                HexaCorp
-            </div>
-        </Toolbar>
+            <Toolbar>
+                <div>
+                    HexaCorp
+                </div>
+            </Toolbar>
 
             <div className="App">
-            <header className="App-header">
+                <header className="App-header">
 
-            </header>
+                </header>
             </div>
 
-            <AppRouter/>
+            <AppRouter />
         </>
     );
 }
