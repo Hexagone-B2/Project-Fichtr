@@ -1,12 +1,14 @@
 import React from 'react';
-import './Toolbar.css';
+import './ConnectedToolbar.css';
 
-function Toolbar(props) {
+function ConnectedToolbar(props) {
     return (
-        <div className="my-app-bar flex justify-between items-center px-6 py-4">
-            <div className="forum-name">Fichtr</div>
+        <div className="my-app-bar flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 bg-white shadow-md">
+            <button>
+                <img src="./img/logo.png" alt="logo" className="w-44"/>
+            </button>
 
-            <form className="flex items-center">
+            <form className="flex items-center mx-auto">
                 <label
                     htmlFor="default-search"
                     className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -41,23 +43,26 @@ function Toolbar(props) {
                 </div>
             </form>
 
-            <div className="flex items-center space-x-4">
-                <button
-                    type="button"
-                    className="btn-connecter focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-                >
-                    Se connecter
+            <div className="flex items-center space-x-7">
+
+                <button type="button" className="btn-question px-5 py-3 text-base font-medium text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <img src="./img/plus.svg" alt="" className="m-2"/>
+
+                    Poser une question
                 </button>
 
-                <button
-                    type="button"
-                    className="btn-inscription focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-                >
-                    Inscription
+                <button>
+                    <img src="./img/bell.svg" alt="" className="w-7"/>
                 </button>
+
+                <button>
+                    <img src="./img/envelope.svg" alt="" className="w-7"/>
+                </button>
+
+
             </div>
         </div>
     );
 }
 
-export default Toolbar;
+export default ConnectedToolbar;
