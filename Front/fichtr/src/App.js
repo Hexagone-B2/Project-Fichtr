@@ -11,9 +11,9 @@ export default function App() {
     return (
         <>
 
-        <ConnectedToolbar>
+        <Toolbar>
 
-        </ConnectedToolbar>
+        </Toolbar>
 
 
 
