@@ -7,7 +7,7 @@
     "start": "nodemon src/index.js"
   },
   "author": "Enzo Salson",
-  "license": "ISC",
+  "license": "Creative Commons Attribution-NonCommercial",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
