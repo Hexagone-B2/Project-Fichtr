@@ -1,13 +1,20 @@
 import "./composant/InscriptionForm";
 import ConnectedToolbar from "./composant/ConnectedToolbar.jsx";
 import RightNavBar from "./composant/RightNavBar";
+import Toolbar from "./composant/Toolbar.jsx";
+import ConnectedToolbar from "./composant/ConnectedToolbar.jsx";
 import AppRouter from "./composant/AppRouter.jsx";
+
 
 export default function App() {
     return (
         <>
-
-
+        <Toolbar>
+            <div>
+                HexaCorp
+            </div>
+        </Toolbar>
+      
         <ConnectedToolbar>
 
         </ConnectedToolbar>
@@ -15,9 +22,8 @@ export default function App() {
         <RightNavBar>
 
         </RightNavBar>
-
+      
         <AppRouter/>
-
         </>
     );
 
