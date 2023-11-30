@@ -1,11 +1,10 @@
 import { BrowserRouter } from "react-router-dom";
-import NonConnectedNavbarLeft from "./NonConnectedNavbarLeft";
-import ConnectedNavbarLeft from "./ConnectedNavbarLeft";
+import LeftNavbar from "./LeftNavbar";
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
-      <ConnectedNavbarLeft/>
+      <LeftNavbar/>
     </BrowserRouter>
   );
 }
