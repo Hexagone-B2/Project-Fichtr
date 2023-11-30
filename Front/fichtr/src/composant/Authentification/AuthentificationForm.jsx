@@ -4,6 +4,7 @@ import axios from "axios";
 export default function AuthentificationForm(props) {
   let [mail, setmail] = useState("");
   let [password, setPassword] = useState("");
+  let [authIsWrong, setAuthIsWrong] = useState(false);
 
   function handleClick(event) {
     axios.post("http://10.2.7.20:3000/api/echo");
@@ -38,6 +39,12 @@ export default function AuthentificationForm(props) {
       .post("http://10.2.7.20:3000/api/login", to_send, { headers })
       .then((res) => {
         console.log(res.data);
+        if (res.code === 403) {
+          setAuthIsWrong(true);
+        }
+        if (res.code === 200) {
+          console.log("succés");
+        }
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -60,7 +67,9 @@ export default function AuthentificationForm(props) {
             Nom d'utilisateur
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className={`shadow appearance-none border ${
+              authIsWrong ? "border-red" : ""
+            } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
             type="text"
             name="mail"
             id="mail"
@@ -76,7 +85,9 @@ export default function AuthentificationForm(props) {
             Mot de passe
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className={`shadow appearance-none border ${
+              authIsWrong ? "border-red" : ""
+            } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
             type="password"
             name="password"
             id="password"
