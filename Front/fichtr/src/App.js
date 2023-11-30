@@ -5,32 +5,19 @@ import Root from "./pages/root";
 import Questions from "./pages/questions";
 import Tags from "./pages/tags";
 import Shoutbox from "./pages/shoutbox";
+import ConnectedToolbar from "./composant/ConnectedToolbar.jsx";
 
 export default function App() {
     return (
         <>
 
-        <Toolbar>
-            <div>
-                HexaCorp
-            </div>
-        </Toolbar>
+        <ConnectedToolbar>
 
-            <div className="App">
-            <header className="App-header">
+        </ConnectedToolbar>
 
-            </header>
-            </div>
 
-            <BrowserRouter>
-            <Routes>
-            <Route path="/" element={<Root/>}>
-        <Route path="questions" element={<Questions/>}/>
-        <Route path="tags" element={<Tags/>}/>
-        <Route path="shoutbox" element={<Shoutbox/>}/>
-        </Route>
-</Routes>
-</BrowserRouter>
+
+
         </>
     );
 
