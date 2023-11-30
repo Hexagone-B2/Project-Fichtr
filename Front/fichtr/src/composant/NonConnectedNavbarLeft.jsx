@@ -1,8 +1,6 @@
 import {Routes, Route, Outlet, Link } from "react-router-dom";
 import Questions from "../pages/questions";
 import Tags from "../pages/tags";
-import "./NavbarLeft.css";
-
 
 const Root = () => {
   return (
