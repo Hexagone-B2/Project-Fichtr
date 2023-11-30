@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 export default function AuthentificationForm(props) {
   let [userName, setUserName] = useState("");
@@ -17,7 +18,26 @@ export default function AuthentificationForm(props) {
     }
   }
 
-  function handleSubmit() {}
+  function handleSubmit(event) {
+    const userName = event.target[0].value;
+    const password = event.target[1].value;
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    var to_send = {
+      username: userName,
+      password: password,
+    };
+    axios
+      .post("http://10.2.7.20:3000/api/login", to_send, { headers })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+    event.preventDefault();
+  }
 
   return (
     <form
