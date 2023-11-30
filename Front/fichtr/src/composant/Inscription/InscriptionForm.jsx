@@ -52,7 +52,7 @@ export default function InscriptionForm(props) {
         firstname: firstName,
         lastname: lastName,
         username: userName,
-        email: email,
+        mail: email,
         password: password,
         repeatpassword: repeatPassword,
       };
