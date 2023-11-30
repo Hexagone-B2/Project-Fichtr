@@ -1,4 +1,4 @@
-async function executeQuery(query, params, callback) {
+module.exports.executeSQL = (query, params, callback)=> {
     const mysql = require('mysql');
     const connection = mysql.createConnection({
         host: '51.159.9.88',
@@ -7,7 +7,7 @@ async function executeQuery(query, params, callback) {
         database: 'fichtr',
         port: 27085
     });
-    await connection.connect((err) => {
+    connection.connect((err) => {
         if (err) {
             console.error('Erreur de connexion à la base de données :', err);
             return;
@@ -17,11 +17,8 @@ async function executeQuery(query, params, callback) {
             if (error) {
                 console.error(error);
                 callback(error, null);
-                return results;
             }
             callback(null, results);
         });
     });
 }
-
-module.exports = executeQuery;

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const multer = require('multer')
+const storage = require('./func/multerStorage');
 
 // Importation des endpoints
 const {getFile} = require('./endpoints/getFile');
@@ -12,8 +13,8 @@ const {login} = require('./endpoints/login');
 const {updateUnameMailBio} = require('./endpoints/updateUnameMailBio');
 const {getProfile} = require('./endpoints/getProfile');
 const {getUnameMailBio} = require('./endpoints/getUnameMailBio');
-
-const storage = require('./func/multerStorage');
+const {getPostInfo} = require('./endpoints/getPostInfo');
+const {modifyPassword} = require("./endpoints/modifyPassword");
 
 
 const upload = multer({storage: storage});
@@ -39,4 +40,7 @@ router.post('/getProfile', getProfile);
 
 router.post('/getUnameMailBio', getUnameMailBio)
 
+router.post('/getPostInfo',getPostInfo);
+
+router.post("/modifyPassword", modifyPassword);
 module.exports = router;
