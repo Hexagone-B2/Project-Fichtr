@@ -6,17 +6,20 @@ import Questions from "./pages/questions";
 import Tags from "./pages/tags";
 import Shoutbox from "./pages/shoutbox";
 import ConnectedToolbar from "./composant/ConnectedToolbar.jsx";
+import RightNavBar from "./composant/RightNavBar";
 
 export default function App() {
     return (
         <>
 
 
-        <Toolbar>
+        <ConnectedToolbar>
 
-        </Toolbar>
+        </ConnectedToolbar>
 
+        <RightNavBar>
 
+        </RightNavBar>
 
 
         </>
