@@ -3,11 +3,11 @@ const multer = require('multer')
 const storage = require('./func/multerStorage');
 
 // Importation des endpoints
-const {getFile} = require('./endpoints/getFile');
+const {getProfilePic} = require('./endpoints/getProfilePic');
 const {getPosts} = require('./endpoints/getPosts');
 const {echo} = require('./endpoints/echo');
 const {hello} = require('./endpoints/hello');
-const {uploadProfilePic} = require('./endpoints/uploadProfilePic');
+const {updateProfilePic} = require('./endpoints/updateProfilePic');
 const {register} = require('./endpoints/register');
 const {login} = require('./endpoints/login');
 const {updateUnameMailBio} = require('./endpoints/updateUnameMailBio');
@@ -19,7 +19,7 @@ const {modifyPassword} = require("./endpoints/modifyPassword");
 
 const upload = multer({storage: storage});
 
-router.get("/file/:file", getFile);
+router.get("/getProfilePic", getProfilePic);
 
 router.get("/getPosts", getPosts);
 
@@ -28,13 +28,13 @@ router.get('/echo', echo);
 
 router.get('/', hello);
 
-router.post('/uploadProfilePic', upload.single('file'), uploadProfilePic)
+router.post('/updateProfilePic', upload.single('file'), updateProfilePic)
 
 router.post('/register', register)
 
 router.post('/login', login)
 
-router.post('/updateUnameMailBio',upload.single('newPhoto'), updateUnameMailBio)
+router.post('/updateUnameMailBio', updateUnameMailBio)
 
 router.post('/getProfile', getProfile);
 
@@ -43,4 +43,5 @@ router.post('/getUnameMailBio', getUnameMailBio)
 router.post('/getPostInfo',getPostInfo);
 
 router.post("/modifyPassword", modifyPassword);
+
 module.exports = router;
