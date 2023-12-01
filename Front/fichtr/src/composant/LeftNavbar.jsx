@@ -151,7 +151,7 @@ function ConnectedNavbarLeft() {
 export default function NavbarLeft(){
     const [IsConnected, setIsConnected] = useState(true);
 
-    if (IsConnected) {
+    if (localStorage.getItem('authorization')){
         return (
             <ConnectedNavbarLeft/>
         );
