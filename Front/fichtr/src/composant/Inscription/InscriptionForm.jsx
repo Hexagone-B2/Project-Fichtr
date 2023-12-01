@@ -1,5 +1,6 @@
 import axios from "axios";
 import Field from "../Field";
+import { useNavigate } from "react-router-dom";
 
 const { useState } = require("react");
 
@@ -16,6 +17,8 @@ export default function InscriptionForm(props) {
   let [userNameIsWrong, setUserNameIsWrong] = useState(false);
   let [firstNameIsWrong, setFirstNameIsWrong] = useState(false);
   let [lastNameIsWrong, setLastNameIsWrong] = useState(false);
+  let [emailUsed, setEmailUsed] = useState(false);
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     const firstName = event.target[0].value;
@@ -56,18 +59,29 @@ export default function InscriptionForm(props) {
         "Content-Type": "application/json",
       };
       axios
-        .post("http://10.2.7.20:3000/api/register", to_send, { headers })
+        .post("http://enzo-salson.fr:3001/api/register", to_send, { headers })
         .then((res) => {
           console.log(res.data);
 
-          if (res.code === 200) {
-            console.log("succes");
+          if (res.status === 200) {
+            navigate("/login");
           }
-          //code username non dispo
-          //mail non dispo
         })
         .catch((error) => {
           console.log(error.response.data);
+          if (error.response.data === "NOT_ALL_DATA") {
+            setPassIsWrong(!regexPassword.test(password));
+            setEmailIsWrong(!regexEmail.test(email));
+            setUserNameIsWrong(userName.length > 50);
+            setFirstNameIsWrong(firstName.length > 50);
+            setLastNameIsWrong(lastName.length > 50);
+          }
+          if (error.response.data === "PASSWORD_IS_NOT_EQUIVALENT") {
+            setRepeatPassIsWrong(true);
+          }
+          if (error.response.data === "INTERNAL_ERROR") {
+            setEmailUsed(true);
+          }
         });
     }
     event.preventDefault();
@@ -109,6 +123,9 @@ export default function InscriptionForm(props) {
         boolean={lastNameIsWrong}
         errorText="Nom de famille trop long"
       />
+      <p class="text-red-500 text-xs italic">
+        {emailUsed ? "Cet email est deja utilisé" : <br />}
+      </p>
       <Field
         type="email"
         name="email"
@@ -119,6 +136,7 @@ export default function InscriptionForm(props) {
         boolean={emailIsWrong}
         errorText="Entrez une adresse mail valide"
       />
+
       <Field
         type="password"
         name="password"

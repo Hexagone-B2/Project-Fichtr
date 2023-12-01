@@ -1,21 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import Field from "../Field";
+import { useNavigate } from "react-router-dom";
 
 export default function AuthentificationForm(props) {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [authIsWrong, setAuthIsWrong] = useState(false);
-
-  function handleClick(event) {
-    axios.post(
-      "http://10.2.7.20:3000/api/echo",
-      {},
-      { headers: { Authorization: localStorage.getItem("authorization") } }
-    );
-
-    event.preventDefault();
-  }
+  let [authIsGood, setAuthIsGood] = useState(false);
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     const mail = event.target[0].value;
@@ -28,19 +21,24 @@ export default function AuthentificationForm(props) {
       password: password,
     };
     axios
-      .post("http://10.2.7.20:3000/api/login", to_send, { headers })
+      .post("http://enzo-salson.fr:3001/api/login", to_send, { headers })
       .then((res) => {
-        console.log(res.data);
-        localStorage.setItem("authorization", res.data);
-        if (res.code === 403) {
-          setAuthIsWrong(true);
-        }
-        if (res.code === 200) {
+        setAuthIsWrong(false);
+        setAuthIsGood(false);
+        console.log(res);
+
+        if (res.status === 200) {
+          localStorage.setItem("authorization", res.data);
+          setAuthIsGood(true);
+          navigate("/home");
           console.log("succés");
         }
       })
       .catch((error) => {
         console.log(error.response.data);
+        if (error.response.data === "WRONG_PASSWORD") {
+          setAuthIsWrong(true);
+        }
       });
     event.preventDefault();
   }
@@ -60,7 +58,7 @@ export default function AuthentificationForm(props) {
           onChange={setEmail}
           placeholder="Email"
           boolean={authIsWrong}
-          errorText=""
+          errorText=" "
         />
         <Field
           type="password"
@@ -70,8 +68,11 @@ export default function AuthentificationForm(props) {
           onChange={setPassword}
           placeholder="Mot de passe"
           boolean={authIsWrong}
-          errorText=""
+          errorText="Email et Mot de passe invalides"
         />
+        <p class="text-green-500 text-xs italic">
+          {authIsGood ? "Connexion Réussi" : <br />}
+        </p>
         <div className="flex items-center justify-between">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -81,13 +82,6 @@ export default function AuthentificationForm(props) {
           </button>
         </div>
       </form>
-
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        onClick={handleClick}
-      >
-        button
-      </button>
     </>
   );
 }
