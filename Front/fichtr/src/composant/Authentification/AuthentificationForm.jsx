@@ -1,12 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import Field from "../Field";
+import { useNavigate } from "react-router-dom";
 
 export default function AuthentificationForm(props) {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [authIsWrong, setAuthIsWrong] = useState(false);
   let [authIsGood, setAuthIsGood] = useState(false);
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     const mail = event.target[0].value;
@@ -28,6 +30,7 @@ export default function AuthentificationForm(props) {
         if (res.status === 200) {
           localStorage.setItem("authorization", res.data);
           setAuthIsGood(true);
+          navigate("/home");
           console.log("succés");
         }
       })
