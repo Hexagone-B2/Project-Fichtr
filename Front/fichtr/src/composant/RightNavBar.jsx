@@ -1,6 +1,16 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from "axios";
 
-function RightNavBar(props) {
+function RightNavBar(tag) {
+    {/*} const [tag, setTag] = useState({})
+    useEffect(() => {
+        axios.RightNavBar("http://enzo-salson.fr:3001/api/getPostInfo", {id: id}).then(response => {
+            const post = {
+                tag: response.data.tag
+            }
+            setTag(tag);
+        })
+    }, []);*/}
     return (
         <div className="flex justify-end items-start fixed top-40 pr-8 mt-4 right-0">
             <ul className="w-60 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">

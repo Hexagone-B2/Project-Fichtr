@@ -7,3 +7,13 @@
     background-color: #41015d;
     transition-duration: 0.4s;
 }
+
+.btn-question {
+    background-color: #310046;
+
+}
+
+.btn-question:hover {
+    background-color: #41015d;
+    transition-duration: 0.4s;
+}
