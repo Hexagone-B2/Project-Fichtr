@@ -2,8 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./pages/Layout";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MyQuestions from "./pages/MyQuestions";
 import Tags from "./pages/Tags";
 import Shoutbox from "./pages/Shoutbox";
@@ -13,25 +12,46 @@ import MyLikes from "./pages/MyLikes";
 import MyAccount from "./pages/MyAccount";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Auth from "./pages/Auth";
+import Layout from "./pages/Layout";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="register" element={<Register />} />
-          <Route path="login" element={<Login />} />
-          <Route path="content/" element={<Auth />}>
-            <Route path="questions" element={<Questions />} />
-            <Route path="tags" element={<Tags />} />
-            <Route path="shoutbox" element={<Shoutbox />} />
-            <Route path="mes-questions" element={<MyQuestions />} />
-            <Route path="mes-reponses" element={<MyResponses />} />
-            <Route path="mes-likes" element={<MyLikes />} />
-            <Route path="mon-compte" element={<MyAccount />} />
-          </Route>
-        </Route>
+        <Route
+          path="/register"
+          element={
+            <Layout>
+              <Register />
+            </Layout>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <Layout>
+              <Login />
+            </Layout>
+          }
+        />
+
+        <Route path="/home" element={<Layout />} />
+        <Route
+          path="/questions"
+          element={
+            <Layout>
+              <Questions />
+            </Layout>
+          }
+        />
+        <Route path="tags" element={<Tags />} />
+        <Route path="shoutbox" element={<Shoutbox />} />
+        <Route path="mes-questions" element={<MyQuestions />} />
+        <Route path="mes-reponses" element={<MyResponses />} />
+        <Route path="mes-likes" element={<MyLikes />} />
+        <Route path="mon-compte" element={<MyAccount />} />
+        {/*Redirection par default, si l'utilisateur veux accéder a des routes qui n'existe pas*/}
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </BrowserRouter>
   );

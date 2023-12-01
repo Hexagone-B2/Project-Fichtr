@@ -1,8 +1,7 @@
 import axios from "axios";
 import Field from "../Field";
 import { useNavigate } from "react-router-dom";
-
-const { useState } = require("react");
+import { useState } from "react";
 
 export default function InscriptionForm(props) {
   let [firstName, setFirstName] = useState("");
