@@ -13,6 +13,7 @@ import MyAccount from "./pages/MyAccount";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Layout from "./pages/Layout";
+import LayoutToolbarOnly from "./pages/LayoutToolbarOnly";
 
 export default function App() {
   return (
@@ -21,17 +22,17 @@ export default function App() {
         <Route
           path="/register"
           element={
-            <Layout>
+            <LayoutToolbarOnly>
               <Register />
-            </Layout>
+            </LayoutToolbarOnly>
           }
         />
         <Route
           path="/login"
           element={
-            <Layout>
+            <LayoutToolbarOnly>
               <Login />
-            </Layout>
+            </LayoutToolbarOnly>
           }
         />
 

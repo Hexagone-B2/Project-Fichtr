@@ -10,10 +10,10 @@ export default function Layout(props) {
         <div className="top-[8rem] relative">
           <NavbarLeft />
         </div>
-        <div className="z-0 top-[8rem] bg-gray-100 relative h-screen w-full overflow-hidden">
+        <div className="z-0 top-[8rem] relative w-full overflow-hidden bg-[#fafafa]">
           {props.children}
         </div>
-        <div className="top-[8rem] relative">
+        <div className="top-[8rem] relative bg-[#fafafa]">
           <RightNavBar />
         </div>
       </div>
