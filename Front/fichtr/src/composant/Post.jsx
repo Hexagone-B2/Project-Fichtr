@@ -3,36 +3,75 @@ import axios from "axios";
 
 function Post({id, username, imagelink}) {
     const [post, setPost] = useState({})
+    const [liked, setLiked] = useState(false)
+    const [likesCount, setLikesCount] = useState(0)
+
+
     useEffect(() => {
-        axios.post("http://enzo-salson.fr:3001/api/getPostInfo", {id: id}).then(response => {
+        let headers = undefined
+        if (localStorage.getItem("authorization")) {
+            headers = {authorization: localStorage.getItem("authorization")}
+        } else {
+            headers = {}
+        }
+        axios.post("http://enzo-salson.fr:3001/api/getPostInfo", {id: id}, {headers}).then(response => {
             const post = {
                 title: response.data.title,
                 body: response.data.body,
                 likes: response.data.likes,
-                comments: response.data.comments
+                comments: response.data.comments,
+                id: response.data.id,
+                liked: response.data.liked,
+                owner_id: response.data.owner_id
             }
-            setPost(post);
+            setLiked(post.liked)
+            setPost(post)
+            setLikesCount(post.likes)
         })
     }, []);
-    return (
 
-        <div className="max-w-lg mx-auto bg-white border border-gray-200 rounded-lg p-4 my-8 relative">
+    const handleLike = (id) => {
+        const headers = {authorization: localStorage.getItem("authorization")}
+        if (!liked) {
+            axios.post("http://enzo-salson.fr:3001/api/like", {post_id: id}, {headers}).then(response => {
+                if (response.data === "OK") {
+                    setLiked(true)
+                    setLikesCount(prevState => prevState + 1)
+                }
+            }).catch(e => console.log(e))
+        } else {
+            axios.post("http://enzo-salson.fr:3001/api/unLike", {post_id: id}, {headers}).then(response => {
+                if (response.data === "OK") {
+                    setLiked(false)
+                    setLikesCount(prevState => prevState - 1)
+                }
+            }).catch(e => console.log(e))
+        }
+    }
+
+    return (
+        <div className="w-full max-w-lg mx-auto bg-white border border-gray-200 rounded-lg p-4 my-8 relative">
             <h2 className="text-xl font-bold mb-2">{post.title}</h2>
             <div className="flex items-center mb-4">
-                <img src={imagelink} alt="avatar" className="w-10 h-10 rounded-full mr-4"/>
+                <img src={"http://enzo-salson.fr:3001/api/getProfilePic?id=" + post.owner_id} alt="avatar"
+                     className="w-10 h-10 rounded-full mr-4"/>
                 <span className="font-bold text-gray-900">{username}</span>
             </div>
             <p className="text-gray-800">{post.body}</p>
             <div className="flex justify-between mt-4">
                 <div className="flex items-center space-x-2">
-                    <span className="text-gray-500 flex items-center"><img src="./img/heart.svg" alt="like"/> {post.likes}</span>
-                    <span className="text-gray-500 flex items-center"><img src="./img/comment.svg" alt="commentaire"/>{post.comments}</span>
+                    <span className="text-gray-500 flex items-center"> <img onClick={() => handleLike(post.id)}
+                                                                            src={liked ? "./img/heart-solid.svg" : "./img/heart.svg"}
+                                                                            alt="like"/> {likesCount}</span>
+                    <span className="text-gray-500 flex items-center"><img src="./img/comment.svg"
+                                                                           alt="commentaire"/>{post.comments}</span>
                 </div>
 
             </div>
         </div>
-
     );
 }
 
 export default Post;
+
+
