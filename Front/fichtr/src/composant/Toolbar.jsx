@@ -60,6 +60,10 @@ function Toolbar() {
                         <button>
                             <img src="./img/envelope.svg" alt="" className="w-7" />
                         </button>
+
+                        <img src="./img/logo.png" alt="avatar"
+                             className="w-10 h-10 rounded-full mr-4"/>
+
                     </>
                 ) : (
                     <>
