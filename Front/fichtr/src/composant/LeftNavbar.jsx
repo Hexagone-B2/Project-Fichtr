@@ -5,7 +5,7 @@ const ConnectedRoot = () => {
     return (
         <>
             <aside id="default-sidebar" class="fixed left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 " aria-label="Sidebar">
-                <div class="h-3/4 px-3 py-36 space-y-3 overflow-y-auto">
+                <div class="h-3/4 px-3 space-y-3 overflow-y-auto">
                     <a class="flex items-center text-xs whitespace-nowrap px-11 text-gray-500 rounded-lg group">
                         MENU
                     </a>
@@ -84,7 +84,7 @@ const NonConnectedRoot = () => {
     return (
         <>
             <aside id="default-sidebar" class="fixed left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 " aria-label="Sidebar">
-                <div class="h-3/4 px-3 py-36 space-y-3 overflow-y-auto">
+                <div class="h-3/4 px-3 space-y-3 overflow-y-auto">
                     <a class="flex items-center text-xs whitespace-nowrap px-11 text-gray-500 rounded-lg group">
                         MENU
                     </a>
