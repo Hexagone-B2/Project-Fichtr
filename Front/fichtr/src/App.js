@@ -9,14 +9,9 @@ export default function App() {
     return (
         <>
             <Toolbar/>
-
-            <RightNavBar>
-
-            </RightNavBar>
-
-            <AppRouter />
-
-            <div className="flex justify-center items-center h-screen">
+            <RightNavBar/>
+            <AppRouter/>
+            <div className="flex flex-col justify-center items-center h-screen">
                 <Post
                     id={1}
                     username="toto"
