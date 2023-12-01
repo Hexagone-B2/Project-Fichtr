@@ -1,9 +1,9 @@
-import UserSettings from './UserSettings';
+import AdminPanel from './AdminPanel';
 import './App.css';
 
 function App() {
   return (
-    <UserSettings/>    
+    <AdminPanel/>    
   );
 }
 
