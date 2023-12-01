@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
-const key = require('secret_key');
+const {SECRET_KEY} = require('./secret_key');
 
 module.exports.checkAuth = (token, callback) => {
-    jwt.verify(token,key,(error, decoded)=>{
+    jwt.verify(token,SECRET_KEY,(error, decoded)=>{
         callback(error,decoded);
     })
 }

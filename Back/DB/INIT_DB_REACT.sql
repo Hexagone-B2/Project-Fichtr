@@ -1,5 +1,5 @@
 USE fichtr;
-DROP TABLE IF EXISTS Tags,Likes,Comment,Profile,Post,Subject,User;
+DROP TABLE IF EXISTS Tags,Likes,Comment,Profile,Post,Subject,User,LikesComment;
 
 CREATE TABLE User (
     id int primary key auto_increment,
@@ -13,7 +13,7 @@ CREATE TABLE User (
 
 CREATE TABLE Profile (
     id int primary key auto_increment,
-    profile_pic varchar(200) not null default '',
+    profile_pic varchar(200) not null default 'default.jpeg',
     bio tinytext,
     url_personnal_site varchar(300) default NULL,
     user_id int not null,
@@ -53,6 +53,14 @@ CREATE TABLE Likes (
     FOREIGN KEY (post_id) REFERENCES Post(id)
 );
 
+CREATE TABLE LikesComment(
+    id int primary key auto_increment,
+    user_id int not null,
+    comment_id int not null,
+    FOREIGN KEY (user_id) REFERENCES User(id),
+    FOREIGN KEY (comment_id) REFERENCES Post(id)
+);
+
 CREATE TABLE Tags (
     post_id int not null,
     tags varchar(150) not null,
@@ -61,40 +69,74 @@ CREATE TABLE Tags (
 
 -- Création des données de test.
 
-INSERT INTO User (username, firstname, lastname, mail, password, roles) VALUES
-('john_doe', 'John', 'Doe', 'john.doe@example.com', 'hashed_password_1', 'user'),
-('jane_smith', 'Jane', 'Smith', 'jane.smith@example.com', 'hashed_password_2', 'admin'),
-('bob_jackson', 'Bob', 'Jackson', 'bob.jackson@example.com', 'hashed_password_3', 'user');
+-- Ajouter des utilisateurs
+INSERT INTO User (username, firstname, lastname, mail, password, roles)
+VALUES
+    ('user1', 'John', 'Doe', 'john.doe@email.com', 'password1', 'user'),
+    ('user2', 'Jane', 'Smith', 'jane.smith@email.com', 'password2', 'user'),
+    ('admin1', 'Admin', 'Adminsson', 'admin@admin.com', 'adminpass', 'admin'),
+    ('user3', 'Alice', 'Johnson', 'alice.johnson@email.com', 'password3', 'user'),
+    ('user4', 'Bob', 'Williams', 'bob.williams@email.com', 'password4', 'user');
 
+-- Ajouter des profils
+INSERT INTO Profile (bio, url_personnal_site, user_id)
+VALUES
+    ('Lorem ipsum dolor sit amet.', 'http://www.example.com', 1),
+    ('Consectetur adipiscing elit.', NULL, 2),
+    ('Pellentesque ac tristique elit.', NULL, 3),
+    ('Vestibulum cursus augue at neque.', 'http://www.example.net', 4),
+    ('Aenean euismod ultricies neque.', 'http://www.example.org', 5);
 
-INSERT INTO Profile (profile_pic, bio, url_personnal_site, user_id) VALUES
-('profile_pic_john.jpg', 'A software engineer', 'http://www.johndoe.com', 1),
-('profile_pic_jane.jpg', 'An administrator', NULL, 2),
-('profile_pic_bob.jpg', 'A blogger', 'http://www.bobjackson.com', 3);
+-- Ajouter des sujets
+INSERT INTO Subject (name)
+VALUES
+    ('Technology'),
+    ('Science'),
+    ('Travel'),
+    ('Food'),
+    ('Music');
 
-INSERT INTO Subject (name) VALUES
-('Technology'),
-('Travel'),
-('Food');
+-- Ajouter des messages
+INSERT INTO Post (title, body, user_id, subject_id)
+VALUES
+    ('Post 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 1, 1),
+    ('Post 2', 'Pellentesque ac tristique elit. Vestibulum cursus augue at neque.', 2, 2),
+    ('Post 3', 'Aenean euismod ultricies neque.', 3, 3),
+    ('Post 4', 'Vestibulum cursus augue at neque.', 4, 4),
+    ('Post 5', 'Consectetur adipiscing elit. Pellentesque ac tristique elit.', 5, 5);
 
-INSERT INTO Post (title, body, user_id, subject_id) VALUES
-('Introduction to SQL', 'SQL is a powerful database query language...', 1, 1),
-('My Trip to Paris', 'I had an amazing time in Paris. Here are some highlights...', 3, 2),
-('Delicious Pasta Recipe', 'Here is a simple and tasty pasta recipe...', 2, 3);
+-- Ajouter des commentaires
+INSERT INTO Comment (user_id, post_id, body, time)
+VALUES
+    (1, 1, 'Great post!', NOW()),
+    (2, 1, 'I totally agree.', NOW()),
+    (3, 2, 'Interesting thoughts.', NOW()),
+    (4, 3, 'Thanks for sharing.', NOW()),
+    (5, 4, 'Nice post!', NOW());
 
-INSERT INTO Comment (user_id, post_id, body, time) VALUES
-(1, 1, 'Great article!', NOW()),
-(2, 1, 'I learned a lot from this.', NOW()),
-(3, 2, 'Paris is my favorite city!', NOW()),
-(1, 3, 'I''ll definitely try this recipe.', NOW());
+-- Ajouter des likes
+INSERT INTO Likes (user_id, post_id)
+VALUES
+    (1, 1),
+    (2, 1),
+    (3, 2),
+    (4, 3),
+    (5, 4);
 
-INSERT INTO Likes (user_id, post_id) VALUES
-(2, 1),
-(3, 1),
-(1, 2),
-(2, 3);
+-- Ajouter des likes de commentaires
+INSERT INTO LikesComment (user_id, comment_id)
+VALUES
+    (1, 1),
+    (2, 1),
+    (3, 2),
+    (4, 3),
+    (5, 4);
 
-INSERT INTO Tags (post_id, tags) VALUES
-(1, 'SQL, databases, programming'),
-(2, 'travel, Paris, adventure'),
-(3, 'food, recipe, pasta');
+-- Ajouter des tags
+INSERT INTO Tags (post_id, tags)
+VALUES
+    (1, 'tech, programming'),
+    (2, 'science, research'),
+    (3, 'travel, adventure'),
+    (4, 'food, cooking'),
+    (5, 'music, art');

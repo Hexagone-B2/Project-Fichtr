@@ -10,15 +10,15 @@ module.exports.register = (req, res) => {
                     (error) => {
                         if (error){
                             console.log(error);
-                            res.status(500).send('SQL_ERROR');
+                            res.status(500).send('INTERNAL_ERROR');
                         }
                         else{
-                            executeSQL("SELECT id FROM User where username=?;",[req.body.username],(error,result)=>{
+                            executeSQL("SELECT id FROM User where mail=?;",[req.body.mail],(error,result)=>{
                                 if (error){
                                     console.log(error);
-                                    res.status(500).send('SQL_ERROR');
+                                    res.status(500).send('INTERNAL_ERROR');
                                 }else{
-                                    executeSQL('INSERT INTO Profile (profile_pic,bio,url_personnal_site,user_id) VALUES (?,?,?,?);',["","","",result[0].id],(error)=>{
+                                    executeSQL('INSERT INTO Profile (profile_pic,bio,url_personnal_site,user_id) VALUES (?,?,?,?);',["default.jpeg","","",result[0].id],(error)=>{
                                         if (error){
                                             console.log(error);
                                         }else{

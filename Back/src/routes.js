@@ -15,7 +15,12 @@ const {getProfile} = require('./endpoints/getProfile');
 const {getUnameMailBio} = require('./endpoints/getUnameMailBio');
 const {getPostInfo} = require('./endpoints/getPostInfo');
 const {modifyPassword} = require("./endpoints/modifyPassword");
-
+const {getMyInfo} = require("./endpoints/getMyInfo");
+const {like} = require("./endpoints/like")
+const {unlike} = require("./endpoints/unlike")
+const {createSubject} = require("./endpoints/createSubject");
+const {getSubjects} = require("./endpoints/getSubjects");
+const {deleteSubject} = require("./endpoints/deleteSubject");
 
 const upload = multer({storage: storage});
 
@@ -44,4 +49,15 @@ router.post('/getPostInfo',getPostInfo);
 
 router.post("/modifyPassword", modifyPassword);
 
+router.post("/getMyInfo", getMyInfo);
+
+router.post("/like", like);
+
+router.post('/unlike',unlike)
+
+router.post('/createSubject', createSubject)
+
+router.post('/getSubjects', getSubjects)
+
+router.post('/deleteSubject', deleteSubject)
 module.exports = router;

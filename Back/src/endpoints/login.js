@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const {executeSQL} = require('../func/mysql');
-
+const {SECRET_KEY} = require('../func/secret_key')
 
 module.exports.login = (req, res) => {
     if (!(req.body.mail && req.body.password)){
