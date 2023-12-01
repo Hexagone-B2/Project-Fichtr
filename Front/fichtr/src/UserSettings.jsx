@@ -3,6 +3,9 @@ import axios from "axios";
 
 function UserSettings() {
 
+    const [id, setId] = useState("");
+    const [varPasswordErrorDiv, setPasswordVarErrorDiv] = useState(errorDiv(""));
+    const [varUsernameErrorDiv, setUsernameVarErrorDiv] = useState(errorDiv(""));
     const [username, setUsername] = useState("");
     const [mail, setMail] = useState("");
     const [bio, setBio] = useState("");
@@ -11,53 +14,83 @@ function UserSettings() {
     const [image, setImage] = useState("");
 
     useEffect(function () {
-        axios.post("http://enzo-salson.fr:3001/api/getUnameMailBio")
-            .then(response => {
-                setUsername(response.data.username);
-                setMail(response.data.mail);
-                setBio(response.data.bio);
-                setPassword(response.data.password);
-                setPasswordConfirm(response.data.passwordConfirm);
-                setImage(response.data.image);
-            })
+        if (localStorage.getItem('authorization')) {
+            const token = localStorage.getItem("authorization");
+            const headers = { authorization: token }
+            axios.post("http://enzo-salson.fr:3001/api/getUnameMailBio", {}, { headers })
+                .then(response => {
+                    setUsername(response.data.username);
+                    setMail(response.data.mail);
+                    setBio(response.data.bio);
+                    setImage(response.data.image);
+                    setId(response.data.id);
+                }
+            )
+        }
     }, []);
 
     const allowedChars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
         '!', '?', ',', '.', ';', '/', ':', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '']
 
+    function errorDiv(errorMessage) {
+        return (
+            <div>
+                {errorMessage}
+            </div>
+        )
+    }
+
     function handleSubmit(event) {
-        let objectTest = new FormData();
+        setUsernameVarErrorDiv(errorDiv(""));
+        setPasswordVarErrorDiv(errorDiv(""));
         switch (event.target.name) {
             case "formText":
                 if (username.length <= 50) {
-                    objectTest.append("username", username);
-                    objectTest.append("mail", mail);
-                    objectTest.append("bio", bio);
-                    console.log(objectTest);
+                    const token = localStorage.getItem("authorization");
+                    const headers = { authorization: token };
                     axios.post("http://enzo-salson.fr:3001/api/updateUnameMailBio", {
                         "username": username,
                         "mail": mail,
-                        "bio": bio
-                    })
+                        "bio": bio,
+                    }, { headers })
+                } else {
+                    setUsernameVarErrorDiv(errorDiv("Le nom d'utilisateur est trop long"));
                 }
                 break;
             case "formImage":
-                objectTest.append("newPhoto", image);
-                console.log(objectTest);
-                axios.post("http://enzo-salson.fr:3001/api/uploadProfilePic", {
-                    "file": image,
-                })
+                let objectTest = new FormData();
+                const token = localStorage.getItem("authorization");
+                const headers = { authorization: token };
+                objectTest.append("file", image);
+                axios.post("http://enzo-salson.fr:3001/api/updateProfilePic", objectTest, {headers})
                 break;
             case "formPassword":
-                if (password === passwordConfirm) {
-                    objectTest.append("password", password);
-                    objectTest.append("passwordConfirm", passwordConfirm);
-                    console.log(objectTest);
-                    axios.post("http://enzo-salson.fr:3001/api/changePassword", {
-                        "password:password": password,
-                        "password:repeatPassword": passwordConfirm
-                    })
+                function passwordCheck() {
+                    let breakCond = true
+                    password.split("").forEach(
+                        (character) => {
+                            if (allowedChars.includes(character) != true) {
+                                breakCond = false;
+                            }
+                        }
+                    )
+                    return breakCond;
+                };
+                if (passwordCheck() == true) {
+                    if (password === passwordConfirm) {
+                        const token = localStorage.getItem("authorization");
+                        const headers = { authorization: token }
+                        axios.post("http://enzo-salson.fr:3001/api/modifyPassword", {
+                            "password": password,
+                            "repeatPassword": passwordConfirm,
+                            "id": "1"
+                        }, { headers })
+                    } else {
+                        setPasswordVarErrorDiv(errorDiv("Les mots de passe ne sont pas similaires"));
+                    }
+                } else {
+                    setPasswordVarErrorDiv(errorDiv("Le mot de passe contient des caracteres non supportes"));
                 }
                 break;
             default:
@@ -93,16 +126,18 @@ function UserSettings() {
                 break;
         }
     }
+    
     return (
         <div className="flex justify-center items-center h-screen">
             <div className="flex justify-center gap-10">
                 <div className="flex flex-col items-center border border-2 h-fit w-64 p-5 gap-3">
-                    <img src={image} alt="" className="rounded-full h-32 w-32" />
+                    <img src={"http://enzo-salson.fr:3001/api/getProfilePic?id=" + id} alt="" className="rounded-full h-32 w-32" />
                     <h3><b>{username}</b></h3>
                     <p className="break-normal">{bio}</p>
                 </div>
                 <div className="flex flex-col gap-5">
                     <form onSubmit={handleSubmit} name="formText" className="flex flex-col justify-center align-center gap-1 p-5 border border-2" encType="multipart/form-data">
+                        {varUsernameErrorDiv}
                         <div className="flex gap-2">
                             <label htmlFor="username" className="w-full">Modifier nom d'utilisateur</label>
                             <label htmlFor="mail" className="w-full">Modifier mail</label>
@@ -129,6 +164,7 @@ function UserSettings() {
                 <div>
                     <form name="formPassword" onSubmit={handleSubmit} className="flex flex-col gap-1 p-5 border border-2">
                         <label htmlFor="password">Modifier mot de passe</label><br />
+                        {varPasswordErrorDiv}
                         <div className="flex flex-col gap-2">
                             <input type="password" name="password" id="password" placeholder="Nouveau mot de passe" onChange={handleChange} className="border border-slate-300 rounded bg-gray-100 border-2" />
                             <input type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Confirmer mot de passe" onChange={handleChange} className="border border-slate-300 rounded bg-gray-100 border-2" />
