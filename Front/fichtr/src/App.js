@@ -7,21 +7,21 @@ import AppRouter from "./composant/AppRouter.jsx";
 export default function App() {
     return (
         <>
-        <Toolbar>
-            <div>
-                HexaCorp
-            </div>
-        </Toolbar>
-      
-        <ConnectedToolbar>
+            <Toolbar>
+                <div>
+                    HexaCorp
+                </div>
+            </Toolbar>
 
-        </ConnectedToolbar>
+            <ConnectedToolbar>
 
-        <RightNavBar>
+            </ConnectedToolbar>
 
-        </RightNavBar>
-      
-        <AppRouter/>
+            <RightNavBar>
+
+            </RightNavBar>
+
+            <AppRouter />
         </>
     );
 

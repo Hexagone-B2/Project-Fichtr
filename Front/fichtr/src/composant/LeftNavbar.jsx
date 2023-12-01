@@ -1,12 +1,4 @@
-import { useState } from "react";
-import { Routes, Route, Link, NavLink } from "react-router-dom";
-import Questions from "../pages/questions";
-import Tags from "../pages/tags";
-import Shoutbox from "../pages/shoutbox";
-import MyQuestions from "../pages/my-questions";
-import MyResponses from "../pages/my-answers";
-import MyLikes from "../pages/my-likes";
-import MyAccount from "../pages/my-account";
+import { Link } from "react-router-dom";
 
 
 const ConnectedRoot = () => {
@@ -120,45 +112,17 @@ const NonConnectedRoot = () => {
     );
 
 }
-function NonConnectedNavbarLeft() {
-    return (
-        <Routes>
-            <Route path="/" element={<NonConnectedRoot />}>
-                <Route path="questions" element={<Questions />} />
-                <Route path="tags" element={<Tags />} />
-            </Route>
-        </Routes>
-    );
-}
-
-
-function ConnectedNavbarLeft() {
-    return (
-        <Routes>
-            <Route path="/" element={<ConnectedRoot />}>
-                <Route path="questions" element={<Questions />} />
-                <Route path="tags" element={<Tags />} />
-                <Route path="shoutbox" element={<Shoutbox />} />
-                <Route path="my-questions" element={<MyQuestions />} />
-                <Route path="my-answers" element={<MyResponses />} />
-                <Route path="my-likes" element={<MyLikes />} />
-                <Route path="my-account" element={<MyAccount />} />
-            </Route>
-        </Routes>
-    );
-}
 
 export default function NavbarLeft(){
-    const [IsConnected, setIsConnected] = useState(true);
-
-    if (IsConnected) {
+    
+    if (localStorage.getItem('authorization')){
         return (
-            <ConnectedNavbarLeft/>
+            <ConnectedRoot/>
         );
     }
     else {
         return (
-            <NonConnectedNavbarLeft/>
+            <NonConnectedRoot/>
         );
     }
 
