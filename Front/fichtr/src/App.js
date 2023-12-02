@@ -1,27 +1,71 @@
-import "./composant/InscriptionForm";
-import Toolbar from "./composant/Toolbar.jsx";
-import RightNavBar from "./composant/RightNavBar";
-import AppRouter from './composant/AppRouter.jsx';
-import Post from './composant/Post.jsx';
-
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import MyQuestions from "./pages/MyQuestions";
+import Tags from "./pages/Tags";
+import Shoutbox from "./pages/Shoutbox";
+import Questions from "./pages/Questions";
+import MyResponses from "./pages/MyResponses";
+import MyLikes from "./pages/MyLikes";
+import MyAccount from "./pages/MyAccount";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Layout from "./pages/Layout";
+import LayoutToolbarOnly from "./pages/LayoutToolbarOnly";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
 export default function App() {
-    return (
-        <>
-            <Toolbar/>
-            <RightNavBar/>
-            <AppRouter/>
-            <div className="flex flex-col justify-center items-center h-screen">
-                <Post
-                    id={1}
-                    username="toto"
-                />
-                <Post
-                    id={1}
-                    username="toto"
-                />
-            </div>
-        </>
-    );
-
+  return (
+    <BrowserRouter>
+      <Routes>
+        {localStorage.getItem("authorization") ? (
+          <>
+            <Route path="/mes-questions" element={<MyQuestions />} />
+            <Route path="/mon-profil" element={<Profile />} />
+            <Route path="/mes-reponses" element={<MyResponses />} />
+            <Route path="/mes-likes" element={<MyLikes />} />
+            <Route path="/mon-compte" element={<MyAccount />} />
+          </>
+        ) : (
+          <>
+            <Route
+              path="/register"
+              element={
+                <LayoutToolbarOnly>
+                  <Register />
+                </LayoutToolbarOnly>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <LayoutToolbarOnly>
+                  <Login />
+                </LayoutToolbarOnly>
+              }
+            />
+          </>
+        )}
+        <Route
+          path="/home"
+          element={
+            <Layout>
+              <Home />
+            </Layout>
+          }
+        />
+        <Route
+          path="/questions"
+          element={
+            <Layout>
+              <Questions />
+            </Layout>
+          }
+        />
+        <Route path="/tags" element={<Tags />} />
+        <Route path="/shoutbox" element={<Shoutbox />} />
+        {/*Redirection par default, si l'utilisateur veux accéder a des routes qui n'existe pas*/}
+        <Route path="*" element={<Navigate to="/home" />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
