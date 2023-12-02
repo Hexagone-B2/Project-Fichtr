@@ -1,5 +1,4 @@
 import React from "react";
-import "./ConnectedToolbar.css";
 import "./Toolbar.css";
 function Toolbar() {
   const isLoggedIn = !!localStorage.getItem("authorization");

@@ -70,7 +70,7 @@ export default function AuthentificationForm(props) {
           boolean={authIsWrong}
           errorText="Email et Mot de passe invalides"
         />
-        <p class="text-green-500 text-xs italic">
+        <p className="text-green-500 text-xs italic">
           {authIsGood ? "Connexion Réussi" : <br />}
         </p>
         <div className="flex items-center justify-between">

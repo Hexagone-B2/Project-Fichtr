@@ -5,16 +5,16 @@ const ConnectedRoot = () => {
     <>
       <aside
         id="default-sidebar"
-        class="w-64 bg-blue-50 top-[8rem] sticky"
+        className="w-64 top-[8rem] sticky"
         aria-label="Sidebar"
       >
-        <div class="h-3/4 px-3 py-36 space-y-3 overflow-y-auto">
-          <div class="flex items-center text-xs whitespace-nowrap px-11 text-gray-500 rounded-lg group">
+        <div className="h-3/4 px-3 py-36 space-y-3 overflow-y-auto">
+          <div className="flex items-center text-xs whitespace-nowrap px-11 text-gray-500 rounded-lg group">
             MENU
           </div>
-          <ul class="space-y-3 font-medium">
+          <ul className="space-y-3 font-medium">
             <li>
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="16"
@@ -28,14 +28,14 @@ const ConnectedRoot = () => {
                 </svg>
                 <Link
                   to="/questions"
-                  class="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
                 >
                   Questions
                 </Link>
               </div>
             </li>
             <li>
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="16"
@@ -46,14 +46,14 @@ const ConnectedRoot = () => {
                 </svg>
                 <Link
                   to="/tags"
-                  class="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
                 >
                   Tags
                 </Link>
               </div>
             </li>
             <li>
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="16"
@@ -64,7 +64,7 @@ const ConnectedRoot = () => {
                 </svg>
                 <Link
                   to="/shoutbox"
-                  class="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
                 >
                   Shoutbox
                 </Link>
@@ -72,12 +72,12 @@ const ConnectedRoot = () => {
             </li>
           </ul>
 
-          <div class="flex items-center text-xs whitespace-nowrap px-11 text-gray-500 rounded-lg group">
+          <div className="flex items-center text-xs whitespace-nowrap px-11 text-gray-500 rounded-lg group">
             NAVIGATION PERSONNELLE
           </div>
-          <ul class="space-y-3 font-medium">
+          <ul className="space-y-3 font-medium">
             <li>
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="16"
@@ -91,14 +91,14 @@ const ConnectedRoot = () => {
                 </svg>
                 <Link
                   to="/my-questions"
-                  class="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
                 >
                   Mes Questions
                 </Link>
               </div>
             </li>
             <li>
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="16"
@@ -112,14 +112,14 @@ const ConnectedRoot = () => {
                 </svg>
                 <Link
                   to="/my-answers"
-                  class="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
                 >
                   Mes Réponses
                 </Link>
               </div>
             </li>
             <li>
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="16"
@@ -133,14 +133,14 @@ const ConnectedRoot = () => {
                 </svg>
                 <Link
                   to="/my-likes"
-                  class="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
                 >
                   Mes Likes
                 </Link>
               </div>
             </li>
             <li>
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
@@ -155,7 +155,7 @@ const ConnectedRoot = () => {
                 </svg>
                 <Link
                   to="/my-account"
-                  class="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
                 >
                   Mon Compte
                 </Link>
@@ -172,16 +172,16 @@ const NonConnectedRoot = () => {
     <>
       <aside
         id="default-sidebar"
-        class="fixed left-0 z-40 w-64 transition-transform -translate-x-full sm:translate-x-0 "
+        className="fixed left-0 z-40 w-64 transition-transform -translate-x-full sm:translate-x-0 "
         aria-label="Sidebar"
       >
-        <div class="h-3/4 px-3 py-36 space-y-3 overflow-y-auto">
-          <div class="flex items-center text-xs whitespace-nowrap px-11 text-gray-500 rounded-lg group">
+        <div className="h-3/4 px-3 py-36 space-y-3 overflow-y-auto">
+          <div className="flex items-center text-xs whitespace-nowrap px-11 text-gray-500 rounded-lg group">
             MENU
           </div>
-          <ul class="space-y-3 font-medium">
+          <ul className="space-y-3 font-medium">
             <li>
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="16"
@@ -195,14 +195,14 @@ const NonConnectedRoot = () => {
                 </svg>
                 <Link
                   to="questions"
-                  class="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
                 >
                   Questions
                 </Link>
               </div>
             </li>
             <li>
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="16"
@@ -213,7 +213,7 @@ const NonConnectedRoot = () => {
                 </svg>
                 <Link
                   to="tags"
-                  class="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
                 >
                   Tags
                 </Link>
