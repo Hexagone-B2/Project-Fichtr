@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import MyQuestions from "./pages/MyQuestions";
 import Tags from "./pages/Tags";
 import Shoutbox from "./pages/Shoutbox";
@@ -11,28 +11,40 @@ import Login from "./pages/Login";
 import Layout from "./pages/Layout";
 import LayoutToolbarOnly from "./pages/LayoutToolbarOnly";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/register"
-          element={
-            <LayoutToolbarOnly>
-              <Register />
-            </LayoutToolbarOnly>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <LayoutToolbarOnly>
-              <Login />
-            </LayoutToolbarOnly>
-          }
-        />
-
+        {localStorage.getItem("authorization") ? (
+          <>
+            <Route path="/mes-questions" element={<MyQuestions />} />
+            <Route path="/mon-profil" element={<Profile />} />
+            <Route path="/mes-reponses" element={<MyResponses />} />
+            <Route path="/mes-likes" element={<MyLikes />} />
+            <Route path="/mon-compte" element={<MyAccount />} />
+          </>
+        ) : (
+          <>
+            <Route
+              path="/register"
+              element={
+                <LayoutToolbarOnly>
+                  <Register />
+                </LayoutToolbarOnly>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <LayoutToolbarOnly>
+                  <Login />
+                </LayoutToolbarOnly>
+              }
+            />
+          </>
+        )}
         <Route
           path="/home"
           element={
@@ -49,12 +61,8 @@ export default function App() {
             </Layout>
           }
         />
-        <Route path="tags" element={<Tags />} />
-        <Route path="shoutbox" element={<Shoutbox />} />
-        <Route path="mes-questions" element={<MyQuestions />} />
-        <Route path="mes-reponses" element={<MyResponses />} />
-        <Route path="mes-likes" element={<MyLikes />} />
-        <Route path="mon-compte" element={<MyAccount />} />
+        <Route path="/tags" element={<Tags />} />
+        <Route path="/shoutbox" element={<Shoutbox />} />
         {/*Redirection par default, si l'utilisateur veux accéder a des routes qui n'existe pas*/}
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
