@@ -30,11 +30,7 @@ export default function AuthentificationForm(props) {
         console.log(res);
 
         if (res.status === 200) {
-          localStorage.setItem("authorization", res.data);
-          setAuthIsGood(true);
-          loginUser();
-          navigate("/home");
-          console.log("succés");
+          loginUser(res.data);
         }
       })
       .catch((error) => {

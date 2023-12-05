@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AuthContext } from "./AuthContext";
+import axios from "axios";
 
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -7,23 +8,36 @@ export function AuthProvider({ children }) {
   function authUser() {
     //mettre une vrai authentification ici
     if (localStorage.getItem("authorization")) {
-      setIsAuthenticated(true);
+      const headers = { authorization: localStorage.getItem("authorization") };
+      axios
+        .post("http://enzo-salson.fr:3001/api/authorization", {}, { headers }) //quel endpoint  ?
+        .then((response) => {
+          if (response.data === "OK") {
+            setIsAuthenticated(true);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          setIsAuthenticated(false);
+        });
     }
   }
 
-  function loginUser() {
+  //recuperer le token, le stocker en localstorage
+  function loginUser(data) {
+    localStorage.setItem("authorization", data);
     setIsAuthenticated(true);
   }
 
+  //effacer le token dans le localstorage
   function logoutUser() {
-    // Logique de déconnexion ici
+    localStorage.removeItem("authorization");
     setIsAuthenticated(false);
   }
-  useEffect(() => {
-    authUser();
-  }, []);
   return (
-    <AuthContext.Provider value={{ isAuthenticated, loginUser, logoutUser }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, authUser, loginUser, logoutUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

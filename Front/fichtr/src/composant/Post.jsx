@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { AuthContext } from "./AuthContext";
 
 function Post({ id }) {
   const [post, setPost] = useState({});
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
-  const [isConnected, setIsConnected] = useState(false);
+  const { isAuthenticated } = useContext(AuthContext);
 
   useEffect(() => {
     let headers = undefined;
-    if (localStorage.getItem("authorization")) {
+    if (isAuthenticated) {
       headers = { authorization: localStorage.getItem("authorization") };
-      setIsConnected(true);
     } else {
       headers = {};
     }
@@ -92,7 +92,7 @@ function Post({ id }) {
       <div className="flex justify-between mt-4">
         <div className="flex items-center space-x-2">
           <span className="text-gray-500 flex items-center">
-            {isConnected ? (
+            {isAuthenticated ? (
               <img
                 onClick={() => handleLike(post.id)}
                 src={liked ? "./img/heart-solid.svg" : "./img/heart.svg"}
