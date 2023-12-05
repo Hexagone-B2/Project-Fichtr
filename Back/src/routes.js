@@ -21,6 +21,7 @@ const {unlike} = require("./endpoints/unlike")
 const {createSubject} = require("./endpoints/createSubject");
 const {getSubjects} = require("./endpoints/getSubjects");
 const {deleteSubject} = require("./endpoints/deleteSubject");
+const {isAuthenticated} = require("./endpoints/isAuthenticated");
 
 const upload = multer({storage: storage});
 
@@ -60,4 +61,8 @@ router.post('/createSubject', createSubject)
 router.post('/getSubjects', getSubjects)
 
 router.post('/deleteSubject', deleteSubject)
+
+router.post('/isAuthenticated', isAuthenticated)
+
+
 module.exports = router;
