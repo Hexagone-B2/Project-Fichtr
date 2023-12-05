@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const routes = require('./routes.js');
-const cors = require('cors')
+const cors = require('cors');
+const helmet = require('helmet')
 
 
 const p = {
@@ -10,7 +11,7 @@ const p = {
 }
 
 app.use(cors())
-
+//app.use(helmet()) que en prod pour les headers
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json());
 
