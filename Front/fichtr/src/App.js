@@ -12,12 +12,16 @@ import Layout from "./pages/Layout";
 import LayoutToolbarOnly from "./pages/LayoutToolbarOnly";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import { useContext } from "react";
+import { AuthContext } from "./composant/AuthContext";
 
 export default function App() {
+  const { isAuthenticated } = useContext(AuthContext);
+
   return (
     <BrowserRouter>
       <Routes>
-        {localStorage.getItem("authorization") ? (
+        {isAuthenticated ? (
           <>
             <Route path="/mes-questions" element={<MyQuestions />} />
             <Route path="/mon-profil" element={<Profile />} />
