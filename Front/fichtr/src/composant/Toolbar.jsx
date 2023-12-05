@@ -1,13 +1,15 @@
 import React from "react";
 import "./Toolbar.css";
+import { Link } from "react-router-dom";
+
 function Toolbar() {
   const isLoggedIn = !!localStorage.getItem("authorization");
 
   return (
     <div className="my-app-bar flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 bg-white shadow-md h-[8rem] z-10">
-      <button>
+      <Link to={"/home"}>
         <img src={"/img/logo.png"} alt="logo" className="w-44" />
-      </button>
+      </Link>
 
       <form
         className={
@@ -81,19 +83,21 @@ function Toolbar() {
           </>
         ) : (
           <>
-            <button
+            <Link
+              to={"/login"}
               type="button"
               className="btn-connecter focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
             >
               Se connecter
-            </button>
+            </Link>
 
-            <button
+            <Link
+              to={"/register"}
               type="button"
               className="btn-inscription focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
             >
               Inscription
-            </button>
+            </Link>
           </>
         )}
       </div>
