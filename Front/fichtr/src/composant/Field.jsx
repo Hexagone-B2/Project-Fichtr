@@ -16,7 +16,7 @@ export default function Field(props) {
         placeholder={props.placeholder}
         required
       />
-      <p class="text-red-500 text-xs italic">
+      <p className="text-red-500 text-xs italic">
         {props.boolean ? props.errorText : <br />}
       </p>
     </div>

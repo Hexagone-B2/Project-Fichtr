@@ -1,8 +1,7 @@
 import axios from "axios";
 import Field from "../Field";
 import { useNavigate } from "react-router-dom";
-
-const { useState } = require("react");
+import { useState } from "react";
 
 export default function InscriptionForm(props) {
   let [firstName, setFirstName] = useState("");
@@ -123,7 +122,7 @@ export default function InscriptionForm(props) {
         boolean={lastNameIsWrong}
         errorText="Nom de famille trop long"
       />
-      <p class="text-red-500 text-xs italic">
+      <p className="text-red-500 text-xs italic">
         {emailUsed ? "Cet email est deja utilisé" : <br />}
       </p>
       <Field
