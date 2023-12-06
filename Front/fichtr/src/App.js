@@ -1,25 +1,71 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import MyQuestions from "./pages/MyQuestions";
+import Tags from "./pages/Tags";
+import Shoutbox from "./pages/Shoutbox";
+import Questions from "./pages/Questions";
+import MyResponses from "./pages/MyResponses";
+import MyLikes from "./pages/MyLikes";
+import MyAccount from "./pages/MyAccount";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Layout from "./pages/Layout";
+import LayoutToolbarOnly from "./pages/LayoutToolbarOnly";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {localStorage.getItem("authorization") ? (
+          <>
+            <Route path="/mes-questions" element={<MyQuestions />} />
+            <Route path="/mon-profil" element={<Profile />} />
+            <Route path="/mes-reponses" element={<MyResponses />} />
+            <Route path="/mes-likes" element={<MyLikes />} />
+            <Route path="/mon-compte" element={<MyAccount />} />
+          </>
+        ) : (
+          <>
+            <Route
+              path="/register"
+              element={
+                <LayoutToolbarOnly>
+                  <Register />
+                </LayoutToolbarOnly>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <LayoutToolbarOnly>
+                  <Login />
+                </LayoutToolbarOnly>
+              }
+            />
+          </>
+        )}
+        <Route
+          path="/home"
+          element={
+            <Layout>
+              <Home />
+            </Layout>
+          }
+        />
+        <Route
+          path="/questions"
+          element={
+            <Layout>
+              <Questions />
+            </Layout>
+          }
+        />
+        <Route path="/tags" element={<Tags />} />
+        <Route path="/shoutbox" element={<Shoutbox />} />
+        {/*Redirection par default, si l'utilisateur veux accéder a des routes qui n'existe pas*/}
+        <Route path="*" element={<Navigate to="/home" />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
