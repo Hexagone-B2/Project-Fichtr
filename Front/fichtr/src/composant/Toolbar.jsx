@@ -62,15 +62,12 @@ function Toolbar() {
           <>
             <button
               type="button"
-              className="btn-question px-5 py-2 text-base font-medium text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="btn-question px-5 py-2 text-base font-medium text-center inline-flex items-center text-white bg-[#310046] rounded-lg hover:bg-[#41015d] focus:ring-4 focus:outline-none focus:bg-[#310046] dark:bg-[#310046] dark:hover:bg-[#41015d] dark:focus:bg-[#310046]"
             >
               <img src={"/img/plus.svg"} alt="" className="m-2" />
               Poser une question
             </button>
 
-            <button>
-              <img src={"/img/bell.svg"} alt="" className="w-7" />
-            </button>
 
             <button>
               <img src={"/img/envelope.svg"} alt="" className="w-7" />
@@ -87,7 +84,7 @@ function Toolbar() {
             <Link
               to={"/login"}
               type="button"
-              className="btn-connecter focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+              className="btn-connecter focus:outline-none text-white bg-[#310046] hover:bg-[#41015d] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
             >
               Se connecter
             </Link>
@@ -95,7 +92,7 @@ function Toolbar() {
             <Link
               to={"/register"}
               type="button"
-              className="btn-inscription focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+              className="btn-inscription focus:outline-none text-white bg-[#310046] hover:bg-[#41015d] focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
             >
               Inscription
             </Link>
