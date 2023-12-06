@@ -1,62 +1,57 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function ScrollSubject() {
+    const [SubjectList, SetSubjectList] = useState([]);
     const [Subject, SetSubject] = useState();
+
+    function load() {
+        axios.post("http://enzo-salson.fr:3001/api/getSubjects").then(response => {
+            SetSubjectList(response.data.list);
+        })
+    }
+
+    useEffect(load, []);
+
+    function handleSubjectSelect(value) {
+        SetSubject(value);
+    }
 
     return (
         <>
 
             <button id="dropdownRadioHelperButton" data-dropdown-toggle="dropdownRadioHelper" class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">Sujets<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
             </svg>
             </button>
 
             <div id="dropdownRadioHelper" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-60">
                 <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioHelperButton">
-                    <li>
-                        <div class="flex p-2 rounded hover:bg-gray-100">
-                            <div class="flex items-center h-5">
-                                <input id="helper-radio-4" name="helper-radio" type="radio" value="" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 focus:ring-2"/>
-                            </div>
-                            <div class="ms-2 text-sm">
-                                <label for="helper-radio-4" class="font-medium text-gray-900">
-                                    <div>Tuez moi</div>
-                                    <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500">Some helpful instruction goes over here.</p>
-                                </label>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex p-2 rounded hover:bg-gray-100">
-                            <div class="flex items-center h-5">
-                                <input id="helper-radio-5" name="helper-radio" type="radio" value="" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 focus:ring-2"/>
-                            </div>
-                            <div class="ms-2 text-sm">
-                                <label for="helper-radio-5" class="font-medium text-gray-900">
-                                    <div>Par pitié</div>
-                                    <p id="helper-radio-text-5" class="text-xs font-normal text-gray-500">Some helpful instruction goes over here.</p>
-                                </label>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex p-2 rounded hover:bg-gray-100">
-                            <div class="flex items-center h-5">
-                                <input id="helper-radio-6" name="helper-radio" type="radio" value="" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 focus:ring-2"/>
-                            </div>
-                            <div class="ms-2 text-sm">
-                                <label for="helper-radio-6" class="font-medium text-gray-900">
-                                    <div>AAAAAAAAAAAAAA</div>
-                                    <p id="helper-radio-text-6" class="text-xs font-normal text-gray-500">Some helpful instruction goes over here.</p>
-                                </label>
-                            </div>
-                        </div>
-                    </li>
+                    {SubjectList.map(element => (
+                        <SubjectItem key={element.id} id={element.id} name={element.name} handleSubjectSelect={handleSubjectSelect} />
+                    ))}
                 </ul>
             </div>
 
 
         </>
+    );
+}
+
+function SubjectItem({ id, name, handleSubjectSelect }) {
+    return (
+        <li>
+            <div class="flex p-2 rounded hover:bg-gray-100" onChange={() => handleSubjectSelect(id)} >
+                <div class="flex items-center h-5">
+                    <input id={"helper-radio-" + id} name="helper-radio" type="radio" value="" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 focus:ring-2" />
+                </div>
+                <div class="ms-2 text-sm">
+                    <label htmlFor={"helper-radio-" + id} class="font-medium text-gray-900">
+                        <div>{name}</div>
+                    </label>
+                </div>
+            </div>
+        </li>
     );
 }
 
@@ -88,7 +83,7 @@ export default function PostForm() {
                     </div>
                 </div>
                 <div class="px-4 py-2 bg-white rounded-b-lg">
-                    <label for="editor" class="sr-only">Publish post</label>
+                    <label htmlFor="editor" class="sr-only">Publish post</label>
                     <textarea id="editor" rows="8" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 focus:ring-0" placeholder="Write an article..." required></textarea>
                 </div>
                 <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-purple-700 rounded-lg focus:ring-4 focus:ring-purple-200 hover:bg-purple-800">
