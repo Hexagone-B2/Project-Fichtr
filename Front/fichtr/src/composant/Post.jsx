@@ -76,7 +76,7 @@ function Post({ id }) {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto bg-white border border-gray-200 rounded-lg p-4 my-8 relative">
+    <div className="m-8 bg-white border border-gray-200 rounded-lg p-4 relative">
       <h2 className="text-xl font-bold mb-2">{post.title}</h2>
       <div className="flex items-center mb-4">
         <img
