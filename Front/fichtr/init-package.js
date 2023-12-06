@@ -8,23 +8,25 @@ const removeDirCommand = os.platform() === "win32" ? "rmdir /s /q" : "rm -rf";
 // Utilisez 'del' sur Windows, 'rm' sur les systèmes UNIX
 const removeFileCommand = os.platform() === "win32" ? "del" : "rm";
 
+// Fonction pour supprimer un dossier s'il existe
 function removeDirectoryIfExists(directoryPath) {
   if (fs.existsSync(directoryPath)) {
-    console.log(`Suppression du dossier ${directoryPath}`);
+    console.log(`\x1b[36mSuppression du dossier ${directoryPath}\x1b[0m`);
     execSync(`${removeDirCommand} ${directoryPath}`);
-    console.log(`Dossier ${directoryPath} supprimé avec succès`);
+    console.log(`\x1b[32mDossier ${directoryPath} supprimé avec succès\x1b[0m`);
   } else {
-    console.log(`Le dossier ${directoryPath} n'existe pas`);
+    console.log(`\x1b[33mLe dossier ${directoryPath} n'existe pas\x1b[0m`);
   }
 }
 
+// Fonction pour supprimer un fichier s'il existe
 function removeFileIfExists(filePath) {
   if (fs.existsSync(filePath)) {
-    console.log(`Suppression du fichier ${filePath}`);
+    console.log(`\x1b[36mSuppression du fichier ${filePath}\x1b[0m`);
     execSync(`${removeFileCommand} ${filePath}`);
-    console.log(`Fichier ${filePath} supprimé avec succès`);
+    console.log(`\x1b[32mFichier ${filePath} supprimé avec succès\x1b[0m`);
   } else {
-    console.log(`Le fichier ${filePath} n'existe pas`);
+    console.log(`\x1b[33mLe fichier ${filePath} n'existe pas\x1b[0m`);
   }
 }
 
@@ -78,24 +80,28 @@ const packageJsonContent = `{
   }
 }`;
 
-console.log("Début du script...");
+console.log("\x1b[34mDébut du script...\x1b[0m");
 
-console.log("#1 Suppression des fichiers");
+console.log("\x1b[34m#1 Suppression des fichiers\x1b[0m");
 removeDirectoryIfExists("node_modules");
 removeFileIfExists("package.json");
 removeFileIfExists("package-lock.json");
 
-console.log("#2 Écriture du fichier package.json");
+console.log("\x1b[34m#2 Écriture du fichier package.json\x1b[0m");
 const packageJsonPath = "package.json";
 fs.writeFileSync(packageJsonPath, packageJsonContent);
-console.log("Package.json écrit avec succès");
+console.log("\x1b[32mPackage.json écrit avec succès\x1b[0m");
 
 // Exécuter la commande npm install
 try {
-  console.log("#3 installation des packages (npm install)");
+  console.log("\x1b[34m#3 installation des packages (npm install)\x1b[0m");
   execSync("npm install");
 } catch (error) {
-  console.error("Erreur lors de l'exécution de npm install :", error.message);
+  console.error(
+    "\x1b[31mErreur lors de l'exécution de npm install :",
+    error.message,
+    "\x1b[0m"
+  );
 }
 
-console.log("Packages installés avec succès !");
+console.log("\x1b[32mPackages installés avec succès !\x1b[0m");
