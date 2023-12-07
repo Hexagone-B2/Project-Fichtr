@@ -1,23 +1,49 @@
 import Post from "../composant/Post";
-import { useState } from "react";
-import ChargeContentPost from "../composant/ChargeContentPost";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import PostOne from "../composant/PostOne";
 
-export default function Home(props) {
-  let [nb, setNb] = useState(0);
+export default function Home() {
+  const [idList, setIdList] = useState([]);
+  const [showOnePost, setShowOnePost] = useState(false);
+  const [idOnePost, setIdOnePost] = useState(0);
+  const [nb, setNb] = useState(0);
 
-  return (
-    <>
-      <ChargeContentPost
-        endpoint={"http://enzo-salson.fr:3001/api/getPosts"}
-        nb={nb}
-      ></ChargeContentPost>
+  useEffect(() => {
+    function getContent() {
+      axios
+        .post("http://enzo-salson.fr:3001/api/getPosts", { nb: nb })
+        .then((response) => {
+          setIdList((prevIdList) => [...prevIdList, ...response.data.tab]);
+        })
+        .catch((e) => {
+          console.log("erreur : " + e);
+        });
+    }
 
+    // Appel de la fonction de requête lorsque le composant est monté
+    getContent();
+  }, [nb]);
+
+  return showOnePost ? (
+    <PostOne id={idOnePost} />
+  ) : (
+    <div>
+      {idList.map((item) => (
+        // Créer dynamiquement des composants enfants en fonction des éléments de la liste
+        <Post
+          key={item}
+          id={item}
+          setIdOnePost={setIdOnePost}
+          setShowOnePost={setShowOnePost}
+        />
+      ))}
       <button
         onClick={() => setNb((prevState) => prevState + 1)}
         className="p-8 bg-[#310046] hover:bg-[#470863] text-white font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       >
         Charger plus de posts
       </button>
-    </>
+    </div>
   );
 }
