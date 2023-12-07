@@ -8,7 +8,7 @@ const {getProfilePic} = require('./endpoints/getProfilePic');
 router.get("/getProfilePic", getProfilePic);
 
 const {getPosts} = require('./endpoints/getPosts');
-router.get("/getPosts", getPosts);
+router.post("/getPosts", getPosts);
 
 const {echo} = require('./endpoints/echo');
 router.post('/echo', echo); router.get('/echo', echo);
@@ -61,5 +61,7 @@ router.post('/deleteSubject', deleteSubject)
 const {isAuthenticated} = require("./endpoints/isAuthenticated");
 router.post('/isAuthenticated', isAuthenticated)
 
+const {getComments} = require("./endpoints/getComments");
+router.post('/getComments', getComments)
 
 module.exports = router;

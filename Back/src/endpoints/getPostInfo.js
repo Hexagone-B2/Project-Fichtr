@@ -8,29 +8,26 @@ module.exports.getPostInfo = (req,res)=>{
     if (!(req.body.id)){
         res.status(403).send('NOT_ALL_DATA');
     }else{
-        executeSQL('SELECT p.id, p.title as title, p.body as body, p.user_id as owner_id FROM Post p where p.id=?;',[req.body.id],(error,result)=>{
+        executeSQL('SELECT p.title as title, p.body as body, p.user_id as owner_id, User.username as username FROM Post p INNER JOIN User on User.id=p.user_id where p.id=?;',[req.body.id],(error,result)=>{
             if (error){
                 res.status(500).send('INTERNAL_ERROR');
             }else{
-                const titleBody = [result[0].title, result[0].body, result[0].id,result[0].owner_id];
-                executeSQL("SELECT COUNT(*) as num FROM Likes where post_id=?;",[req.body.id],(error,result)=>{
+                let json = {
+                    title: result[0].title,
+                    body: result[0].body,
+                    owner_id : result[0].owner_id,
+                    username:result[0].username
+                }
+                executeSQL("SELECT COUNT(*) as num FROM Likes INNER JOIN User on User.id=Likes.user_id where post_id=?;",[req.body.id],(error,result)=>{
                     if (error){
                         res.status(500).send('INTERNAL_ERROR');
                     }else{
-                        const likes = result[0].num;
+                        json.likes = result[0].num
                         executeSQL("SELECT COUNT(*) as num FROM Comment where post_id=?;",[req.body.id],(error,result)=>{
                             if (error){
                                 res.status(500).send('INTERNAL_ERROR');
                             }else{
-                                const comments = result[0].num;
-                                let json = {
-                                    id: titleBody[2],
-                                    title: titleBody[0],
-                                    body: titleBody[1],
-                                    likes: likes,
-                                    comments: comments,
-                                    owner_id : titleBody[3]
-                                }
+                                json.comments=result[0].num
                                 if (req.headers.authorization){
                                     checkAuth(req.headers.authorization,(error,decoded)=>{
                                         if (error){
@@ -40,11 +37,7 @@ module.exports.getPostInfo = (req,res)=>{
                                                 if (error){
                                                     res.status(500).send('INTERNAL_ERROR');
                                                 }else{
-                                                    if (result[0]){
-                                                        json.liked = true;
-                                                    }else{
-                                                        json.liked=false;
-                                                    }
+                                                    json.liked = !!result[0];
                                                     res.json(json);
                                                 }
                                             })

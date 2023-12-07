@@ -103,7 +103,23 @@ VALUES
     ('Post 2', 'Pellentesque ac tristique elit. Vestibulum cursus augue at neque.', 2, 2),
     ('Post 3', 'Aenean euismod ultricies neque.', 3, 3),
     ('Post 4', 'Vestibulum cursus augue at neque.', 4, 4),
-    ('Post 5', 'Consectetur adipiscing elit. Pellentesque ac tristique elit.', 5, 5);
+    ('Post 5', 'Consectetur adipiscing elit. Pellentesque ac tristique elit.', 5, 5),
+    ('Post 6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 1, 1),
+    ('Post 7', 'Pellentesque ac tristique elit. Vestibulum cursus augue at neque.', 2, 2),
+    ('Post 8', 'Aenean euismod ultricies neque.', 3, 3),
+    ('Post 9', 'Vestibulum cursus augue at neque.', 4, 4),
+    ('Post 10', 'Consectetur adipiscing elit. Pellentesque ac tristique elit.', 5, 5),
+    ('Post 10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 1, 1),
+    ('Post 11', 'Pellentesque ac tristique elit. Vestibulum cursus augue at neque.', 2, 2),
+    ('Post 12', 'Aenean euismod ultricies neque.', 3, 3),
+    ('Post 13', 'Vestibulum cursus augue at neque.', 4, 4),
+    ('Post 14', 'Consectetur adipiscing elit. Pellentesque ac tristique elit.', 5, 5),
+    ('Post 15', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 1, 1),
+    ('Post 16', 'Pellentesque ac tristique elit. Vestibulum cursus augue at neque.', 2, 2),
+    ('Post 17', 'Aenean euismod ultricies neque.', 3, 3),
+    ('Post 18', 'Vestibulum cursus augue at neque.', 4, 4),
+    ('Post 19', 'Consectetur adipiscing elit. Pellentesque ac tristique elit.', 5, 5);
+
 
 -- Ajouter des commentaires
 INSERT INTO Comment (user_id, post_id, body, time)
