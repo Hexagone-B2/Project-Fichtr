@@ -15,7 +15,7 @@ export default function Posts(props) {
 
                 <div className="z-0 top-[8rem] relative w-full overflow-hidden bg-[#fafafa]">
                     <div className="mx-auto max-w-2xl p-8">
-                        <Post />
+                        <Post id={1} />
                         <div className="flex-col p-1">
                             <Commentaire />
                             <Commentaire />

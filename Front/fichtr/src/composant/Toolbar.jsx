@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 
 function Toolbar() {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, userId } = useContext(AuthContext);
 
   return (
     <div className="my-app-bar flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 bg-white shadow-md h-[8rem] z-10">
@@ -72,7 +72,7 @@ function Toolbar() {
             </button>
 
             <img
-              src={"/img/logo.png"}
+              src={"http://enzo-salson.fr:3001/api/getProfilePic?id=" + userId}
               alt="avatar"
               className="w-10 h-10 rounded-full mr-4"
             />
