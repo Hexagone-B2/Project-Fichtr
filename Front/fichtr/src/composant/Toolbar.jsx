@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import "./Toolbar.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 
@@ -67,7 +66,6 @@ function Toolbar() {
               <img src={"/img/plus.svg"} alt="" className="m-2" />
               Poser une question
             </button>
-
 
             <button>
               <img src={"/img/envelope.svg"} alt="" className="w-7" />

@@ -6,13 +6,12 @@ export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   function authUser() {
-    //mettre une vrai authentification ici
     if (localStorage.getItem("authorization")) {
       const headers = { authorization: localStorage.getItem("authorization") };
       axios
-        .post("http://enzo-salson.fr:3001/api/authorization", {}, { headers }) //quel endpoint  ?
+        .post("http://enzo-salson.fr:3001/api/isAuthenticated", {}, { headers })
         .then((response) => {
-          if (response.data === "OK") {
+          if (response.data.authenticated === true) {
             setIsAuthenticated(true);
           }
         })
