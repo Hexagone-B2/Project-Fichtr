@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "./AuthContext";
 
 function Toolbar() {
-  const isLoggedIn = !!localStorage.getItem("authorization");
+  const { isAuthenticated } = useContext(AuthContext);
 
   return (
     <div className="my-app-bar flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 bg-white shadow-md h-[8rem] z-10">
@@ -12,7 +13,7 @@ function Toolbar() {
 
       <form
         className={
-          isLoggedIn ? "flex items-center mx-auto" : "flex items-center"
+          isAuthenticated ? "flex items-center mx-auto" : "flex items-center"
         }
       >
         <label
@@ -51,12 +52,12 @@ function Toolbar() {
 
       <div
         className={
-          isLoggedIn
+          isAuthenticated
             ? "flex items-center space-x-7"
             : "flex items-center space-x-4"
         }
       >
-        {isLoggedIn ? (
+        {isAuthenticated ? (
           <>
             <button
               type="button"
@@ -65,7 +66,6 @@ function Toolbar() {
               <img src={"/img/plus.svg"} alt="" className="m-2" />
               Poser une question
             </button>
-
 
             <button>
               <img src={"/img/envelope.svg"} alt="" className="w-7" />

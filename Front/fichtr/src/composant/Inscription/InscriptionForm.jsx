@@ -60,14 +60,11 @@ export default function InscriptionForm(props) {
       axios
         .post("http://enzo-salson.fr:3001/api/register", to_send, { headers })
         .then((res) => {
-          console.log(res.data);
-
           if (res.status === 200) {
             navigate("/login");
           }
         })
         .catch((error) => {
-          console.log(error.response.data);
           if (error.response.data === "NOT_ALL_DATA") {
             setPassIsWrong(!regexPassword.test(password));
             setEmailIsWrong(!regexEmail.test(email));
