@@ -3,21 +3,34 @@ import Comment from "./Comment";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import InputComment from "./InputComment";
+import { AuthContext } from "./AuthContext";
+import { useContext } from "react";
 
 export default function PostOne({ id }) {
   const [allComment, setAllComment] = useState([]);
+  const { isAuthenticated } = useContext(AuthContext);
+  // const [liked, setLiked] = useState(false);
+
+  let headers = null;
+  if (isAuthenticated)
+    headers = { authorization: localStorage.getItem("authorization") };
+  console.log("headers = " + headers);
   useEffect(() => {
     axios
-      .post("http://enzo-salson.fr:3001/api/getComments", {
-        post_id: id,
-      })
+      .post(
+        "http://enzo-salson.fr:3001/api/getComments",
+        {
+          post_id: id,
+        },
+        { headers }
+      )
       .then((response) => {
         setAllComment(response.data.comments);
       });
   }, []);
   console.log(allComment);
   return (
-    <div className="mx-auto max-w-2xl p-8">
+    <div className="p-2">
       <Post id={id} />
       <div className="flex flex-col p-1">
         <InputComment
@@ -27,10 +40,12 @@ export default function PostOne({ id }) {
         />
         {allComment.map((item) => (
           <Comment
+            key={item.id}
             user_id={item.user_id}
             body={item.body}
             username={item.username}
-            comment_id={item.it}
+            comment_id={item.id}
+            liked={item.liked}
           />
         ))}
       </div>
