@@ -18,11 +18,7 @@ function Post({ id }) {
     }
     const data = { id: id };
     axios
-      .post(
-        "http://enzo-salson.fr:3001/api/getPostInfo",
-        data,
-        { headers }
-      )
+      .post("http://enzo-salson.fr:3001/api/getPostInfo", data, { headers })
       .then((response) => {
         const post = {
           title: response.data.title,
@@ -107,7 +103,9 @@ function Post({ id }) {
             {likesCount}
           </span>
           <span className="text-gray-500 flex items-center">
-            <img src="./img/comment.svg" alt="commentaire" />
+            <button onClick={handleComments}>
+              <img src="./img/comment.svg" alt="commentaire" />
+            </button>
             {post.comments}
           </span>
         </div>
