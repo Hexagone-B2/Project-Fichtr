@@ -4,6 +4,8 @@ import axios from "axios";
 
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [userId, setUserId] = useState("");
 
   function authUser() {
     if (localStorage.getItem("authorization")) {
@@ -13,6 +15,8 @@ export function AuthProvider({ children }) {
         .then((response) => {
           if (response.data.authenticated === true) {
             setIsAuthenticated(true);
+            setUserId(response.data.user_id);
+            setUserName(response.data.username);
           }
         })
         .catch((e) => {
@@ -35,7 +39,14 @@ export function AuthProvider({ children }) {
   }
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, authUser, loginUser, logoutUser }}
+      value={{
+        isAuthenticated,
+        authUser,
+        loginUser,
+        logoutUser,
+        userId,
+        userName,
+      }}
     >
       {children}
     </AuthContext.Provider>
