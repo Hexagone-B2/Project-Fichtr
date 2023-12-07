@@ -64,4 +64,13 @@ router.post('/isAuthenticated', isAuthenticated)
 const {getComments} = require("./endpoints/getComments");
 router.post('/getComments', getComments)
 
+const {comment} = require("./endpoints/comment");
+router.post('/comment', comment)
+
+const {likeComment} = require("./endpoints/likeComment");
+router.post('/likeComment', likeComment)
+
+const {getLikesCountComment} = require("./endpoints/getLikesCountComment");
+router.post('/getLikesCountComment', getLikesCountComment)
+
 module.exports = router;

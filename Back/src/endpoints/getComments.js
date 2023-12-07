@@ -1,12 +1,35 @@
 const {executeSQL} = require("../func/mysql");
+const {checkAuth} = require("../func/checkAuth");
+
 module.exports.getComments = (req,res)=>{
-    console.log(req.body)
     if (req.body.post_id){
-        executeSQL('SELECT id,user_id,body,time FROM Comment WHERE post_id=? ORDER BY time;',[parseInt(req.body.post_id)],(error,result)=>{
+        executeSQL('SELECT Comment.id as id,user_id,body,time,User.username as username FROM Comment INNER JOIN User on User.id=Comment.user_id WHERE post_id=? ORDER BY time;',[parseInt(req.body.post_id)],(error,result)=>{
             if(error){
                 res.status(500).send('INTERNAL_ERROR');
             }else{
-                res.json({comments:result});
+                if (req.headers.authorization){
+                    checkAuth(req.headers.authorization,(error,decoded)=>{
+                        if (error){
+                            res.json({comments:result})
+                        }else{
+                            executeSQL('SELECT LikesComment.comment_id FROM LikesComment LEFT JOIN Comment on Comment.id=LikesComment.comment_id where Comment.post_id=? and LikesComment.user_id=?',[parseInt(req.body.post_id),decoded.id],(error,result2)=>{
+                                if (error){
+                                    res.json({comments: result});
+                                }else{
+                                    const result2Index = {};
+                                    result2.forEach((element2) => {
+                                        result2Index[element2.comment_id] = true;
+                                    });
+                                    result.map((element) => {
+                                        element.liked = result2Index[element.id] === true;
+                                    });
+                                }
+                            })
+                        }
+                    });
+                }
+                res.json({comments:result})
+
             }
         })
     }else{
