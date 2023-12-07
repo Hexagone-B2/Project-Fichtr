@@ -28,7 +28,6 @@ function Post({ id }) {
           body: response.data.body,
           likes: response.data.likes,
           comments: response.data.comments,
-          id: response.data.id,
           liked: response.data.liked,
           owner_id: response.data.owner_id,
           username: response.data.username,
@@ -36,7 +35,8 @@ function Post({ id }) {
         setLiked(post.liked);
         setPost(post);
         setLikesCount(post.likes);
-      });
+      })
+      .catch((e) => console.log(e));
   }, []);
 
   const handleLike = (id) => {
@@ -81,7 +81,9 @@ function Post({ id }) {
       <div className="flex items-center mb-4">
         <img
           src={
-            "http://enzo-salson.fr:3001/api/getProfilePic?id=" + post.owner_id
+            post.owner_id
+              ? `http://enzo-salson.fr:3001/api/getProfilePic?id=${post.owner_id}`
+              : ""
           }
           alt="avatar"
           className="w-10 h-10 rounded-full mr-4"
@@ -94,7 +96,7 @@ function Post({ id }) {
           <span className="text-gray-500 flex items-center">
             {isAuthenticated ? (
               <img
-                onClick={() => handleLike(post.id)}
+                onClick={() => handleLike(id)}
                 src={liked ? "./img/heart-solid.svg" : "./img/heart.svg"}
                 alt="like"
               />

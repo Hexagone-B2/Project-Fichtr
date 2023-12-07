@@ -185,7 +185,7 @@ const NonConnectedRoot = () => {
     <>
       <aside
         id="default-sidebar"
-        className="fixed left-0 z-40 w-64 transition-transform -translate-x-full sm:translate-x-0 "
+        className="w-64 top-[8rem] sticky"
         aria-label="Sidebar"
       >
         <div className="h-3/4 px-3 py-36 space-y-3 overflow-y-auto">
