@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import MyQuestions from "./pages/MyQuestions";
 import Tags from "./pages/Tags";
 import Shoutbox from "./pages/Shoutbox";
+import Posts from "./pages/Posts.jsx";
 import Questions from "./pages/Questions";
 import MyResponses from "./pages/MyResponses";
 import MyLikes from "./pages/MyLikes";
@@ -69,9 +70,15 @@ export default function App() {
         />
         <Route path="/tags" element={<Tags />} />
         <Route path="/shoutbox" element={<Shoutbox />} />
+          <Route path="/posts" element={<Posts />} />
         {/*Redirection par default, si l'utilisateur veux accéder a des routes qui n'existe pas*/}
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </BrowserRouter>
+
+
+
+
+
   );
 }
