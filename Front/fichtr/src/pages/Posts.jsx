@@ -2,6 +2,7 @@ import Post from "../composant/Post";
 import Commentaire from "../composant/Commentaire";
 import Layout from "../pages/Layout";
 import {useEffect} from "react";
+import axios from "axios";
 
 
 export default function Posts(props) {
