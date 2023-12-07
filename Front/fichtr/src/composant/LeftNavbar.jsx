@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "./AuthContext";
 
-const ConnectedRoot = () => {
+function ConnectedRoot() {
+  const { logoutUser } = useContext(AuthContext);
+
   return (
     <>
       <aside
@@ -163,10 +167,19 @@ const ConnectedRoot = () => {
             </li>
           </ul>
         </div>
+        <div className="h-3/4 px-3 py-36 space-y-3 overflow-y-auto">
+          <button
+            to="home"
+            className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+            onClick={() => logoutUser()}
+          >
+            Deconnexion
+          </button>
+        </div>
       </aside>
     </>
   );
-};
+}
 const NonConnectedRoot = () => {
   return (
     <>
@@ -227,7 +240,9 @@ const NonConnectedRoot = () => {
 };
 
 export default function NavbarLeft() {
-  if (localStorage.getItem("authorization")) {
+  const { isAuthenticated } = useContext(AuthContext);
+
+  if (isAuthenticated) {
     return <ConnectedRoot />;
   } else {
     return <NonConnectedRoot />;
