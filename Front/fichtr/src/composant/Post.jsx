@@ -16,10 +16,11 @@ function Post({ id }) {
     } else {
       headers = {};
     }
+    const data = { id: id };
     axios
       .post(
         "http://enzo-salson.fr:3001/api/getPostInfo",
-        { id: id },
+        data,
         { headers }
       )
       .then((response) => {
