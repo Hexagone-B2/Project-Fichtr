@@ -4,29 +4,39 @@ import { AuthContext } from "./AuthContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 
-function Comment({ user_id, body, username, comment_id }) {
+function Comment({ user_id, body, username, comment_id, liked }) {
   const { isAuthenticated } = useContext(AuthContext);
-  const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
+  const [isLiked, setIsLiked] = useState(liked);
 
-  function handleLike(id) {
-    const headers = { authorization: localStorage.getItem("authorization") };
-
+  useEffect(() => {
     axios
-      .post(
-        "http://enzo-salson.fr:3001/api/comment",
-        { comment_id: id },
-        { headers }
-      )
-      .then((response) => {
-        setLiked(response.data.liked);
-        setLikesCount(response.data.likes);
+      .post("http://enzo-salson.fr:3001/api/getLikesCountComment", {
+        comment_id: comment_id,
       })
-      .catch((error) => console.log(error));
-  }
+      .then((response) => {
+        console.log(response.data);
+        setLikesCount(response.data.num);
+      });
+    //     .catch((error) => console.log(error));
+  }, []);
+  // function handleLike(id) {
+  //   if (!isLiked) {
+  //     setIsLiked(true);
+  //     setLikesCount((prevState) => prevState + 1);
+  //   }
+  //   axios
+  //     .post("http://enzo-salson.fr:3001/api/likesCountComment", {
+  //       comment_id: id,
+  //     })
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setLikesCount(response.data.num);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }
   return (
-    <div className="w-full max-w-lg mx-auto bg-white border border-gray-200 rounded-lg p-4 my-8 relative">
-      <h2 className="text-xl font-bold mb-2">{body}</h2>
+    <div className="  bg-white border border-gray-200 rounded-lg p-4 my-2 relative">
       <div className="flex items-center mb-4">
         <img
           src={"http://enzo-salson.fr:3001/api/getProfilePic?id=" + user_id}
@@ -36,8 +46,8 @@ function Comment({ user_id, body, username, comment_id }) {
         <span className="font-bold text-gray-900">{username}</span>
         {isAuthenticated ? (
           <img
-            onClick={() => handleLike(comment_id)}
-            src={liked ? "./img/heart-solid.svg" : "./img/heart.svg"}
+            // onClick={() => handleLike(comment_id)}
+            src={isLiked ? "./img/heart-solid.svg" : "./img/heart.svg"}
             alt="like"
           />
         ) : (
@@ -47,6 +57,7 @@ function Comment({ user_id, body, username, comment_id }) {
         )}
         {likesCount}
       </div>
+      <h2 className="font-bold mb-2">{body}</h2>
     </div>
   );
 }
