@@ -1,19 +1,19 @@
-import RightNavBar from "../composant/RightNavBar";
-import NavbarLeft from "../composant/LeftNavbar";
-import Toolbar from "../composant/Toolbar";
 import Post from "../composant/Post";
 import Commentaire from "../composant/Commentaire";
+import Layout from "../pages/Layout";
+import {useEffect} from "react";
+
 
 export default function Posts(props) {
-    return (
-        <>
-            <Toolbar />
-            <div className="flex flex-row w-screen justify-between">
-                <div className="top-[8rem] relative">
-                    <NavbarLeft />
-                </div>
+    useEffect(() => {
+        axios.post("http://enzo-salson.fr:3001/api/getComments")
+    }, []);
 
-                <div className="z-0 top-[8rem] relative w-full overflow-hidden bg-[#fafafa]">
+    return (
+
+
+        <Layout>
+
                     <div className="mx-auto max-w-2xl p-8">
                         <Post id={1} />
                         <div className="flex-col p-1">
@@ -22,12 +22,9 @@ export default function Posts(props) {
 
                         </div>
                     </div>
-                </div>
 
-                <div className="top-[8rem] relative bg-[#fafafa]">
-                    <RightNavBar />
-                </div>
-            </div>
-        </>
+        </Layout>
+
+
     );
 }
