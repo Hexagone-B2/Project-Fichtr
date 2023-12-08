@@ -17,7 +17,7 @@ function UserSettings() {
       const token = localStorage.getItem("authorization");
       const headers = { authorization: token };
       axios
-        .post("http://enzo-salson.fr:3001/api/getUnameMailBio", {}, { headers })
+        .post("https://dev.enzo-salson.fr/api/getUnameMailBio", {}, { headers })
         .then((response) => {
           setUsername(response.data.username);
           setMail(response.data.mail);
@@ -114,7 +114,7 @@ function UserSettings() {
           const token = localStorage.getItem("authorization");
           const headers = { authorization: token };
           axios.post(
-            "http://enzo-salson.fr:3001/api/updateUnameMailBio",
+            "https://dev.enzo-salson.fr/api/updateUnameMailBio",
             {
               username: username,
               mail: mail,
@@ -134,7 +134,7 @@ function UserSettings() {
         const headers = { authorization: token };
         objectTest.append("file", image);
         axios.post(
-          "http://enzo-salson.fr:3001/api/updateProfilePic",
+          "https://dev.enzo-salson.fr/api/updateProfilePic",
           objectTest,
           {
             headers,
@@ -156,7 +156,7 @@ function UserSettings() {
             const token = localStorage.getItem("authorization");
             const headers = { authorization: token };
             axios.post(
-              "http://enzo-salson.fr:3001/api/modifyPassword",
+              "https://dev.enzo-salson.fr/api/modifyPassword",
               {
                 password: password,
                 repeatPassword: passwordConfirm,
@@ -213,7 +213,7 @@ function UserSettings() {
       <div className="flex justify-center gap-10">
         <div className="flex flex-col items-center border border-2 h-fit w-64 p-5 gap-3">
           <img
-            src={"http://enzo-salson.fr:3001/api/getProfilePic?id=" + id}
+            src={"https://dev.enzo-salson.fr/api/getProfilePic?id=" + id}
             alt=""
             className="rounded-full h-32 w-32"
           />

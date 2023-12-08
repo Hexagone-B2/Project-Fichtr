@@ -58,7 +58,7 @@ export default function InscriptionForm(props) {
         "Content-Type": "application/json",
       };
       axios
-        .post("http://enzo-salson.fr:3001/api/register", to_send, { headers })
+        .post("https://dev.enzo-salson.fr/api/register", to_send, { headers })
         .then((res) => {
           if (res.status === 200) {
             navigate("/login");

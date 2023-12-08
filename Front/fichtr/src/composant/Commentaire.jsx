@@ -8,7 +8,7 @@ function Commentaire({ user_id, body, username }) {
       <div className="flex items-center mb-4">
         <img
           src={
-            "http://enzo-salson.fr:3001/api/getProfilePic?id=" +
+            "https://dev.enzo-salson.fr/api/getProfilePic?id=" +
             Commentaire.user_id
           }
           alt="avatar"

@@ -8,7 +8,7 @@ export default function Home(props) {
   return (
     <>
       <ChargeContent
-        endpoint={"http://enzo-salson.fr:3001/api/getPosts"}
+        endpoint={"https://dev.enzo-salson.fr/api/getPosts"}
         nb={nb}
       >
         <Post />
