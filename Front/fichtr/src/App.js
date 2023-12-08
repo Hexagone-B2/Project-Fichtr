@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./composant/AuthContext";
+import UserSettings from "./composant/UserSettings.jsx";
 
 export default function App() {
   const { isAuthenticated, authUser } = useContext(AuthContext);
@@ -30,6 +31,14 @@ export default function App() {
             <Route path="/mes-reponses" element={<MyResponses />} />
             <Route path="/mes-likes" element={<MyLikes />} />
             <Route path="/mon-compte" element={<MyAccount />} />
+            <Route
+              path="/profile"
+              element={
+                <LayoutToolbarOnly>
+                  <UserSettings />
+                </LayoutToolbarOnly>
+              }
+            />
           </>
         ) : (
           <>

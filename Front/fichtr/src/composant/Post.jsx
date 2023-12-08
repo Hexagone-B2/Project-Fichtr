@@ -19,7 +19,7 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
     }
     const data = { id: id };
     axios
-      .post("http://enzo-salson.fr:3001/api/getPostInfo", data, { headers })
+      .post("https://dev.enzo-salson.fr/api/getPostInfo", data, { headers })
       .then((response) => {
         const post = {
           title: response.data.title,
@@ -53,7 +53,7 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
 
       axios
         .post(
-          "http://enzo-salson.fr:3001/api/like",
+          "https://dev.enzo-salson.fr/api/like",
           { post_id: id },
           { headers }
         )
@@ -68,7 +68,7 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
       setLikesCount((prevState) => prevState - 1);
       axios
         .post(
-          "http://enzo-salson.fr:3001/api/unLike",
+          "https://dev.enzo-salson.fr/api/unLike",
           { post_id: id },
           { headers }
         )
@@ -88,7 +88,7 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
         <img
           src={
             post.owner_id
-              ? `http://enzo-salson.fr:3001/api/getProfilePic?id=${post.owner_id}`
+              ? `https://dev.enzo-salson.fr/api/getProfilePic?id=${post.owner_id}`
               : ""
           }
           alt="avatar"

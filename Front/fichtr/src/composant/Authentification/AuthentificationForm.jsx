@@ -23,7 +23,7 @@ export default function AuthentificationForm(props) {
       password: password,
     };
     axios
-      .post("http://enzo-salson.fr:3001/api/login", to_send, { headers })
+      .post("https://dev.enzo-salson.fr/api/login", to_send, { headers })
       .then((res) => {
         setAuthIsWrong(false);
         setAuthIsGood(false);
