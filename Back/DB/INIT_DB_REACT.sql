@@ -122,13 +122,13 @@ VALUES
 
 
 -- Ajouter des commentaires
-INSERT INTO Comment (user_id, post_id, body, time)
+INSERT INTO Comment (user_id, post_id, body)
 VALUES
-    (1, 1, 'Great post!', NOW()),
-    (2, 1, 'I totally agree.', NOW()),
-    (3, 2, 'Interesting thoughts.', NOW()),
-    (4, 3, 'Thanks for sharing.', NOW()),
-    (5, 4, 'Nice post!', NOW());
+    (1, 1, 'Great post!'),
+    (2, 1, 'I totally agree.'),
+    (3, 2, 'Interesting thoughts.'),
+    (4, 3, 'Thanks for sharing.'),
+    (5, 4, 'Nice post!');
 
 -- Ajouter des likes
 INSERT INTO Likes (user_id, post_id)
