@@ -77,6 +77,7 @@ function Post({ id }) {
       <h2 className="text-xl font-bold mb-2">{post.title}</h2>
       <div className="flex items-center mb-4">
         <img
+          crossorigin="anonymous"
           src={
             post.owner_id
               ? `https://dev.enzo-salson.fr/api/getProfilePic?id=${post.owner_id}`

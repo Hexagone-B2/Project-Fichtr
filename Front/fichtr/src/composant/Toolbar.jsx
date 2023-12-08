@@ -72,6 +72,7 @@ function Toolbar() {
             </button>
             <Link to={"/profile"}>
               <img
+                crossorigin="anonymous"
                 src={
                   "https://dev.enzo-salson.fr/api/getProfilePic?id=" + userId
                 }

@@ -7,6 +7,7 @@ function Commentaire({ user_id, body, username }) {
       <h2 className="text-xl font-bold mb-2">{Commentaire.body}</h2>
       <div className="flex items-center mb-4">
         <img
+          crossorigin="anonymous"
           src={
             "https://dev.enzo-salson.fr/api/getProfilePic?id=" +
             Commentaire.user_id

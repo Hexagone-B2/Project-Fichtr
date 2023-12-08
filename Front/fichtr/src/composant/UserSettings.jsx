@@ -213,6 +213,7 @@ function UserSettings() {
       <div className="flex justify-center gap-10">
         <div className="flex flex-col items-center border border-2 h-fit w-64 p-5 gap-3">
           <img
+            crossorigin="anonymous"
             src={"https://dev.enzo-salson.fr/api/getProfilePic?id=" + id}
             alt=""
             className="rounded-full h-32 w-32"
