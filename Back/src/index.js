@@ -10,6 +10,7 @@ const p = {
     port : 3000
 }
 
+
 app.use(cors())
 app.disable('x-powered-by')
 //app.use(helmet()) que en prod pour les headers
