@@ -1,7 +1,7 @@
 // HTTP
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.FIICHTR_PORT || 3000;
 const server = require('http').createServer(app);
 const socketio = require('socket.io')
 const io = socketio(server, {secure: true});
