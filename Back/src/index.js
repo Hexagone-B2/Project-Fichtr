@@ -18,12 +18,12 @@ const routes = require('./routes.js');
 //PRODUCTION
 const cors = require('cors');
 //const helmet = require('helmet')
-
-
-// MIDDLEWARES
 app.use(cors())
 app.disable('x-powered-by')
 //app.use(helmet()) que en prod pour les headers
+
+
+// MIDDLEWARES
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json());
 app.use('/api',routes);
