@@ -14,7 +14,7 @@ export default function PostOne({ id }) {
   let headers = null;
   if (isAuthenticated)
     headers = { authorization: localStorage.getItem("authorization") };
-  console.log("headers = " + headers);
+
   useEffect(() => {
     axios
       .post(
@@ -26,9 +26,9 @@ export default function PostOne({ id }) {
       )
       .then((response) => {
         setAllComment(response.data.comments);
-      });
+      })
+      .catch((error) => console.log(error));
   }, []);
-  console.log(allComment);
   return (
     <div className="p-2">
       <Post id={id} />
@@ -45,7 +45,6 @@ export default function PostOne({ id }) {
             body={item.body}
             username={item.username}
             comment_id={item.id}
-            liked={item.liked}
           />
         ))}
       </div>
