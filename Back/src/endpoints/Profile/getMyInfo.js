@@ -1,4 +1,4 @@
-const {checkAuth} = require("../func/checkAuth");
+const {checkAuth} = require("../../func/checkAuth");
 
 
 module.exports.getMyInfo = (req,res) => {

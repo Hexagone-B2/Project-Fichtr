@@ -1,6 +1,6 @@
 const fs = require('fs');
-const {executeSQL} = require("../func/mysql");
-const {checkAuth} = require("../func/checkAuth");
+const {executeSQL} = require("../../func/mysql");
+const {checkAuth} = require("../../func/checkAuth");
 
 module.exports.updateProfilePic = (req, res) => {
     if (req.file && req.headers.authorization) {

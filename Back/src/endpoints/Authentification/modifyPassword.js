@@ -1,6 +1,6 @@
 const {hash} = require('bcrypt');
-const {executeSQL} = require("../func/mysql");
-const {checkAuth} = require("../func/checkAuth");
+const {executeSQL} = require("../../func/mysql");
+const {checkAuth} = require("../../func/checkAuth");
 
 
 /**

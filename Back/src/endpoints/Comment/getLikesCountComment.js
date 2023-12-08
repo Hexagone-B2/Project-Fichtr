@@ -1,4 +1,5 @@
-const {executeSQL} = require("../func/mysql");
+const {executeSQL} = require("../../func/mysql");
+
 module.exports.getLikesCountComment = (req,res)=>{
     if (req.body.comment_id){
         executeSQL('SELECT COUNT(*) as num FROM LikesComment where comment_id=?',[req.body.comment_id],(error,result)=>{

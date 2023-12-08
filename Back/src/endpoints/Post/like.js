@@ -1,5 +1,5 @@
-const {checkAuth} = require("../func/checkAuth");
-const {executeSQL} = require("../func/mysql");
+const {checkAuth} = require("../../func/checkAuth");
+const {executeSQL} = require("../../func/mysql");
 
 module.exports.like = (req,res)=>{
     if (!(req.body.post_id && req.headers.authorization)){

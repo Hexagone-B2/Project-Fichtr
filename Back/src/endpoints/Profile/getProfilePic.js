@@ -1,4 +1,4 @@
-const {executeSQL} = require("../func/mysql");
+const {executeSQL} = require("../../func/mysql");
 const path = require('path');
 
 module.exports.getProfilePic = (req, res) => {

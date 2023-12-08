@@ -1,5 +1,5 @@
-const {checkAuth} = require("../func/checkAuth");
-const {executeSQL} = require("../func/mysql");
+const {checkAuth} = require("../../func/checkAuth");
+const {executeSQL} = require("../../func/mysql");
 
 module.exports.deleteSubject = (req,res)=>{
     if (req.headers.authorization && req.body.id){

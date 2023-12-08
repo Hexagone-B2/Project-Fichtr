@@ -1,5 +1,5 @@
-const {executeSQL} = require('../func/mysql');
-const {checkAuth} = require("../func/checkAuth");
+const {executeSQL} = require("../../func/mysql");
+const {checkAuth} = require("../../func/checkAuth");
 
 module.exports.getUnameMailBio = (req,res) => {
     if (!(req.headers.authorization)){

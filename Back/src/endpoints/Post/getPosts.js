@@ -1,4 +1,4 @@
-const {executeSQL} = require('../func/mysql');
+const {executeSQL} = require("../../func/mysql");
 
 module.exports.getPosts = (req, res) => {
     if (req.body.hasOwnProperty('nb')){

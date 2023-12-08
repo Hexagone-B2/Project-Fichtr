@@ -1,5 +1,5 @@
-const {executeSQL} = require("../func/mysql");
-const {checkAuth} = require("../func/checkAuth");
+const {executeSQL} = require("../../func/mysql");
+const {checkAuth} = require("../../func/checkAuth");
 module.exports.updateUnameMailBio = (req,res) => {
     if (req.headers.authorization && req.body.username && req.body.bio && req.body.mail){
         checkAuth(req.headers.authorization, (error,decoded)=>{

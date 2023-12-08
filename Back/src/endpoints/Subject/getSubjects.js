@@ -1,4 +1,5 @@
-const {executeSQL} = require("../func/mysql");
+const {executeSQL} = require("../../func/mysql");
+
 module.exports.getSubjects = (req,res)=>{
     executeSQL("SELECT * FROM Subject;",(error,result)=>{
         if (error){

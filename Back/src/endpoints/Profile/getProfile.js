@@ -1,4 +1,4 @@
-const {executeSQL} = require('../func/mysql');
+const {executeSQL} = require("../../func/mysql");
 
 module.exports.getProfile = (req,res) => {
     if (req.session.user){

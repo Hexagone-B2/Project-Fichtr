@@ -1,5 +1,5 @@
-const {executeSQL} = require("../func/mysql");
-const {checkAuth} = require("../func/checkAuth");
+const {executeSQL} = require("../../func/mysql");
+const {checkAuth} = require("../../func/checkAuth");
 
 module.exports.getComments = (req,res)=>{
     if (req.body.post_id){

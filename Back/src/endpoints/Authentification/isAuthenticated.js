@@ -1,4 +1,4 @@
-const {checkAuth} = require("../func/checkAuth");
+const {checkAuth} = require("../../func/checkAuth");
 
 module.exports.isAuthenticated = (req,res)=>{
     if (!(req.headers.authorization)){

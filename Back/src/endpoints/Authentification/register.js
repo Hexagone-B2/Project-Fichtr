@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const {executeSQL} = require('../func/mysql');
+const {executeSQL} = require("../../func/mysql");
 
 module.exports.register = (req, res) => {
     if (req.body.username && req.body.lastname && req.body.firstname && req.body.mail && req.body.password && req.body.repeatpassword) {

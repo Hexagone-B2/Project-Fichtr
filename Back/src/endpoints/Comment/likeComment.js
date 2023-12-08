@@ -1,5 +1,6 @@
-const {checkAuth} = require("../func/checkAuth");
-const {executeSQL} = require("../func/mysql");
+const {checkAuth} = require("../../func/checkAuth");
+const {executeSQL} = require("../../func/mysql");
+
 module.exports.likeComment = (req,res)=>{
     if (req.body.comment_id && req.headers.authorization){
         checkAuth(req.headers.authorization,(error,decoded)=>{
