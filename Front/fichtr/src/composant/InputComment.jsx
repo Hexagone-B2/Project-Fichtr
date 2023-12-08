@@ -10,7 +10,7 @@ export default function InputComment({ id, setAllComment, allComment }) {
 
     axios
       .post(
-        "http://enzo-salson.fr:3001/api/comment",
+        "https://dev.enzo-salson.fr/api/comment",
         { post_id: id, body: event.target[0].value },
         { headers }
       )

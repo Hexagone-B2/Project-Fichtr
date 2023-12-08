@@ -18,7 +18,7 @@ export default function PostOne({ id }) {
   useEffect(() => {
     axios
       .post(
-        "http://enzo-salson.fr:3001/api/getComments",
+        "https://dev.enzo-salson.fr/api/getComments",
         {
           post_id: id,
         },
