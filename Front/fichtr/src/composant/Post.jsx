@@ -18,11 +18,7 @@ function Post({ id }) {
     }
     const data = { id: id };
     axios
-      .post(
-        "http://enzo-salson.fr:3001/api/getPostInfo",
-        data,
-        { headers }
-      )
+      .post("http://enzo-salson.fr:3001/api/getPostInfo", data, { headers })
       .then((response) => {
         const post = {
           title: response.data.title,

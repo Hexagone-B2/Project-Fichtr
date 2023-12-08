@@ -70,12 +70,15 @@ function Toolbar() {
             <button>
               <img src={"/img/envelope.svg"} alt="" className="w-7" />
             </button>
-
-            <img
-              src={"http://enzo-salson.fr:3001/api/getProfilePic?id=" + userId}
-              alt="avatar"
-              className="w-10 h-10 rounded-full mr-4"
-            />
+            <Link to={"/profile"}>
+              <img
+                src={
+                  "http://enzo-salson.fr:3001/api/getProfilePic?id=" + userId
+                }
+                alt="avatar"
+                className="w-10 h-10 rounded-full mr-4"
+              />
+            </Link>
           </>
         ) : (
           <>
