@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>testwebsocket</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<button id="sendButton">Envoyer "Salut" et vérifier en console si la serveur répond</button>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const socket = io.connect("wss://dev.enzo-salson.fr", {secure: true});
+        document.getElementById('sendButton').addEventListener('click', () => {
+            socket.emit('message', 'Salut');
+        });
+        socket.on('message', (message) => {
+            console.log('Message reçu du serveur:', message);
+        });
+    });
+</script>
+</body>
+</html>

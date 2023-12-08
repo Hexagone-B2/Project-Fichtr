@@ -2,7 +2,6 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const fs = require('fs')
 const server = require('http').createServer(app);
 const socketio = require('socket.io')
 const io = socketio(server, {secure: true});
@@ -18,8 +17,9 @@ const cors = require('cors');
 const helmet = require('helmet')
 app.use(cors());
 app.disable('x-powered-by')
-app.disable('access-control-allow-origin');
-app.use(helmet()) //que en prod pour les headers
+app.use(helmet({
+    contentSecurityPolicy: false,
+}))
 
 
 // MIDDLEWARES
@@ -29,6 +29,10 @@ app.use('/api',routes);
 
 io.on('connection', function (socket) {
     console.log('A user connected');
+    socket.on('message', (data) => {
+        console.log(data);
+        io.emit('message', 'message bien reçu');
+    })
 });
 
 app.get('/', (req, res) => {
