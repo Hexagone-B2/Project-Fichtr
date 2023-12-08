@@ -1,13 +1,11 @@
 // HTTP
 const express = require('express');
 const app = express();
-const http = require('http');
-const server = http.createServer(app);
 const port = 3000;
-
-//SOCKET
-const socketio = require("socket.io")
-const io = socketio(server);
+const fs = require('fs')
+const server = require('http').createServer(app);
+const socketio = require('socket.io')
+const io = socketio(server, {secure: true});
 
 //DATA PARSER
 const bodyParser = require('body-parser');
@@ -17,10 +15,11 @@ const routes = require('./routes.js');
 
 //PRODUCTION
 const cors = require('cors');
-//const helmet = require('helmet')
-app.use(cors())
+const helmet = require('helmet')
+app.use(cors());
 app.disable('x-powered-by')
-//app.use(helmet()) que en prod pour les headers
+app.disable('access-control-allow-origin');
+app.use(helmet()) //que en prod pour les headers
 
 
 // MIDDLEWARES
@@ -28,20 +27,16 @@ app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json());
 app.use('/api',routes);
 
-//WEBSOCKET
-
-io.on('connection', (socket) => {
-    socket.on('message', (data) => {
-        if (data.username && data.message) {
-            io.emit('message', {username: data.username, message: data.message});
-        }
-    });
-    socket.on('disconnect', () => {
-        console.log('deco');
-    });
+io.on('connection', function (socket) {
+    console.log('A user connected');
 });
 
-//LISTENING
-app.listen(port, () => {
-    console.log('[*] Serveur WEB en écoute sur le port '+p.port)
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+
+
+//WEBSOCKET
+server.listen(port, () => {
+    console.log('[*] Serveur WEB en écoute sur le port ' + port)
 })
