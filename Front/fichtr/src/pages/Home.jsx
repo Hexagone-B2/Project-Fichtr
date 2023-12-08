@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(() => {
     function getContent() {
       axios
-        .post("http://enzo-salson.fr:3001/api/getPosts", { nb: nb })
+        .post("https://dev.enzo-salson.fr/api/getPosts", { nb: nb })
         .then((response) => {
           setIdList((prevIdList) => [...prevIdList, ...response.data.tab]);
         })

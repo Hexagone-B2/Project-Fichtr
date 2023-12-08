@@ -11,7 +11,7 @@ function Comment({ user_id, body, username, comment_id }) {
 
   useEffect(() => {
     axios
-      .post("http://enzo-salson.fr:3001/api/getLikesCountComment", {
+      .post("https://dev.enzo-salson.fr/api/getLikesCountComment", {
         comment_id: comment_id,
       })
       .then((response) => {
@@ -40,7 +40,7 @@ function Comment({ user_id, body, username, comment_id }) {
         <div className="mb-4">
           <div className="flex items-center p-4">
             <img
-              src={"http://enzo-salson.fr:3001/api/getProfilePic?id=" + user_id}
+              src={"https://dev.enzo-salson.fr/api/getProfilePic?id=" + user_id}
               alt="avatar"
               className="w-10 h-10 rounded-full mr-4"
             />
