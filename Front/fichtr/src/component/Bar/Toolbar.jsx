@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../Provider/AuthContext";
 
 function Toolbar() {
   const { isAuthenticated, userId } = useContext(AuthContext);
