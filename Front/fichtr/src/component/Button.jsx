@@ -16,7 +16,7 @@ export default function Button({ title, handleButton, theme, icon, type }) {
   return (
     <button
       type={type ? type : ""}
-      className={`text-white flex justify-center rounded items-center w-[8rem] h-[2.5rem] gap-2  ${selectTheme(
+      className={`text-white flex justify-center rounded items-center min-w-[8rem] min-h-[2.5rem] gap-2 px-2 ${selectTheme(
         theme
       )}`}
       onClick={handleButton}
