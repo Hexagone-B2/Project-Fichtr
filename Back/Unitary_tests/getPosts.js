@@ -21,4 +21,4 @@ describe('API Tests', () => {
     });
 });
 
-// Pour executer le test unitaire, faire npx mocha Unitary_tests/test.js
+// Pour executer le test unitaire, faire npx mocha Unitary_tests/getPosts.js
