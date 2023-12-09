@@ -1,3 +1,5 @@
+import Tag from "../Tag";
+
 function RightNavBar(tag) {
   return (
     <div className="flex justify-end items-start sticky top-40 pr-8 mt-4 right-0 ">
@@ -10,15 +12,9 @@ function RightNavBar(tag) {
           <br />
           <hr />
           <br />
-          <kbd className="px-2 py-1.5 m-2 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">
-            Shift
-          </kbd>
-          <kbd className="px-2 py-1.5 m-2 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">
-            Ctrl
-          </kbd>
-          <kbd className="px-2 py-1.5 m-2 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">
-            Tab
-          </kbd>
+          <Tag title={"Shift"} />
+          <Tag title={"Ctrl"} />
+          <Tag title={"Tab"} />
 
           <br />
           <br />
