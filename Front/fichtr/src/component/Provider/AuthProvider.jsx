@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
     if (localStorage.getItem("authorization")) {
       const headers = { authorization: localStorage.getItem("authorization") };
       axios
-        .post("http://enzo-salson.fr:3001/api/isAuthenticated", {}, { headers })
+        .post("https://dev.enzo-salson.fr/api/isAuthenticated", {}, { headers })
         .then((response) => {
           if (response.data.authenticated === true) {
             setIsAuthenticated(true);
