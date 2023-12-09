@@ -72,8 +72,9 @@ function Toolbar() {
             </button>
             <Link to={"/profile"}>
               <img
+                crossorigin="anonymous"
                 src={
-                  "http://enzo-salson.fr:3001/api/getProfilePic?id=" + userId
+                  "https://dev.enzo-salson.fr/api/getProfilePic?id=" + userId
                 }
                 alt="avatar"
                 className="w-10 h-10 rounded-full mr-4"
