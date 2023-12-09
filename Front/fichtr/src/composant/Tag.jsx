@@ -1,7 +1,7 @@
 export default function Tag({ title }) {
   return (
-    <div className="border px-2 py-1 mr-1 bg-gray-300 text-gray-600 rounded-md w-fit text-sm">
+    <kbd className="px-2 py-1.5 m-2 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">
       {title}
-    </div>
+    </kbd>
   );
 }
