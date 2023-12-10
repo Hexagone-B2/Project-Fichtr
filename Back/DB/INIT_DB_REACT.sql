@@ -1,5 +1,5 @@
 USE fichtr;
-DROP TABLE IF EXISTS Tags,Likes,Comment,Profile,Post,Subject,User,LikesComment;
+DROP TABLE IF EXISTS Tags,Likes,Comment,Profile,Post,Subject,User,LikesComment,MP;
 
 CREATE TABLE User (
     id int primary key auto_increment,
@@ -65,6 +65,15 @@ CREATE TABLE Tags (
     post_id int not null,
     tags varchar(150) not null,
     FOREIGN KEY (post_id) REFERENCES Post(id)
+);
+
+CREATE TABLE MP
+(
+    sender_id   int,
+    receiver_id int,
+    message     text,
+    FOREIGN KEY (sender_id) REFERENCES User (id),
+    FOREIGN KEY (receiver_id) REFERENCES User (id)
 );
 
 -- Création des données de test.
