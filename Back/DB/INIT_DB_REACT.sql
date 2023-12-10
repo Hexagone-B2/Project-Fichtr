@@ -72,6 +72,7 @@ CREATE TABLE MP
     sender_id   int,
     receiver_id int,
     message     text,
+    time datetime default NOW(),
     FOREIGN KEY (sender_id) REFERENCES User (id),
     FOREIGN KEY (receiver_id) REFERENCES User (id)
 );
