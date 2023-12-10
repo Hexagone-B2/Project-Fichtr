@@ -1,9 +1,10 @@
 const {Server} = require('socket.io');
 const {checkAuth} = require("../func/checkAuth");
+const {executeSQL} = require("../func/mysql");
 
 module.exports = (server) => {
     const io = new Server(server);
-
+    let users = {};
     io.on('connection', (socket) => {
 
         //RECEPTION ET RENVOIE DES MESSAGES DE LA SHOUTBOX
@@ -25,6 +26,43 @@ module.exports = (server) => {
             }
         });
 
+        //MESSAGES PRIVEES
+        socket.on('join_mp', (data) => {
+            if (data.authorization) {
+                checkAuth(data.authorization, (error, decoded) => {
+                    if (!error) {
+                        users[decoded.username] = socket.id;
+                    }
+                })
+            }
 
+        });
+
+        socket.on('send_message_mp', (data) => {
+            if (data.authorization && data.message && data.to) {
+                checkAuth(data.authorization, (error, decoded) => {
+                    if (!error) {
+                        if (data.to in users) {
+                            io.to(users[data.to]).emit('receive_message_mp', {
+                                from: decoded.username,
+                                message: data.message
+                            })
+                        }
+                        executeSQL('SELECT id FROM User WHERE username=?', [data.to], (error, result) => {
+                            if (!error && result[0]) {
+                                executeSQL('INSERT INTO MP (sender_id, receiver_id, message) VALUES (?,?,?);',
+                                    [parseInt(decoded.id), parseInt(result[0].id), data.message], (error) => {
+                                        if (!error) {
+                                            socket.emit('confirmation', {error: false})
+                                        } else {
+                                            socket.emit('confirmation', {error: true})
+                                        }
+                                    })
+                            }
+                        })
+                    }
+                })
+            }
+        })
     })
 }
