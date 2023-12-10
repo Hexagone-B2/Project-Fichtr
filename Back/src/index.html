@@ -10,13 +10,23 @@
 <button id="sendButton">Envoyer "Salut" et vérifier en console si la serveur répond</button>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const socket = io.connect("wss://dev.enzo-salson.fr", {secure: true});
+        const socket = io.connect("wss://dev.enzo-salson.fr");
         document.getElementById('sendButton').addEventListener('click', () => {
-            socket.emit('message', 'Salut');
+            socket.emit('shoutbox_message_send', {
+                authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVuem8ifQ.TeX2jC9QsggA-75HF0koEBabmprVf7rfTQ4ueOYjDww',
+                message: 'coucou'
+            });
         });
-        socket.on('message', (message) => {
-            console.log('Message reçu du serveur:', message);
+
+        socket.on('send_confirmation', (message) => {
+            if (message.error) {
+                console.log(message.error_message);
+            }
         });
+        socket.on('shoutbox_message_receive', (message) => {
+            console.log(message.sender);
+            console.log(message.message)
+        })
     });
 </script>
 </body>
