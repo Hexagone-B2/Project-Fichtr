@@ -28,11 +28,12 @@ app.use(helmet({
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json());
 app.use('/api',routes);
+app.use(express.static(require('path').resolve(__dirname, "../public/web")))
+app.use((req, res) => {
+    res.status(404).sendFile(require('path').resolve(__dirname, "../public/404.html"))
+})
 
 // Routes non api
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
 
 
 server.listen(port, () => {
