@@ -11,6 +11,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const socket = io.connect("wss://dev.enzo-salson.fr");
+        console.log(socket)
         document.getElementById('sendButton').addEventListener('click', () => {
             socket.emit('shoutbox_message_send', {
                 authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVuem8ifQ.TeX2jC9QsggA-75HF0koEBabmprVf7rfTQ4ueOYjDww',

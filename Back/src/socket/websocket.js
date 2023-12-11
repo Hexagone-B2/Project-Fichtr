@@ -6,9 +6,10 @@ module.exports = (server) => {
     const io = new Server(server);
     let users = {};
     io.on('connection', (socket) => {
-
+        console.log('NEW_USER')
         //RECEPTION ET RENVOIE DES MESSAGES DE LA SHOUTBOX
         socket.on('shoutbox_message_send', (data) => {
+            console.log(data)
             if (data.authorization && data.message) {
                 checkAuth(data.authorization, (error, decoded) => {
                     if (!error) {
