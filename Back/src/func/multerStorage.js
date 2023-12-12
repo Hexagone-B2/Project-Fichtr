@@ -1,8 +1,8 @@
 module.exports = require('multer').diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './public/profile_pic/'); // Le dossier où les fichiers seront stockés
+        cb(null, require('path').resolve(__dirname, "../../", "public/profile_pic"));
     }, filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname); // Nom du fichier
+        cb(null, Date.now() + '-' + file.originalname);
     },
 });
 
