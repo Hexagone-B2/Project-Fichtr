@@ -5,6 +5,8 @@ const port = process.env.FIICHTR_PORT || 3000;
 const server = require('http').createServer(app);
 require('./socket/websocket')(server);
 
+//Utils
+const resolve = require('path').resolve
 
 //DATA PARSER
 const bodyParser = require('body-parser');
@@ -28,9 +30,9 @@ app.use(helmet({
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json());
 app.use('/api',routes);
-app.use(express.static(require('path').resolve(__dirname, "../public/web")))
+app.use(express.static(resolve(__dirname, "../public/web")))
 app.use((req, res) => {
-    res.status(404).sendFile(require('path').resolve(__dirname, "../public/404.html"))
+    res.status(404).sendFile(resolve(__dirname, "../public/404.html"))
 })
 
 // Routes non api
