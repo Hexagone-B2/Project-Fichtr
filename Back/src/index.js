@@ -5,6 +5,18 @@ const port = process.env.FIICHTR_PORT || 3000;
 const server = require('http').createServer(app);
 require('./socket/websocket')(server);
 
+//Possibilité d'utiliser les sessions pour l'authentification
+
+// const cookieParser = require("cookie-parser");
+// const sessions = require('express-session');
+//
+// app.use(sessions({
+//     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+//     saveUninitialized:true,
+//     resave: false
+// }));
+// app.use(cookieParser());
+
 //Utils
 const resolve = require('path').resolve
 
@@ -30,6 +42,16 @@ app.use(helmet({
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json());
 app.use('/api',routes);
+
+app.get('/t', (req, res) => {
+    req.session.user = 4;
+    res.send('salut')
+})
+
+app.get('/y', (req, res) => {
+    res.json(req.session)
+})
+
 app.use(express.static(resolve(__dirname, "../public/web")))
 app.use((req, res) => {
     res.status(404).sendFile(resolve(__dirname, "../public/404.html"))
