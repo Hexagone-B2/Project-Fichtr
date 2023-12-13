@@ -1,5 +1,6 @@
 const {checkAuth} = require("../../func/checkAuth");
 const {executeSQL} = require("../../func/mysql");
+const {nad} = require("../../func/notAllData");
 
 module.exports.likeComment = (req,res)=>{
     if (req.body.comment_id && req.headers.authorization){
@@ -17,6 +18,6 @@ module.exports.likeComment = (req,res)=>{
             }
         })
     }else{
-        res.status(403).send('NOT_ALL_DATA')
+        nad(res);
     }
 }

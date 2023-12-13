@@ -1,6 +1,7 @@
 const fs = require('fs');
 const {executeSQL} = require("../../func/mysql");
 const {checkAuth} = require("../../func/checkAuth");
+const {nad} = require("../../func/notAllData");
 
 module.exports.updateProfilePic = (req, res) => {
     if (req.file && req.headers.authorization) {
@@ -41,7 +42,7 @@ module.exports.updateProfilePic = (req, res) => {
         })
 
     } else {
-        res.status(403).send('NOT_ALL_DATA');
+        nad(res);
         fs.unlink(__dirname + "/../../" + req.file.path, () => {
         });
     }

@@ -43,22 +43,18 @@ app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json());
 app.use('/api',routes);
 
-app.get('/t', (req, res) => {
-    req.session.user = 4;
-    res.send('salut')
-})
-
-app.get('/y', (req, res) => {
-    res.json(req.session)
-})
+// app.get('/t', (req, res) => {
+//     send403(res);
+// })
+// //
+// // app.get('/y', (req, res) => {
+// //     res.json(req.session)
+// // })
 
 app.use(express.static(resolve(__dirname, "../public/web")))
 app.use((req, res) => {
     res.status(404).sendFile(resolve(__dirname, "../public/404.html"))
 })
-
-// Routes non api
-
 
 server.listen(port, () => {
     console.log('[*] Serveur WEB en écoute sur le port ' + port)

@@ -1,5 +1,6 @@
 const {executeSQL} = require("../../func/mysql");
 const {checkAuth} = require("../../func/checkAuth");
+const {nad} = require("../../func/notAllData");
 
 module.exports.getComments = (req,res)=>{
     if (req.body.post_id){
@@ -33,6 +34,6 @@ module.exports.getComments = (req,res)=>{
             }
         })
     }else{
-        res.status(403).send('NOT_ALL_DATA');
+        nad(res);
     }
 }

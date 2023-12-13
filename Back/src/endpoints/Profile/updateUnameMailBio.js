@@ -1,5 +1,6 @@
 const {executeSQL} = require("../../func/mysql");
 const {checkAuth} = require("../../func/checkAuth");
+const {nad} = require("../../func/notAllData");
 module.exports.updateUnameMailBio = (req,res) => {
     if (req.headers.authorization && req.body.username && req.body.bio && req.body.mail){
         checkAuth(req.headers.authorization, (error,decoded)=>{
@@ -26,6 +27,6 @@ module.exports.updateUnameMailBio = (req,res) => {
 
         })
     }else{
-        res.status(403).send('NOT_ALL_DATA');
+        nad(res);
     }
 }

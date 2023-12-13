@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const {executeSQL} = require("../../func/mysql");
+const {nad} = require("../../func/notAllData");
 
 module.exports.register = (req, res) => {
     if (req.body.username && req.body.lastname && req.body.firstname && req.body.mail && req.body.password && req.body.repeatpassword) {
@@ -34,6 +35,6 @@ module.exports.register = (req, res) => {
             res.status(403).send('PASSWORD_NOT_EQUIVALENT');
         }
     } else {
-        res.status(403).send('NOT_ALL_DATA');
+        nad(res);
     }
 }

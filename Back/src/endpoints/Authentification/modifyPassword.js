@@ -1,6 +1,7 @@
 const {hash} = require('bcrypt');
 const {executeSQL} = require("../../func/mysql");
 const {checkAuth} = require("../../func/checkAuth");
+const {nad} = require("../../func/notAllData");
 
 
 /**
@@ -13,7 +14,7 @@ const {checkAuth} = require("../../func/checkAuth");
  */
 module.exports.modifyPassword = (req, res) => {
     if (!(req.body.password && req.body.repeatPassword && req.headers.authorization)) {
-        res.status(403).send('NOT_ALL_DATA');
+        nad(res);
     } else {
         checkAuth(req.headers.authorization,(error,decoded)=>{
             if (req.body.password === req.body.repeatPassword) {

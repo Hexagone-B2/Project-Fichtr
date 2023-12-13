@@ -1,9 +1,10 @@
 const {checkAuth} = require("../../func/checkAuth");
 const {executeSQL} = require("../../func/mysql");
+const {nad} = require("../../func/notAllData");
 
 module.exports.like = (req,res)=>{
     if (!(req.body.post_id && req.headers.authorization)){
-        res.status(403).send('NOT_ALL_DATA');
+        nad(res);
     }else{
         checkAuth(req.headers.authorization,(error,decoded)=>{
             if (error){

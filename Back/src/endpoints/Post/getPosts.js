@@ -1,4 +1,5 @@
 const {executeSQL} = require("../../func/mysql");
+const {nad} = require("../../func/notAllData");
 
 module.exports.getPosts = (req, res) => {
     if (req.body.hasOwnProperty('nb')){
@@ -13,6 +14,6 @@ module.exports.getPosts = (req, res) => {
             }
         })
     }else{
-        res.status(403).send('NOT_ALL_DATA');
+        nad(res)
     }
 }

@@ -1,9 +1,10 @@
 const bcrypt = require("bcrypt");
 const {executeSQL} = require("../../func/mysql");
+const {nad} = require("../../func/notAllData");
 
 module.exports.login = (req, res) => {
     if (!(req.body.mail && req.body.password)) {
-        res.status(403).send('NOT_ALL_DATA');
+        nad(res)
     } else {
         executeSQL('SELECT * from User where mail=?', [req.body.mail], (error, result) => {
             if (!result[0]) {

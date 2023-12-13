@@ -1,3 +1,4 @@
+
 module.exports.hello = (req, res) => {
- res.send('Bonjour !');
+  res.send('Hello World')
 };

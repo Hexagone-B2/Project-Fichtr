@@ -1,5 +1,6 @@
 const {checkAuth} = require("../../func/checkAuth");
 const {executeSQL} = require("../../func/mysql");
+const {nad} = require("../../func/notAllData");
 module.exports.createSubject = (req,res)=>{
     if (req.headers.authorization && req.body.name){
         checkAuth(req.headers.authorization,(error,decoded)=>{
@@ -18,6 +19,6 @@ module.exports.createSubject = (req,res)=>{
             }
         })
     }else{
-        res.status(403).send('NOT_ALL_DATA');
+        nad(res);
     }
 }

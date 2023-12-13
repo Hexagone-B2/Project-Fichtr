@@ -1,5 +1,6 @@
 const {checkAuth} = require("../../func/checkAuth");
 const {executeSQL} = require("../../func/mysql");
+const {nad} = require("../../func/notAllData");
 
 module.exports.deleteSubject = (req,res)=>{
     if (req.headers.authorization && req.body.id){
@@ -25,6 +26,6 @@ module.exports.deleteSubject = (req,res)=>{
             }
         })
     }else{
-        res.status(403).send('NOT_ALL_DATA');
+        nad(res);
     }
 }

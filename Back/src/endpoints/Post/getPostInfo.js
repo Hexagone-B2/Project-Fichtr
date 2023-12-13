@@ -1,12 +1,13 @@
 const {executeSQL} = require("../../func/mysql");
 const {checkAuth} = require("../../func/checkAuth");
+const {nad} = require("../../func/notAllData");
 
 /**
  * @jso @result[] num
  */
 module.exports.getPostInfo = (req,res)=>{
     if (!(req.body.id)){
-        res.status(403).send('NOT_ALL_DATA');
+        nad(res);
     }else{
         executeSQL('SELECT p.title as title, p.body as body, p.user_id as owner_id, User.username as username FROM Post p INNER JOIN User on User.id=p.user_id where p.id=?;',[req.body.id],(error,result)=>{
             if (error){

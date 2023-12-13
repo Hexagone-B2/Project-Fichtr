@@ -1,9 +1,10 @@
 const {executeSQL} = require("../../func/mysql");
 const path = require('path');
+const {nad} = require("../../func/notAllData");
 
 module.exports.getProfilePic = (req, res) => {
     if (!(req.query.id)){
-        res.status(403).send('NOT_ALL_DATA');
+        nad(res);
     }else{
         executeSQL('SELECT profile_pic from Profile where id=?;',[req.query.id],(error,result)=>{
             if (error){
