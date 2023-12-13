@@ -1,10 +1,9 @@
 // HTTP
 const express = require('express');
 const app = express();
-const port = process.env.FIICHTR_PORT || 3000;
+const port = process.env.FICHTR_PORT || 3000;
 const server = require('http').createServer(app);
 require('./socket/websocket')(server);
-
 //Possibilité d'utiliser les sessions pour l'authentification
 
 // const cookieParser = require("cookie-parser");
@@ -31,7 +30,7 @@ const cors = require('cors');
 const helmet = require('helmet')
 app.use(cors({
     origin: '*',
-    methods: 'POST,GET'
+    methods: 'POST,GET,PUT'
 }));
 app.disable('x-powered-by')
 app.use(helmet({

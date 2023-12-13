@@ -3,10 +3,14 @@ const {checkAuth} = require("../func/checkAuth");
 const {executeSQL} = require("../func/mysql");
 
 module.exports = (server) => {
-    const io = new Server(server);
+    //FUCK CORS
+    const io = new Server(server, {
+        cors: {
+            origin: "*"
+        }
+    });
     let users = {};
     io.on('connection', (socket) => {
-        console.log('NEW_USER')
         //RECEPTION ET RENVOIE DES MESSAGES DE LA SHOUTBOX
         socket.on('shoutbox_message_send', (data) => {
             console.log(data)
@@ -23,7 +27,7 @@ module.exports = (server) => {
                     }
                 })
             } else {
-                socket.emit('send_confirmation', {error: true, error_message: 'NOT_AUTHENTICATED'});
+                socket.emit('send_confirmation', {error: true, error_message: 'NOT_ALL_DATA'});
             }
         });
 
@@ -33,6 +37,7 @@ module.exports = (server) => {
                 checkAuth(data.authorization, (error, decoded) => {
                     if (!error) {
                         users[decoded.username] = socket.id;
+                        console.log(socket.id)
                     }
                 })
             }
@@ -40,6 +45,7 @@ module.exports = (server) => {
         });
 
         socket.on('send_message_mp', (data) => {
+            console.log(users)
             if (data.authorization && data.message && data.to) {
                 checkAuth(data.authorization, (error, decoded) => {
                     if (!error) {

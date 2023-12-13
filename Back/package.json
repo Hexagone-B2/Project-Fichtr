@@ -4,7 +4,7 @@
   "description": "Projet react",
   "main": "src/index.js",
   "scripts": {
-    "start": "ssh -q -R 3003:localhost:3000 root@enzo-salson.fr -N 2>/dev/null & nodemon src/index.js",
+    "start": "ssh -q -R 3003:localhost:3000 root@enzo-salson.fr -N >/dev/null & nodemon src/index.js",
     "local": "nodemon src/index.js"
   },
   "author": "Enzo Salson",
