@@ -12,15 +12,14 @@ module.exports.login = (req, res) => {
                 res.status(403).send('UNKNOWN_MAIL');
             }else{
                 if (bcrypt.compareSync(req.body.password, result[0].password)) {
-                    const user = {
+                    const token = jwt.sign({
                         id: result[0].id,
                         username:result[0].username,
                         firstname: result[0].firstname,
                         lastname: result[0].lastname,
                         mail: result[0].mail,
                         roles: result[0].roles,
-                    };
-                    const token = jwt.sign(user,SECRET_KEY,{expiresIn : 60*60});
+                    }, SECRET_KEY, {expiresIn: 60 * 60});
                     res.send(token);
                 } else {
                     res.status(403).send('WRONG_PASSWORD');
