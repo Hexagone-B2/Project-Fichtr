@@ -1,4 +1,12 @@
-export default function Button({ title, handleButton, theme, icon, type }) {
+export default function Button({
+  title,
+  handleButton,
+  theme,
+  icon,
+  type,
+  id,
+  dataDropdownToggle,
+}) {
   function selectTheme(theme) {
     switch (theme) {
       case "primary":
@@ -19,6 +27,8 @@ export default function Button({ title, handleButton, theme, icon, type }) {
       className={`text-white flex justify-center rounded items-center min-w-[8rem] min-h-[2.5rem] gap-2 px-2 ${selectTheme(
         theme
       )}`}
+      id={id}
+      data-dropdown-toggle={dataDropdownToggle}
       onClick={handleButton}
     >
       {icon ? icon : null}
