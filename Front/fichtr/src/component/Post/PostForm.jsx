@@ -1,5 +1,24 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Button from "../Button";
+
+const dropDownIcon = (
+  <svg
+    class="w-2.5 h-2.5"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 10 6"
+  >
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="m1 1 4 4 4-4"
+    />
+  </svg>
+);
 
 function ScrollSubject() {
   const [SubjectList, SetSubjectList] = useState([]);
@@ -21,29 +40,14 @@ function ScrollSubject() {
 
   return (
     <>
-      <button
-        id="dropdownRadioHelperButton"
-        data-dropdown-toggle="dropdownRadioHelper"
-        class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
-        type="button"
-      >
-        Sujets
-        <svg
-          class="w-2.5 h-2.5 ms-3"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 10 6"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="m1 1 4 4 4-4"
-          />
-        </svg>
-      </button>
+      <Button
+        title={"Sujets"}
+        id={"dropdownRadioHelperButton"}
+        data-dropdown-toggle={"dropdownRadioHelper"}
+        type={"button"}
+        theme={"primary"}
+        icon={dropDownIcon}
+      />
 
       <div
         id="dropdownRadioHelper"
@@ -154,12 +158,7 @@ export default function PostForm() {
             required
           ></textarea>
         </div>
-        <button
-          type="submit"
-          class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-purple-700 rounded-lg focus:ring-4 focus:ring-purple-200 hover:bg-purple-800"
-        >
-          Publish post
-        </button>
+        <Button title={"Publish post"} theme={"primary"} type={"submit"} />
       </div>
     </form>
   );

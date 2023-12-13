@@ -1,6 +1,6 @@
-import RightNavBar from "../composant/RightNavBar";
-import NavbarLeft from "../composant/LeftNavbar";
-import Toolbar from "../composant/Toolbar";
+import RightNavBar from "../component/Bar/RightNavBar";
+import NavbarLeft from "../component/Bar/LeftNavbar";
+import Toolbar from "../component/Bar/Toolbar";
 
 export default function Layout(props) {
   return (
