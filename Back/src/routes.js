@@ -73,7 +73,5 @@ router.post('/likeComment', likeComment)
 const {unlikeComment} = require("./endpoints/Comment/unlikeComment");
 router.post('/unlikeComment', unlikeComment)
 
-const {getLikesCountComment} = require("./endpoints/Comment/getLikesCountComment");
-router.post('/getLikesCountComment', getLikesCountComment)
 
 module.exports = router;
