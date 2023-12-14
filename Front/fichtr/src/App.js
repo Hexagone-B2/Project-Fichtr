@@ -13,6 +13,7 @@ import Layout from "./pages/Layout";
 import LayoutToolbarOnly from "./pages/LayoutToolbarOnly";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import Conversation from "./pages/Conversation";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./component/Provider/AuthContext.jsx";
 import UserSettings from "./component/UserSettings.jsx";
@@ -80,6 +81,7 @@ export default function App() {
         <Route path="/tags" element={<Tags />} />
         <Route path="/shoutbox" element={<Shoutbox />} />
         <Route path="/posts" element={<Posts />} />
+        <Route path="/conversation" element={<Conversation />} />
         {/*Redirection par default, si l'utilisateur veux accéder a des routes qui n'existe pas*/}
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
