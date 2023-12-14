@@ -14,12 +14,13 @@ export default function Home(props) {
       >
         <Post />
       </ChargeContentPost>
-
-      <Button
-        title={"Charger plus de posts"}
-        handleButton={() => setNb((prevState) => prevState + 1)}
-        theme={"primary"}
-      />
+      <div className="flex justify-center">
+        <Button
+          title={"Charger plus de posts"}
+          handleButton={() => setNb((prevState) => prevState + 1)}
+          theme={"primary"}
+        />
+      </div>
     </>
   );
 }
