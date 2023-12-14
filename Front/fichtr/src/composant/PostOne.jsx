@@ -1,9 +1,9 @@
-import Post from "./Post";
+import Post from "./Post/Post";
 import Comment from "./Comment";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import InputComment from "./InputComment";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "./Provider/AuthContext";
 import { useContext } from "react";
 
 export default function PostOne({ id }) {
@@ -26,6 +26,7 @@ export default function PostOne({ id }) {
       )
       .then((response) => {
         setAllComment(response.data.comments);
+        console.log(allComment);
       })
       .catch((error) => console.log(error));
   }, []);
