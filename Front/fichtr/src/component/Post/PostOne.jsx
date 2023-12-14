@@ -10,11 +10,17 @@ import Button from "../Button";
 export default function PostOne({ id, setShowOnePost }) {
   const [allComment, setAllComment] = useState([]);
   const { isAuthenticated } = useContext(AuthContext);
+  const [nbLikes, setNbLikes] = useState(0);
+  const [mostLiked, setMostLiked] = useState(0);
 
   let headers = null;
   if (isAuthenticated)
     headers = { authorization: localStorage.getItem("authorization") };
 
+  const sumLikes = (item) => {
+    if (item.likes > mostLiked) setMostLiked(item.likes);
+    setNbLikes(nbLikes + item.likes);
+  };
   useEffect(() => {
     axios
       .post(
@@ -27,9 +33,11 @@ export default function PostOne({ id, setShowOnePost }) {
       .then((response) => {
         setAllComment(response.data.comments);
         console.log(response.data.comments);
+        sumLikes(allComment);
       })
       .catch((error) => console.log(error));
   }, []);
+
   return (
     <div className="p-2">
       <Button
@@ -53,6 +61,7 @@ export default function PostOne({ id, setShowOnePost }) {
             username={item.username}
             comment_id={item.id}
             nbLikes={0}
+            opacity={(item.likes * 100) / nbLikes}
           />
         ))}
       </div>

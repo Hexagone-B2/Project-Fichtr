@@ -22,7 +22,7 @@ const dropDownIcon = (
 
 function ScrollSubject() {
   const [SubjectList, SetSubjectList] = useState([]);
-  const [Subject, SetSubject] = useState();
+  const [subject, SetSubject] = useState();
 
   function load() {
     axios
