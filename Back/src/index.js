@@ -12,7 +12,8 @@ require('./socket/websocket')(server);
 // app.use(sessions({
 //     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
 //     saveUninitialized:true,
-//     resave: false
+//     resave: false,
+//     httpOnly:false
 // }));
 // app.use(cookieParser());
 
@@ -29,8 +30,13 @@ const routes = require('./routes.js');
 const cors = require('cors');
 const helmet = require('helmet')
 app.use(cors({
-    origin: '*',
-    methods: 'POST,GET,PUT'
+    // origin: ['http://localhost:3000','http://localhost:3001','http://localhost:3002','http://localhost:3003','https://dev.enzo-salson.fr'],
+    origin: (origin, callback) => {
+        callback(null, true)
+    },
+    methods: 'POST,GET,PUT',
+    credentials: true,
+    exposedHeaders: ['set-cookie'],
 }));
 app.disable('x-powered-by')
 app.use(helmet({
@@ -42,13 +48,14 @@ app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json());
 app.use('/api',routes);
 
-// app.get('/t', (req, res) => {
-//     send403(res);
+// app.post('/t', (req, res) => {
+//     req.session.user=4;
+//     res.send('OK')
 // })
-// //
-// // app.get('/y', (req, res) => {
-// //     res.json(req.session)
-// // })
+//
+// app.get('/y', (req, res) => {
+//     res.json(req.session)
+// })
 
 app.use(express.static(resolve(__dirname, "../public/web")))
 app.use((req, res) => {

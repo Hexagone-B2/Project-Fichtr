@@ -13,7 +13,7 @@ module.exports.getProfilePic = (req, res) => {
                 res.status(403).send('NO_USER_FOUNDED');
             }else{
                 try{
-                    res.sendFile(path.resolve(__dirname + "/../../public/profile_pic/" + result[0].profile_pic))
+                    res.sendFile(path.resolve(__dirname + "/../../../public/profile_pic/" + result[0].profile_pic))
                 }catch(e){
                     ite(res);
                 }

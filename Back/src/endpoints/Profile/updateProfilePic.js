@@ -2,15 +2,16 @@ const fs = require('fs');
 const {executeSQL} = require("../../func/mysql");
 const {checkAuth} = require("../../func/checkAuth");
 const {nad, ite} = require("../../func/error");
+const path = require('path');
 
 module.exports.updateProfilePic = (req, res) => {
     if (req.file && req.headers.authorization) {
         checkAuth(req.headers.authorization, (error, decoded) => {
             if (["image/jpeg", "image/gif", "image/png"].includes(req.file.mimetype)) {
-                if (req.file.size < 10000000) {
+                if (req.file.size < 5000000) {
                     const splitedFilename = req.file.filename.split(".");
                     const ext = "." + splitedFilename[splitedFilename.length - 1]
-                    fs.rename(__dirname + "/../../" + req.file.path, __dirname + "/../../public/profile_pic/" + decoded.id + ext, (error) => {
+                    fs.rename(req.file.path, path.resolve(__dirname + "/../../../public/profile_pic/" + decoded.id + ext), (error) => {
                         if (error) {
                             console.log(error);
                             ite(res);

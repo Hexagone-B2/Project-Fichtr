@@ -11,16 +11,18 @@ module.exports = (server) => {
     });
     let users = {};
     io.on('connection', (socket) => {
+        console.log('NEWUSER')
         //RECEPTION ET RENVOIE DES MESSAGES DE LA SHOUTBOX
         socket.on('shoutbox_message_send', (data) => {
-            console.log(data)
             if (data.authorization && data.message) {
                 checkAuth(data.authorization, (error, decoded) => {
                     if (!error) {
                         socket.broadcast.emit('shoutbox_message_receive', {
+                            sender_id: decoded.id,
                             sender: decoded.username,
                             message: data.message
                         });
+                        console.log('ok')
                         socket.emit('send_confirmation', {error: false});
                     } else {
                         socket.emit('send_confirmation', {error: true, error_message: 'NOT_AUTHENTICATED'});
@@ -37,7 +39,6 @@ module.exports = (server) => {
                 checkAuth(data.authorization, (error, decoded) => {
                     if (!error) {
                         users[decoded.username] = socket.id;
-                        console.log(socket.id)
                     }
                 })
             }
@@ -45,7 +46,6 @@ module.exports = (server) => {
         });
 
         socket.on('send_message_mp', (data) => {
-            console.log(users)
             if (data.authorization && data.message && data.to) {
                 checkAuth(data.authorization, (error, decoded) => {
                     if (!error) {

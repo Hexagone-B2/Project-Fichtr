@@ -4,7 +4,7 @@ const {nad, ite} = require("../../func/error");
 
 module.exports.getComments = (req,res)=>{
     if (req.body.post_id){
-        executeSQL('SELECT Comment.id as id,user_id,body,time,User.username as username FROM Comment INNER JOIN User on User.id=Comment.user_id WHERE post_id=? ORDER BY time;',[parseInt(req.body.post_id)],(error,result)=>{
+        executeSQL('SELECT Comment.id as id,user_id,body,User.username as username FROM Comment INNER JOIN User on User.id=Comment.user_id WHERE post_id=? ORDER BY time;', [parseInt(req.body.post_id)], (error, result) => {
             if(error){
                 ite(res);
             }else{
@@ -28,9 +28,9 @@ module.exports.getComments = (req,res)=>{
                             })
                         }
                     });
+                } else {
+                    res.json({comments: result})
                 }
-                res.json({comments:result})
-
             }
         })
     }else{
