@@ -25,6 +25,25 @@ export function AuthProvider({ children }) {
     }
   }
 
+  function refreshAuth() {
+    if (localStorage.getItem("authorization")) {
+      const headers = { authorization: localStorage.getItem("authorization") };
+      axios
+        .post("https://dev.enzo-salson.fr/api/refreshAuth", {}, { headers })
+        .then((response) => {
+          // if (response.data.authenticated === true) {
+          setIsAuthenticated(true);
+          //   setUserId(response.data.user_id);
+          //   setUserName(response.data.username);
+          // }
+        })
+        .catch((e) => {
+          console.log(e);
+          setIsAuthenticated(false);
+        });
+    }
+  }
+
   //recuperer le token, le stocker en localstorage
   function loginUser(data) {
     localStorage.setItem("authorization", data);
@@ -45,6 +64,7 @@ export function AuthProvider({ children }) {
         logoutUser,
         userId,
         userName,
+        refreshAuth,
       }}
     >
       {children}

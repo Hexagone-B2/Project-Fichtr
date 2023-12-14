@@ -36,6 +36,7 @@ export default function PostOne({ id, setShowOnePost }) {
         sumLikes(allComment);
       })
       .catch((error) => console.log(error));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
