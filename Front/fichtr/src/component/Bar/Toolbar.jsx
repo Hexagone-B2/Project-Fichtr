@@ -1,6 +1,24 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../Provider/AuthContext";
+import Button from "../Button";
+
+const plusCircle = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+    class="w-6 h-6"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+);
 
 function Toolbar() {
   const { isAuthenticated, userId } = useContext(AuthContext);
@@ -59,40 +77,34 @@ function Toolbar() {
       >
         {isAuthenticated ? (
           <>
-            <button
-              type="button"
-              className="btn-question px-5 py-2 text-base font-medium text-center inline-flex items-center text-white bg-[#310046] rounded-lg hover:bg-[#41015d] focus:ring-4 focus:outline-none focus:bg-[#310046] dark:bg-[#310046] dark:hover:bg-[#41015d] dark:focus:bg-[#310046]"
-            >
-              <img src={"/img/plus.svg"} alt="" className="m-2" />
-              Poser une question
-            </button>
-
-            <button>
-              <img src={"/img/envelope.svg"} alt="" className="w-7" />
-            </button>
-
-            <img
-              src={"http://enzo-salson.fr:3001/api/getProfilePic?id=" + userId}
-              alt="avatar"
-              className="w-10 h-10 rounded-full mr-4"
+            <Button
+              title={"Poser une question"}
+              theme={"primary"}
+              icon={plusCircle}
             />
+            <Link to={"/profile"}>
+              <img
+                crossorigin="anonymous"
+                src={
+                  "https://dev.enzo-salson.fr/api/getProfilePic?id=" + userId
+                }
+                alt="avatar"
+                className="w-10 h-10 rounded-full mr-4"
+              />
+            </Link>
           </>
         ) : (
           <>
-            <Link
-              to={"/login"}
-              type="button"
-              className="btn-connecter focus:outline-none text-white bg-[#310046] hover:bg-[#41015d] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-            >
-              Se connecter
+            <Link to={"/login"}>
+              <Button
+                title={"Se connecter"}
+                type={"button"}
+                theme={"primary"}
+              />
             </Link>
 
-            <Link
-              to={"/register"}
-              type="button"
-              className="btn-inscription focus:outline-none text-white bg-[#310046] hover:bg-[#41015d] focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-            >
-              Inscription
+            <Link to={"/register"} type="button">
+              <Button title={"Inscription"} type={"button"} theme={"pale"} />
             </Link>
           </>
         )}

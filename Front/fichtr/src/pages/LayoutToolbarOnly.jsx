@@ -1,4 +1,4 @@
-import Toolbar from "../composant/Toolbar";
+import Toolbar from "../component/Bar/Toolbar";
 
 export default function LayoutToolbarOnly(props) {
   return (

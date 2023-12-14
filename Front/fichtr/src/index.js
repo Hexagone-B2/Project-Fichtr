@@ -4,7 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import Shoutbox from "./pages/Shoutbox";
-import { AuthProvider } from "./composant/AuthProvider";
+import { AuthProvider } from "./component/Provider/AuthProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

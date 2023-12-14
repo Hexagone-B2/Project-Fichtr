@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useContext } from "react";
 import io from "socket.io-client";
+import { AuthProvider } from "./Provider/AuthProvider";
 
 const socket = io.connect("https://dev.enzo-salson.fr");
 
-function ShoutboxSendMessage() {
+function ShoutboxSendMessage({messageList, setMessageList}) {
     const [message, setMessage] = useState("");
+    const { isAuthenticated, userId, userName } = useContext(AuthProvider);
 
     function handleClick(e){
         e.preventDefault();
 
-        socket.emit("shoutbox_message_send", {authorization: localStorage.getItem("authorization"), message: message});
+        if (isAuthenticated) {
+             socket.emit("shoutbox_message_send", {authorization: localStorage.getItem("authorization"), message: message});
+             setMessageList([...messageList, { username: userName, pfp: userId, content: message }]);
+        }
 
     }
     
@@ -32,11 +36,12 @@ function ShoutboxSendMessage() {
     );
 }
 
-function ShoutboxMessageList() {
-    const [messageList, setMessageList] = useState([
-        { username: "Jesus Christ", pfp: 1, content: "Jaaj" },
-        { username: "Peintre Autrichien", pfp: 1, content: "TGhnnhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" }
-    ]);
+function ShoutboxMessageList({messageList, setMessageList}) {
+    useEffect(() => {
+        socket.on("shoutbox_message_receive", (data) => {
+            setMessageList([...messageList, { username: data.username, pfp: data.sender_id, content: data.message }]);
+        });
+    });
 
     return (
         <div>
@@ -44,7 +49,7 @@ function ShoutboxMessageList() {
                 <div class="flex items-start gap-2.5 p-2">
                     <div class="flex flex-col w-full leading-1.5 p-4 border-gray-500 bg-gray-100 rounded-e-xl rounded-es-xl">
                         <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                            <img class="w-8 h-8 rounded-full" src={message.pfp} alt={message.username} />
+                            <img crossOrigin="anonymous" class="w-8 h-8 rounded-full" src={"https://dev.enzo-salson.fr/api/getProfilePic?id=" + message.pfp} alt={message.username} />
                             <span class="text-sm font-semibold text-gray-900">{message.username}</span>
                             <span class="text-sm font-normal text-gray-500">11:46</span>
                         </div>
@@ -57,10 +62,14 @@ function ShoutboxMessageList() {
 }
 
 export default function ShoutboxComponent() {
+    const [messageList, setMessageList] = useState([
+        { username: "Jesus Christ", pfp: 1, content: "Jaaj" },
+        { username: "Peintre Autrichien", pfp: 1, content: "TGhnnhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" }
+    ]);
     return (
         <>
-            <ShoutboxMessageList />
-            <ShoutboxSendMessage />
+            <ShoutboxMessageList messageList={messageList} setMessageList={setMessageList} />
+            <ShoutboxSendMessage messageList={messageList} setMessageList={setMessageList} />
         </>
     );
 }

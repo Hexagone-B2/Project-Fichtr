@@ -16,14 +16,14 @@ export default function ChargeContent({ endpoint, nb, children }) {
         });
     }
 
-    // Appel de la fonction de requête lorsque le composant est monté
+    // Appel de la fonction de requête lorsque le component est monté
     getContent();
   }, [endpoint, nb]);
 
   return (
     <div>
       {idList.map((item) =>
-        // Créer dynamiquement des composants enfants en fonction des éléments de la liste
+        // Créer dynamiquement des components enfants en fonction des éléments de la liste
         React.Children.map(children, (child) => {
           return React.cloneElement(child, {
             id: item,
