@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Post from "./Post";
 import PostOne from "./PostOne";
 
-export default function ChargeContentPost({ endpoint, nb, children }) {
+export default function ChargeContentPost({ endpoint, nb }) {
   const [idList, setIdList] = useState([]);
   const [showOnePost, setShowOnePost] = useState(false);
   const [idOnePost, setIdOnePost] = useState(0);
@@ -25,11 +25,10 @@ export default function ChargeContentPost({ endpoint, nb, children }) {
   }, [endpoint, nb]);
 
   return showOnePost ? (
-    <PostOne id={idOnePost} />
+    <PostOne id={idOnePost} setShowOnePost={setShowOnePost} />
   ) : (
     <div>
       {idList.map((item) => (
-        // Créer dynamiquement des composants enfants en fonction des éléments de la liste
         <Post
           key={item}
           id={item}
