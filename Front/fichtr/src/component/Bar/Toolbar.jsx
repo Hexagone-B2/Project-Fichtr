@@ -82,7 +82,6 @@ function Toolbar() {
               theme={"primary"}
               icon={plusCircle}
             />
-            <Button icon={"/img/envelope.svg"} title={""} />
             <Link to={"/profile"}>
               <img
                 crossorigin="anonymous"
@@ -105,7 +104,7 @@ function Toolbar() {
             </Link>
 
             <Link to={"/register"} type="button">
-              <Button title={"Inscription"} type={"button"} theme={"primary"} />
+              <Button title={"Inscription"} type={"button"} theme={"pale"} />
             </Link>
           </>
         )}

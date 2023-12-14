@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Button from "./Button";
 
 function UserSettings() {
   const [id, setId] = useState("");
@@ -275,19 +276,17 @@ function UserSettings() {
             />
             <br />
             <div className="flex justify-between">
-              <input
-                type="button"
-                name="DeleteAccount"
-                id="DeleteAccount"
-                value="Supprimer le compte"
-                className="bg-red-500 rounded-full p-3 font-semibold"
+              <Button
+                type={"button"}
+                id={"DeleteAccount"}
+                title={"Supprimer le compte"}
+                theme={"danger"}
               />
-              <input
-                type="submit"
-                name="SubmitAccount"
-                id="SubmitAccount"
-                value="Valider les modifications"
-                className="bg-green-500 rounded-full p-3 font-semibold"
+              <Button
+                type={"submit"}
+                id={"SubmitAccount"}
+                title={"Valider les modifications"}
+                theme={"success"}
               />
             </div>
           </form>
@@ -309,12 +308,11 @@ function UserSettings() {
                 accept=".jpg, .jpeg, .png"
                 className="rounded-l bg-gray-100"
               />
-              <input
-                type="submit"
-                name="SubmitAccount"
-                id="SubmitAccount"
-                value="Changer l'image"
-                className="bg-green-500 rounded-r h-full p-2 font-semibold"
+              <Button
+                type={"submit"}
+                id={"SubmitAccount"}
+                title={"Changer l'image"}
+                theme={"success"}
               />
             </div>
           </form>
@@ -347,12 +345,11 @@ function UserSettings() {
               />
             </div>
             <br />
-            <input
-              type="submit"
-              name="SubmitAccount"
-              id="SubmitAccount"
-              value="Valider les modifications"
-              className="bg-green-500 rounded-full p-3 font-semibold"
+            <Button
+              type={"submit"}
+              id={"SubmitAccount"}
+              title={"Valider les modifications"}
+              theme={"success"}
             />
             <br />
           </form>
