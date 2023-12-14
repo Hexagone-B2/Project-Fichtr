@@ -9,7 +9,7 @@ import { AuthProvider } from "./composant/AuthProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthProvider>
-    <Shoutbox />
+    <App />
   </AuthProvider>
 );
 
