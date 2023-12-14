@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthContext";
 import Button from "../Button";
+import ProfilePicture from "../User/ProfilePic";
 
 const plusCircle = (
   <svg
@@ -83,14 +84,7 @@ function Toolbar() {
               icon={plusCircle}
             />
             <Link to={"/profile"}>
-              <img
-                crossorigin="anonymous"
-                src={
-                  "https://dev.enzo-salson.fr/api/getProfilePic?id=" + userId
-                }
-                alt="avatar"
-                className="w-10 h-10 rounded-full mr-4"
-              />
+              <ProfilePicture size={"small"} userId={userId} />
             </Link>
           </>
         ) : (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "./Button";
+import ProfilePicture from "./User/ProfilePic";
 
 function UserSettings() {
   const [id, setId] = useState("");
@@ -213,12 +214,7 @@ function UserSettings() {
     <div className="flex justify-center items-center h-screen">
       <div className="flex justify-center gap-10">
         <div className="flex flex-col items-center border-2 h-fit w-64 p-5 gap-3">
-          <img
-            crossorigin="anonymous"
-            src={"https://dev.enzo-salson.fr/api/getProfilePic?id=" + id}
-            alt=""
-            className="rounded-full h-32 w-32"
-          />
+          <ProfilePicture size={"large"} userId={id} />
           <h3>
             <b>{username}</b>
           </h3>

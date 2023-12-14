@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthContext";
+import ProfilePicture from "../User/ProfilePic";
 
 function Post({ id, setIdOnePost, setShowOnePost }) {
   const [post, setPost] = useState({});
@@ -85,16 +86,7 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
     <div className="m-8 bg-white border border-gray-200 rounded-lg p-4 relative">
       <h2 className="text-xl font-bold mb-2">{post.title}</h2>
       <div className="flex items-center mb-4">
-        <img
-          crossorigin="anonymous"
-          src={
-            post.owner_id
-              ? `https://dev.enzo-salson.fr/api/getProfilePic?id=${post.owner_id}`
-              : ""
-          }
-          alt="avatar"
-          className="w-10 h-10 rounded-full mr-4"
-        />
+        <ProfilePicture size={"small"} userId={post.owner_id || null} />
         <span className="font-bold text-gray-900">{post.username}</span>
       </div>
       <p className="text-gray-800">{post.body}</p>
