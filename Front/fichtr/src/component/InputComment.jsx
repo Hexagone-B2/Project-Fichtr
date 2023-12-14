@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "./Provider/AuthContext";
 import { useContext, useState } from "react";
 
 export default function InputComment({ id, setAllComment, allComment }) {

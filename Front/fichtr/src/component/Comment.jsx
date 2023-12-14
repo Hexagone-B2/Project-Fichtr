@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "./Provider/AuthContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import ProfilePicture from "./User/ProfilePic";
 
 function Comment({ user_id, body, username, comment_id }) {
   const { isAuthenticated } = useContext(AuthContext);
@@ -39,11 +40,7 @@ function Comment({ user_id, body, username, comment_id }) {
         </div>
         <div className="mb-4">
           <div className="flex items-center p-4">
-            <img
-              src={"https://dev.enzo-salson.fr/api/getProfilePic?id=" + user_id}
-              alt="avatar"
-              className="w-10 h-10 rounded-full mr-4"
-            />
+            <ProfilePicture userId={user_id} />
             <span className="font-bold text-gray-900">{username}</span>
           </div>
           <div className="p-2">{body}</div>
