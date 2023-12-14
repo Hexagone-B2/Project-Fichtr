@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./component/Provider/AuthContext.jsx";
 import UserSettings from "./component/UserSettings.jsx";
+import CreatePost from "./pages/CreatePost.jsx";
 
 export default function App() {
   const { isAuthenticated, authUser } = useContext(AuthContext);
@@ -31,6 +32,14 @@ export default function App() {
             <Route path="/mes-reponses" element={<MyResponses />} />
             <Route path="/mes-likes" element={<MyLikes />} />
             <Route path="/mon-compte" element={<MyAccount />} />
+            <Route
+              path="/create-post"
+              element={
+                <Layout>
+                  <CreatePost />
+                </Layout>
+              }
+            />
             <Route
               path="/profile"
               element={

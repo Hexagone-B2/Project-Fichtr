@@ -78,11 +78,16 @@ function Toolbar() {
       >
         {isAuthenticated ? (
           <>
-            <Button
-              title={"Poser une question"}
-              theme={"primary"}
-              icon={plusCircle}
-            />
+            <Link to={"/create-post"}>
+              <Button
+                title={"Poser une question"}
+                theme={"primary"}
+                icon={plusCircle}
+              />
+            </Link>
+            <Link to={"/mp"}>
+              <img src={"/img/envelope.svg"} alt="" className="w-7" />
+            </Link>
             <Link to={"/profile"}>
               <ProfilePicture size={"small"} userId={userId} />
             </Link>
