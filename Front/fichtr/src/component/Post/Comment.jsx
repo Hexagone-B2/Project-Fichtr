@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../Provider/AuthContext";
 import { useContext } from "react";
@@ -21,41 +21,41 @@ function Comment({ user_id, body, username, comment_id, nbLikes, opacity }) {
   //     .catch((error) => console.log(error));
   // }, []);
 
-  // const handleLike = (id) => {
-  //   const headers = { authorization: localStorage.getItem("authorization") };
-  //   if (!liked) {
-  //     setLiked(true);
-  //     setLikesCount((prevState) => prevState + 1);
+  const handleLike = (id) => {
+    const headers = { authorization: localStorage.getItem("authorization") };
+    if (!liked) {
+      setLiked(true);
+      setLikesCount((prevState) => prevState + 1);
 
-  //     axios
-  //       .post(
-  //         "https://dev.enzo-salson.fr/api/likeComment",
-  //         { comment_id: id },
-  //         { headers }
-  //       )
-  //       .then((response) => {})
-  //       .catch((e) => {
-  //         console.log(e);
-  //         setLiked(false);
-  //         setLikesCount((prevState) => prevState - 1);
-  //       });
-  //   } else {
-  //     setLiked(false);
-  //     setLikesCount((prevState) => prevState - 1);
-  //     axios
-  //       .post(
-  //         "https://dev.enzo-salson.fr/api/unlikeComment",
-  //         { comment_id: id },
-  //         { headers }
-  //       )
-  //       .then((response) => {})
-  //       .catch((e) => {
-  //         console.log(e);
-  //         setLiked(true);
-  //         setLikesCount((prevState) => prevState + 1);
-  //       });
-  //   }
-  // };
+      axios
+        .post(
+          "https://dev.enzo-salson.fr/api/likeComment",
+          { comment_id: id },
+          { headers }
+        )
+        .then((response) => {})
+        .catch((e) => {
+          console.log(e);
+          setLiked(false);
+          setLikesCount((prevState) => prevState - 1);
+        });
+    } else {
+      setLiked(false);
+      setLikesCount((prevState) => prevState - 1);
+      axios
+        .post(
+          "https://dev.enzo-salson.fr/api/unlikeComment",
+          { comment_id: id },
+          { headers }
+        )
+        .then((response) => {})
+        .catch((e) => {
+          console.log(e);
+          setLiked(true);
+          setLikesCount((prevState) => prevState + 1);
+        });
+    }
+  };
 
   return (
     <div className="  bg-white border border-gray-200 rounded-lg  my-2 relative">
@@ -65,7 +65,7 @@ function Comment({ user_id, body, username, comment_id, nbLikes, opacity }) {
         >
           {isAuthenticated ? (
             <img
-              // onClick={() => handleLike(comment_id)}
+              onClick={() => handleLike(comment_id)}
               src={liked ? "./img/heart-solid.svg" : "./img/heart.svg"}
               alt="like"
             />
@@ -78,7 +78,7 @@ function Comment({ user_id, body, username, comment_id, nbLikes, opacity }) {
         </div>
         <div className="mb-4">
           <div className="flex items-center p-4">
-            {/* <ProfilePicture userId={user_id} /> */}
+            <ProfilePicture userId={user_id} />
             <span className="font-bold text-gray-900">{username}</span>
           </div>
           <div className="p-2">{body}</div>
