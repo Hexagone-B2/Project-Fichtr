@@ -25,7 +25,7 @@ function Toolbar() {
 
   return (
     <div className="my-app-bar flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 bg-white shadow-md h-[8rem] z-10">
-      <Link to={"/home"}>
+      <Link to={"/"}>
         <img src={"/img/logo.png"} alt="logo" className="w-44" />
       </Link>
 

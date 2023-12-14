@@ -61,7 +61,7 @@ export default function App() {
           </>
         )}
         <Route
-          path="/home"
+          path="/"
           element={
             <Layout>
               <Home />
@@ -79,7 +79,7 @@ export default function App() {
         <Route path="/tags" element={<Tags />} />
         <Route path="/shoutbox" element={<Shoutbox />} />
         {/*Redirection par default, si l'utilisateur veux accéder a des routes qui n'existe pas*/}
-        <Route path="*" element={<Navigate to="/home" />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );
