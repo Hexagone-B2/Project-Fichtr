@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../Provider/AuthContext";
 
 function Post({ id, setIdOnePost, setShowOnePost }) {
   const [post, setPost] = useState({});

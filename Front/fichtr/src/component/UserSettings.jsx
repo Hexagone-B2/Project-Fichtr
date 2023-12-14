@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Button from "./Button";
 
 function UserSettings() {
   const [id, setId] = useState("");
@@ -211,7 +212,7 @@ function UserSettings() {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="flex justify-center gap-10">
-        <div className="flex flex-col items-center border border-2 h-fit w-64 p-5 gap-3">
+        <div className="flex flex-col items-center border-2 h-fit w-64 p-5 gap-3">
           <img
             crossorigin="anonymous"
             src={"https://dev.enzo-salson.fr/api/getProfilePic?id=" + id}
@@ -227,7 +228,7 @@ function UserSettings() {
           <form
             onSubmit={handleSubmit}
             name="formText"
-            className="flex flex-col justify-center align-center gap-1 p-5 border border-2"
+            className="flex flex-col justify-center align-center gap-1 p-5 border-2"
             encType="multipart/form-data"
           >
             {varUsernameErrorDiv}
@@ -249,7 +250,7 @@ function UserSettings() {
                 maxLength={50}
                 onChange={handleChange}
                 value={username}
-                className="border border-slate-300 rounded bg-gray-100 border-2"
+                className="border-slate-300 rounded bg-gray-100 border-2"
               />
               <input
                 type="email"
@@ -258,7 +259,7 @@ function UserSettings() {
                 placeholder="Nouveau mail"
                 value={mail}
                 onChange={handleChange}
-                className="border border-slate-300 rounded bg-gray-100 border-2"
+                className="border-slate-300 rounded bg-gray-100 border-2"
               />
             </div>
             <label htmlFor="bio" className="my-1">
@@ -271,30 +272,28 @@ function UserSettings() {
               placeholder="Modifier la bio"
               onChange={handleChange}
               value={bio}
-              className="border border-slate-300 rounded bg-gray-100 border-2 h-32 break-normal"
+              className="border-slate-300 rounded bg-gray-100 border-2 h-32 break-normal"
             />
             <br />
             <div className="flex justify-between">
-              <input
-                type="button"
-                name="DeleteAccount"
-                id="DeleteAccount"
-                value="Supprimer le compte"
-                className="bg-red-500 rounded-full p-3 font-semibold"
+              <Button
+                type={"button"}
+                id={"DeleteAccount"}
+                title={"Supprimer le compte"}
+                theme={"danger"}
               />
-              <input
-                type="submit"
-                name="SubmitAccount"
-                id="SubmitAccount"
-                value="Valider les modifications"
-                className="bg-green-500 rounded-full p-3 font-semibold"
+              <Button
+                type={"submit"}
+                id={"SubmitAccount"}
+                title={"Valider les modifications"}
+                theme={"success"}
               />
             </div>
           </form>
           <form
             name="formImage"
             onSubmit={handleSubmit}
-            className="flex flex-col gap-1 p-5 border border-2"
+            className="flex flex-col gap-1 p-5 border-2"
           >
             <label htmlFor="newPhoto" className="my-1">
               Changer photo de profil
@@ -309,12 +308,11 @@ function UserSettings() {
                 accept=".jpg, .jpeg, .png"
                 className="rounded-l bg-gray-100"
               />
-              <input
-                type="submit"
-                name="SubmitAccount"
-                id="SubmitAccount"
-                value="Changer l'image"
-                className="bg-green-500 rounded-r h-full p-2 font-semibold"
+              <Button
+                type={"submit"}
+                id={"SubmitAccount"}
+                title={"Changer l'image"}
+                theme={"success"}
               />
             </div>
           </form>
@@ -323,7 +321,7 @@ function UserSettings() {
           <form
             name="formPassword"
             onSubmit={handleSubmit}
-            className="flex flex-col gap-1 p-5 border border-2"
+            className="flex flex-col gap-1 p-5 border-2"
           >
             <label htmlFor="password">Modifier mot de passe</label>
             <br />
@@ -335,7 +333,7 @@ function UserSettings() {
                 id="password"
                 placeholder="Nouveau mot de passe"
                 onChange={handleChange}
-                className="border border-slate-300 rounded bg-gray-100 border-2"
+                className=" border-slate-300 rounded bg-gray-100 border-2"
               />
               <input
                 type="password"
@@ -343,16 +341,15 @@ function UserSettings() {
                 id="passwordConfirm"
                 placeholder="Confirmer mot de passe"
                 onChange={handleChange}
-                className="border border-slate-300 rounded bg-gray-100 border-2"
+                className=" border-slate-300 rounded bg-gray-100 border-2"
               />
             </div>
             <br />
-            <input
-              type="submit"
-              name="SubmitAccount"
-              id="SubmitAccount"
-              value="Valider les modifications"
-              className="bg-green-500 rounded-full p-3 font-semibold"
+            <Button
+              type={"submit"}
+              id={"SubmitAccount"}
+              title={"Valider les modifications"}
+              theme={"success"}
             />
             <br />
           </form>

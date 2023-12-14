@@ -1,4 +1,4 @@
-import InscriptionPage from "../composant/Inscription/InscriptionPage";
+import InscriptionPage from "../component/Inscription/InscriptionPage";
 
 export default function Register(props) {
   return (

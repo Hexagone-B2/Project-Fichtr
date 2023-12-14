@@ -1,4 +1,4 @@
-import AuthentificationPage from "../composant/Authentification/AuthentificationPage";
+import AuthentificationPage from "../component/Authentification/AuthentificationPage";
 
 export default function Login(props) {
   return (
