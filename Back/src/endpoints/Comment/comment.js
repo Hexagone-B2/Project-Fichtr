@@ -1,6 +1,6 @@
 const {checkAuth} = require("../../func/checkAuth");
 const {executeSQL} = require("../../func/mysql");
-const {nad} = require("../../func/notAllData");
+const {nad, ite} = require("../../func/error");
 
 module.exports.comment = (req,res)=>{
     if (req.body.post_id && req.body.body && req.headers.authorization){
@@ -10,11 +10,11 @@ module.exports.comment = (req,res)=>{
             }else{
                 executeSQL('INSERT INTO Comment (user_id,post_id,body) VALUES (?,?,?);',[decoded.id,req.body.post_id,req.body.body],(error)=>{
                     if (error){
-                        res.status(500).send('INTERNAL_ERROR');
+                        ite(res);
                     }else{
                         executeSQL('SELECT id,time from Comment where post_id=? and user_id=? and body=?', [req.body.post_id,decoded.id,req.body.body],(error,result)=>{
                             if (error){
-                                res.status(500).send('INTERNAL_ERROR');
+                                ite(res);
                             }else{
                                 res.json({comment_id:result[0].id,time:result[0].time})
                             }

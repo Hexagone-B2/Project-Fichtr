@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const {executeSQL} = require("../../func/mysql");
-const {nad} = require("../../func/notAllData");
+const {nad} = require("../../func/error");
 
 module.exports.login = (req, res) => {
     if (!(req.body.mail && req.body.password)) {
@@ -11,7 +11,7 @@ module.exports.login = (req, res) => {
                 res.status(403).send('UNKNOWN_MAIL');
             } else {
                 if (bcrypt.compareSync(req.body.password, result[0].password)) {
-                    const user = {
+                    req.session.user = {
                         id: result[0].id,
                         username: result[0].username,
                         firstname: result[0].firstname,
@@ -19,20 +19,11 @@ module.exports.login = (req, res) => {
                         mail: result[0].mail,
                         roles: result[0].roles,
                     };
-                    req.session.user = user;
                     res.send('OK');
                 } else {
                     res.status(403).send('WRONG_PASSWORD');
                 }
             }
         })
-    }
-}
-
-function checkAuth(session, callback) {
-    if (session.user.id) {
-        callback(null, decoded);
-    } else {
-        callback('Utilisateur non connecté.', null)
     }
 }

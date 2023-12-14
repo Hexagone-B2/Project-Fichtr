@@ -1,6 +1,6 @@
 const {checkAuth} = require("../../func/checkAuth");
 const {executeSQL} = require("../../func/mysql");
-const {nad} = require("../../func/notAllData");
+const {nad, ite} = require("../../func/error");
 module.exports.createSubject = (req,res)=>{
     if (req.headers.authorization && req.body.name){
         checkAuth(req.headers.authorization,(error,decoded)=>{
@@ -9,7 +9,7 @@ module.exports.createSubject = (req,res)=>{
             }else if (decoded.roles === 'admin'){
                 executeSQL("INSERT INTO Subject (name) VALUES (?);",[req.body.name],(error)=>{
                     if (error){
-                        res.status(500).send('INTERNAL_ERROR');
+                        ite(res);
                     }else{
                         res.send('OK');
                     }

@@ -1,12 +1,12 @@
 const {executeSQL} = require("../../func/mysql");
 const {checkAuth} = require("../../func/checkAuth");
-const {nad} = require("../../func/notAllData");
+const {nad, ite} = require("../../func/error");
 
 module.exports.getComments = (req,res)=>{
     if (req.body.post_id){
         executeSQL('SELECT Comment.id as id,user_id,body,time,User.username as username FROM Comment INNER JOIN User on User.id=Comment.user_id WHERE post_id=? ORDER BY time;',[parseInt(req.body.post_id)],(error,result)=>{
             if(error){
-                res.status(500).send('INTERNAL_ERROR');
+                ite(res);
             }else{
                 if (req.headers.authorization){
                     checkAuth(req.headers.authorization,(error,decoded)=>{

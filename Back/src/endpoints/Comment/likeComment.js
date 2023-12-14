@@ -1,6 +1,6 @@
 const {checkAuth} = require("../../func/checkAuth");
 const {executeSQL} = require("../../func/mysql");
-const {nad} = require("../../func/notAllData");
+const {nad, ite} = require("../../func/error");
 
 module.exports.likeComment = (req,res)=>{
     if (req.body.comment_id && req.headers.authorization){
@@ -10,7 +10,7 @@ module.exports.likeComment = (req,res)=>{
             }else{
                 executeSQL('INSERT INTO LikesComment (user_id,comment_id) VALUES (?,?);',[decoded.id,req.body.comment_id],(error)=>{
                     if (error){
-                        res.status(500).send('INTERNAL_ERROR');
+                        ite(res);
                     }else{
                         res.send('OK');
                     }

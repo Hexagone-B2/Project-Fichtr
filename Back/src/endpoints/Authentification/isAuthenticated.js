@@ -1,5 +1,5 @@
 const {checkAuth} = require("../../func/checkAuth");
-const {nad} = require("../../func/notAllData");
+const {nad} = require("../../func/error");
 
 module.exports.isAuthenticated = (req,res)=>{
     if (!(req.headers.authorization)){

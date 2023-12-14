@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const {executeSQL} = require("../../func/mysql");
-const {nad} = require("../../func/notAllData");
+const {nad, ite} = require("../../func/error");
 
 module.exports.register = (req, res) => {
     if (req.body.username && req.body.lastname && req.body.firstname && req.body.mail && req.body.password && req.body.repeatpassword) {
@@ -11,13 +11,13 @@ module.exports.register = (req, res) => {
                     (error) => {
                         if (error){
                             console.log(error);
-                            res.status(500).send('INTERNAL_ERROR');
+                            ite(res);
                         }
                         else{
                             executeSQL("SELECT id FROM User where mail=?;",[req.body.mail],(error,result)=>{
                                 if (error){
                                     console.log(error);
-                                    res.status(500).send('INTERNAL_ERROR');
+                                    ite(res);
                                 }else{
                                     executeSQL('INSERT INTO Profile (profile_pic,bio,url_personnal_site,user_id) VALUES (?,?,?,?);',["default.jpeg","","",result[0].id],(error)=>{
                                         if (error){

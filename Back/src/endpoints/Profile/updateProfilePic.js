@@ -1,7 +1,7 @@
 const fs = require('fs');
 const {executeSQL} = require("../../func/mysql");
 const {checkAuth} = require("../../func/checkAuth");
-const {nad} = require("../../func/notAllData");
+const {nad, ite} = require("../../func/error");
 
 module.exports.updateProfilePic = (req, res) => {
     if (req.file && req.headers.authorization) {
@@ -13,14 +13,14 @@ module.exports.updateProfilePic = (req, res) => {
                     fs.rename(__dirname + "/../../" + req.file.path, __dirname + "/../../public/profile_pic/" + decoded.id + ext, (error) => {
                         if (error) {
                             console.log(error);
-                            res.status(500).send('INTERNAL_ERROR');
+                            ite(res);
                             fs.unlink(__dirname + "/../../" + req.file.path, () => {
                             });
                         } else {
                             executeSQL("UPDATE Profile set profile_pic=? where user_id=?", [decoded.id + ext, decoded.id], (error) => {
                                 if (error) {
                                     console.log(error);
-                                    res.status(500).send('INTERNAL_ERROR');
+                                    ite(res);
                                     fs.unlink(__dirname + "/../../" + req.file.path, () => {
                                     });
                                 } else {

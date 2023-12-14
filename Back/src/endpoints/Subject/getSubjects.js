@@ -1,9 +1,10 @@
 const {executeSQL} = require("../../func/mysql");
+const {ite} = require("../../func/error");
 
 module.exports.getSubjects = (req,res)=>{
     executeSQL("SELECT * FROM Subject;",(error,result)=>{
         if (error){
-            res.status(500).send('INTERNAL_ERROR');
+            ite(res);
         }else{
             res.json({list : result});
         }

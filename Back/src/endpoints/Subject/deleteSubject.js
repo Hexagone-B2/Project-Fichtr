@@ -1,6 +1,6 @@
 const {checkAuth} = require("../../func/checkAuth");
 const {executeSQL} = require("../../func/mysql");
-const {nad} = require("../../func/notAllData");
+const {nad, ite} = require("../../func/error");
 
 module.exports.deleteSubject = (req,res)=>{
     if (req.headers.authorization && req.body.id){
@@ -10,11 +10,11 @@ module.exports.deleteSubject = (req,res)=>{
             }else if (decoded.roles === 'admin'){
                 executeSQL('DELETE FROM Post WHERE subject_id=?;',[parseInt(req.body.id)],(error)=>{
                     if (error){
-                        res.status(500).send('INTERNAL_ERROR');
+                        ite(res);
                     }else{
                         executeSQL("DELETE FROM Subject WHERE id=?;",[parseInt(req.body.id)],(error)=>{
                             if (error){
-                                res.status(500).send('INTERNAL_ERROR');
+                                ite(res);
                             }else{
                                 res.send('OK');
                             }

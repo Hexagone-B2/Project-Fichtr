@@ -1,6 +1,6 @@
 const {executeSQL} = require("../../func/mysql");
 const {checkAuth} = require("../../func/checkAuth");
-const {nad} = require("../../func/notAllData");
+const {nad, ite} = require("../../func/error");
 
 /**
  * @jso @result[] num
@@ -11,7 +11,7 @@ module.exports.getPostInfo = (req,res)=>{
     }else{
         executeSQL('SELECT p.title as title, p.body as body, p.user_id as owner_id, User.username as username FROM Post p INNER JOIN User on User.id=p.user_id where p.id=?;',[req.body.id],(error,result)=>{
             if (error){
-                res.status(500).send('INTERNAL_ERROR');
+                ite(res);
             }else{
                 let json = {
                     title: result[0].title,
@@ -21,12 +21,12 @@ module.exports.getPostInfo = (req,res)=>{
                 }
                 executeSQL("SELECT COUNT(*) as num FROM Likes INNER JOIN User on User.id=Likes.user_id where post_id=?;",[req.body.id],(error,result)=>{
                     if (error){
-                        res.status(500).send('INTERNAL_ERROR');
+                        ite(res);
                     }else{
                         json.likes = result[0].num
                         executeSQL("SELECT COUNT(*) as num FROM Comment where post_id=?;",[req.body.id],(error,result)=>{
                             if (error){
-                                res.status(500).send('INTERNAL_ERROR');
+                                ite(res);
                             }else{
                                 json.comments=result[0].num
                                 if (req.headers.authorization){
@@ -36,7 +36,7 @@ module.exports.getPostInfo = (req,res)=>{
                                         }else{
                                             executeSQL('SELECT id FROM Likes where post_id=? and user_id=?;',[req.body.id,parseInt(decoded.id)],(error,result)=>{
                                                 if (error){
-                                                    res.status(500).send('INTERNAL_ERROR');
+                                                    ite(res);
                                                 }else{
                                                     json.liked = !!result[0];
                                                     res.json(json);

@@ -1,7 +1,7 @@
 const {hash} = require('bcrypt');
 const {executeSQL} = require("../../func/mysql");
 const {checkAuth} = require("../../func/checkAuth");
-const {nad} = require("../../func/notAllData");
+const {nad, ite} = require("../../func/error");
 
 
 /**
@@ -21,7 +21,7 @@ module.exports.modifyPassword = (req, res) => {
                 hash(req.body.password, 10).then(hashed => {
                     executeSQL("UPDATE User SET password=? where id=?;", [hashed, decoded.id], (error) => {
                         if (error) {
-                            res.status(500).send('INTERNAL_ERROR');
+                            ite(res);
                         } else {
                             res.send('OK');
                         }
