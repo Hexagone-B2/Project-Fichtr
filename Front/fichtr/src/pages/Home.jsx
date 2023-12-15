@@ -1,14 +1,18 @@
 import Post from "../composant/Post";
 import { useState } from "react";
 import ChargeContent from "../composant/ChargeContent";
-import PrivateMessages from "../composant/PrivateMessages";
 
 export default function Home(props) {
   let [nb, setNb] = useState(0);
 
   return (
     <>
-      <PrivateMessages />
+      <ChargeContent
+        endpoint={"http://dev.enzo-salson.fr/api/getPosts"}
+        nb={nb}
+      >
+        <Post />
+      </ChargeContent>
 
       <button
         onClick={() => setNb((prevState) => prevState + 1)}
