@@ -6,15 +6,15 @@ import ProfilePicture from "../User/ProfilePic";
 import Tags from "../Tags";
 import Loading from "../Loading";
 
-function Post({ id }) {
+function Post({ id, setIdOnePost, setShowOnePost }) {
   const [post, setPost] = useState({});
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
   const { isAuthenticated } = useContext(AuthContext);
-  const [isLoading, setIsLoading] = useState(true);
-
+  const [clickable, setClickable] = useState(true);
   useEffect(() => {
-      let headers;
+    if (!setIdOnePost) setClickable(false);
+    let headers = undefined;
     if (isAuthenticated) {
       headers = { authorization: localStorage.getItem("authorization") };
     } else {
@@ -38,6 +38,14 @@ function Post({ id }) {
         })
         .catch((e) => console.log(e));
   }, []);
+
+  const handleComments = (e) => {
+    if (clickable) {
+      setIdOnePost(e.target.id);
+      console.log(e);
+      setShowOnePost(true);
+    }
+  };
 
   const handleLike = (id) => {
     const headers = { authorization: localStorage.getItem("authorization") };
@@ -99,9 +107,11 @@ function Post({ id }) {
             )}
               {likesCount}
           </span>
-                      <span className="text-gray-500 flex items-center">
-            <img src="./img/comment.svg" alt="commentaire" />
-                          {post.comments}
+          <span className="text-gray-500 flex items-center">
+            <button onClick={handleComments}>
+              <img src="./img/comment.svg" alt="commentaire" id={id} />
+            </button>
+            {post.comments}
           </span>
                   </div>
                   <Tags tagNames={post.tags} />
