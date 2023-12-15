@@ -11,16 +11,20 @@ export default function PostOne({ id, setShowOnePost }) {
   const [allComment, setAllComment] = useState([]);
   const { isAuthenticated } = useContext(AuthContext);
   const [nbLikes, setNbLikes] = useState(0);
-  const [mostLiked, setMostLiked] = useState(0);
+  // let nbLikes = 0;
 
   let headers = null;
   if (isAuthenticated)
     headers = { authorization: localStorage.getItem("authorization") };
 
-  const sumLikes = (item) => {
-    if (item.likes > mostLiked) setMostLiked(item.likes);
-    setNbLikes(nbLikes + item.likes);
-  };
+  function sumLikes(list) {
+    console.log(list);
+    list.forEach((item) => {
+      console.log(item);
+      // nbLikes += item.likes_count;
+      setNbLikes((prevState) => prevState + parseInt(item.likes_count));
+    });
+  }
   useEffect(() => {
     axios
       .post(
@@ -31,13 +35,12 @@ export default function PostOne({ id, setShowOnePost }) {
         { headers }
       )
       .then((response) => {
-        setAllComment(response.data.comments);
-        console.log(response.data.comments);
-        sumLikes(allComment);
+        setAllComment(response.data);
+        sumLikes(response.data);
       })
       .catch((error) => console.log(error));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  console.log("nbLikes =" + nbLikes);
 
   return (
     <div className="p-2">
@@ -48,6 +51,20 @@ export default function PostOne({ id, setShowOnePost }) {
       />
 
       <Post id={id} />
+      {/* {mostLiked.id !== "-1" ? (
+        <Comment
+          //  key={mostLiked.id}
+          user_id={mostLiked.user_id}
+          body={mostLiked.body}
+          username={mostLiked.username}
+          comment_id={mostLiked.id}
+          likes_count={mostLiked.likes_count}
+          isLiked={mostLiked.liked}
+          gradient={`${mostLiked.likes_count / nbLikes}`}
+        />
+      ) : (
+        ""
+      )} */}
       <div className="flex flex-col p-1">
         <InputComment
           id={id}
@@ -61,8 +78,9 @@ export default function PostOne({ id, setShowOnePost }) {
             body={item.body}
             username={item.username}
             comment_id={item.id}
-            nbLikes={0}
-            opacity={(item.likes * 100) / nbLikes}
+            likes_count={item.likes_count}
+            isLiked={item.liked}
+            gradient={nbLikes > 0 ? parseInt(item.likes_count) / nbLikes : 0}
           />
         ))}
       </div>

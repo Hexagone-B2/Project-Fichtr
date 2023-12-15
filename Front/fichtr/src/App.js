@@ -21,10 +21,10 @@ export default function App() {
   const { isAuthenticated, authUser, refreshAuth } = useContext(AuthContext);
   useEffect(() => {
     authUser();
-    const intervalId = setInterval(refreshAuth(), 5 * 60 * 1000); //toutes les 5 minutes
-    return () => {
-      clearInterval(intervalId); //enleve setInterval au demontage du composant
-    };
+    // const intervalId = setInterval(refreshAuth(), 5 * 60 * 1000); //toutes les 5 minutes
+    // return () => {
+    //   clearInterval(intervalId); //enleve setInterval au demontage du composant
+    // };
   }, [isAuthenticated, authUser, refreshAuth]);
   return (
     <BrowserRouter>
