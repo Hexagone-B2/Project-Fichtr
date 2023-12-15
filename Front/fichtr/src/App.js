@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import MyQuestions from "./pages/MyQuestions";
 import Tags from "./pages/Tags";
 import Shoutbox from "./pages/Shoutbox";
@@ -13,84 +13,84 @@ import Layout from "./pages/Layout";
 import LayoutToolbarOnly from "./pages/LayoutToolbarOnly";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "./component/Provider/AuthContext.jsx";
+import {useContext} from "react";
+import {AuthContext} from "./component/Provider/AuthContext.jsx";
 import UserSettings from "./component/UserSettings.jsx";
-let a = 1
+
 export default function App() {
-  const { isAuthenticated, authUser } = useContext(AuthContext);
-    setInterval(()=>{
+    const {isAuthenticated, authUser} = useContext(AuthContext);
+    setInterval(() => {
         authUser();
-    },1000);
-  return (
-    <BrowserRouter>
-      <Routes>
-        {isAuthenticated ? (
-          <>
-            <Route path="/mes-questions" element={<MyQuestions />} />
-            <Route path="/mon-profil" element={<Profile />} />
-            <Route path="/mes-reponses" element={<MyResponses />} />
-            <Route path="/mes-likes" element={<MyLikes />} />
-            <Route path="/mon-compte" element={<MyAccount />} />
-            <Route
-              path="/profile"
-              element={
-                <LayoutToolbarOnly>
-                  <UserSettings />
-                </LayoutToolbarOnly>
-              }
-            />
-          </>
-        ) : (
-          <>
-            <Route
-              path="/register"
-              element={
-                <LayoutToolbarOnly>
-                  <Register />
-                </LayoutToolbarOnly>
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <LayoutToolbarOnly>
-                  <Login />
-                </LayoutToolbarOnly>
-              }
-            />
-          </>
-        )}
-        <Route
-          path="/"
-          element={
-            <Layout>
-              <Home />
-            </Layout>
-          }
-        />
-        <Route
-          path="/questions"
-          element={
-            <Layout>
-              <Questions />
-            </Layout>
-          }
-        />
-        <Route
-            path="/shoutbox"
-            element={
-            <Layout>
-                <Shoutbox/>
-            </Layout>
-          }
-        />
-        <Route path="/tags" element={<Tags />} />
-        <Route path="/shoutbox" element={<Shoutbox />} />
-        <Route path="/posts" element={<Posts />} />
-        {/*Redirection par default, si l'utilisateur veux accéder a des routes qui n'existe pas*/}
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    }, 10000);
+    return (
+        <BrowserRouter>
+            <Routes>
+                {isAuthenticated ? (
+                    <>
+                        <Route path="/mes-questions" element={<MyQuestions/>}/>
+                        <Route path="/mon-profil" element={<Profile/>}/>
+                        <Route path="/mes-reponses" element={<MyResponses/>}/>
+                        <Route path="/mes-likes" element={<MyLikes/>}/>
+                        <Route path="/mon-compte" element={<MyAccount/>}/>
+                        <Route
+                            path="/profile"
+                            element={
+                                <LayoutToolbarOnly>
+                                    <UserSettings/>
+                                </LayoutToolbarOnly>
+                            }
+                        />
+                    </>
+                ) : (
+                    <>
+                        <Route
+                            path="/register"
+                            element={
+                                <LayoutToolbarOnly>
+                                    <Register/>
+                                </LayoutToolbarOnly>
+                            }
+                        />
+                        <Route
+                            path="/login"
+                            element={
+                                <LayoutToolbarOnly>
+                                    <Login/>
+                                </LayoutToolbarOnly>
+                            }
+                        />
+                    </>
+                )}
+                <Route
+                    path="/"
+                    element={
+                        <Layout>
+                            <Home/>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/questions"
+                    element={
+                        <Layout>
+                            <Questions/>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/shoutbox"
+                    element={
+                        <Layout>
+                            <Shoutbox/>
+                        </Layout>
+                    }
+                />
+                <Route path="/tags" element={<Tags/>}/>
+                <Route path="/shoutbox" element={<Shoutbox/>}/>
+                <Route path="/posts" element={<Posts/>}/>
+                {/*Redirection par default, si l'utilisateur veux accéder a des routes qui n'existe pas*/}
+                <Route path="*" element={<Navigate to="/"/>}/>
+            </Routes>
+        </BrowserRouter>
+    );
 }
