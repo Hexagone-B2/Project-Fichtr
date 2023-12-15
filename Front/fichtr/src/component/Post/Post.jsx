@@ -32,6 +32,7 @@ function Post({ id }) {
             username: response.data.username,
             tags: response.data.tags
           };
+          console.log(post.tags)
           setLiked(post.liked);
           setPost(post);
           setLikesCount(post.likes);
@@ -104,8 +105,8 @@ function Post({ id }) {
               {post.comments}
           </span>
           </div>
+            <Tags tagNames={post.tags} />
         </div>
-        <Tags tagNames={post.tags} />
       </div>
   );
 }
