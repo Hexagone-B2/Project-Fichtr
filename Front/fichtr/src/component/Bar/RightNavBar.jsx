@@ -2,7 +2,7 @@ import Tag from "../Tag";
 
 function RightNavBar(tag) {
   return (
-    <div className="flex justify-end items-start sticky top-40 pr-8 mt-4 right-0 ">
+    <div className="flex justify-end items-start sticky top-40 m-2">
       <ul className="w-60 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
         <li className="w-full px-6 py-6 border-b border-gray-200 rounded-t-lg">
           <div className="flex items-center">
