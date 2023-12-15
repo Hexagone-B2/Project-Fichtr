@@ -4,38 +4,37 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthContext";
 import ProfilePicture from "../User/ProfilePic";
 import Tags from "../Tags";
+import Loading from "../Loading";
 
 function Post({ id }) {
   const [post, setPost] = useState({});
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
   const { isAuthenticated } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    let headers = undefined;
+      let headers;
     if (isAuthenticated) {
       headers = { authorization: localStorage.getItem("authorization") };
     } else {
       headers = {};
     }
-    const data = { id: id };
-    axios
-        .post("https://dev.enzo-salson.fr/api/getPostInfo", data, { headers })
+    axios.post("https://dev.enzo-salson.fr/api/getPostInfo", { id: id }, { headers })
         .then((response) => {
-          const post = {
-            title: response.data.title,
-            body: response.data.body,
-            likes: response.data.likes,
-            comments: response.data.comments,
-            liked: response.data.liked,
-            owner_id: response.data.owner_id,
-            username: response.data.username,
-            tags: response.data.tags
-          };
-          console.log(post.tags)
           setLiked(post.liked);
-          setPost(post);
+          setPost({
+              title: response.data.title,
+              body: response.data.body,
+              likes: response.data.likes,
+              comments: response.data.comments,
+              liked: response.data.liked,
+              owner_id: response.data.owner_id,
+              username: response.data.username,
+              tags: response.data.tags
+          });
           setLikesCount(post.likes);
+          setIsLoading(false);
         })
         .catch((e) => console.log(e));
   }, []);
@@ -75,17 +74,17 @@ function Post({ id }) {
           });
     }
   };
-
-  return (
-      <div className="m-8 bg-white border border-gray-200 rounded-lg p-4 relative">
-        <h2 className="text-xl font-bold mb-2">{post.title}</h2>
-        <div className="flex items-center mb-4">
-          <ProfilePicture size={"small"} userId={post.owner_id || null} />
-          <span className="font-bold text-gray-900">{post.username}</span>
-        </div>
-        <p className="text-gray-800">{post.body}</p>
-        <div className="flex justify-between mt-4">
-          <div className="flex items-center space-x-2">
+  if (!isLoading){
+      return (
+          <div className="m-8 bg-white border border-gray-200 rounded-lg p-4 relative">
+              <h2 className="text-xl font-bold mb-2">{post.title}</h2>
+              <div className="flex items-center mb-4">
+                  <ProfilePicture size={"small"} userId={post.owner_id || null} />
+                  <span className="font-bold text-gray-900">{post.username}</span>
+              </div>
+              <p className="text-gray-800">{post.body}</p>
+              <div className="flex justify-between mt-4">
+                  <div className="flex items-center space-x-2">
           <span className="text-gray-500 flex items-center">
             {isAuthenticated ? (
                 <img
@@ -95,20 +94,28 @@ function Post({ id }) {
                 />
             ) : (
                 <Link to={"/login"}>
-                  <img src={"./img/heart.svg"} alt="like" />
+                    <img src={"./img/heart.svg"} alt="like" />
                 </Link>
             )}
-            {likesCount}
+              {likesCount}
           </span>
-            <span className="text-gray-500 flex items-center">
+                      <span className="text-gray-500 flex items-center">
             <img src="./img/comment.svg" alt="commentaire" />
-              {post.comments}
+                          {post.comments}
           </span>
+                  </div>
+                  <Tags tagNames={post.tags} />
+              </div>
           </div>
-            <Tags tagNames={post.tags} />
-        </div>
-      </div>
-  );
+      );
+  }else{
+      return (
+          <div className="m-8 bg-white border border-gray-200 rounded-lg p-4 relative">
+          <Loading/>
+          </div>
+      )
+  }
+
 }
 
 export default Post;
