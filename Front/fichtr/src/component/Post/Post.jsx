@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthContext";
 import ProfilePicture from "../User/ProfilePic";
+import Tags from "../Tags";
 
 function Post({ id }) {
   const [post, setPost] = useState({});
@@ -103,6 +104,7 @@ function Post({ id }) {
           </span>
         </div>
       </div>
+      <Tags tagNames={["tag1", "tag2"]} />
     </div>
   );
 }
