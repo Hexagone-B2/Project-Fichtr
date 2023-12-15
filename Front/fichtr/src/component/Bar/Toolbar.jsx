@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthContext";
 import Button from "../Button";
+import ProfilePicture from "../User/ProfilePic";
 
 const plusCircle = (
   <svg
@@ -10,7 +11,7 @@ const plusCircle = (
     viewBox="0 0 24 24"
     stroke-width="1.5"
     stroke="currentColor"
-    class="w-6 h-6"
+    className="w-6 h-6"
   >
     <path
       stroke-linecap="round"
@@ -25,7 +26,7 @@ function Toolbar() {
 
   return (
     <div className="my-app-bar flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 bg-white shadow-md h-[8rem] z-10">
-      <Link to={"/home"}>
+      <Link to={"/"}>
         <img src={"/img/logo.png"} alt="logo" className="w-44" />
       </Link>
 
@@ -43,7 +44,7 @@ function Toolbar() {
         <div className="relative">
           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg
-              className="w-4 h-4 text-gray-500 dark:text-gray-400"
+              className="w-4 h-4 text-gray-500"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -61,7 +62,7 @@ function Toolbar() {
           <input
             type="search"
             id="default-search"
-            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Faire une recherche..."
             required=""
           />
@@ -82,16 +83,8 @@ function Toolbar() {
               theme={"primary"}
               icon={plusCircle}
             />
-            <Button icon={"/img/envelope.svg"} title={""} />
             <Link to={"/profile"}>
-              <img
-                crossorigin="anonymous"
-                src={
-                  "https://dev.enzo-salson.fr/api/getProfilePic?id=" + userId
-                }
-                alt="avatar"
-                className="w-10 h-10 rounded-full mr-4"
-              />
+              <ProfilePicture size={"small"} userId={userId} />
             </Link>
           </>
         ) : (
@@ -105,7 +98,7 @@ function Toolbar() {
             </Link>
 
             <Link to={"/register"} type="button">
-              <Button title={"Inscription"} type={"button"} theme={"primary"} />
+              <Button title={"Inscription"} type={"button"} theme={"pale"} />
             </Link>
           </>
         )}

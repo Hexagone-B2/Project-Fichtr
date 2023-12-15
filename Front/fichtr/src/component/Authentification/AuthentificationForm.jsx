@@ -10,7 +10,6 @@ export default function AuthentificationForm(props) {
   let [password, setPassword] = useState("");
   let [authIsWrong, setAuthIsWrong] = useState(false);
   let [authIsGood, setAuthIsGood] = useState(false);
-  const navigate = useNavigate();
   const { loginUser } = useContext(AuthContext);
 
   function handleSubmit(event) {

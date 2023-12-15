@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import ProfilePicture from "../User/ProfilePic";
 
 function Commentaire({ user_id, body, username }) {
   return (
     <div className="w-full max-w-lg mx-auto bg-white border border-gray-200 rounded-lg p-4 my-8 relative">
       <h2 className="text-xl font-bold mb-2">{Commentaire.body}</h2>
       <div className="flex items-center mb-4">
-        <img
-          crossorigin="anonymous"
-          src={
-            "https://dev.enzo-salson.fr/api/getProfilePic?id=" +
-            Commentaire.user_id
-          }
-          alt="avatar"
-          className="w-10 h-10 rounded-full mr-4"
-        />
+        <ProfilePicture userId={Commentaire.user_id} size={"small"} />
         <span className="font-bold text-gray-900">{Commentaire.username}</span>
       </div>
 

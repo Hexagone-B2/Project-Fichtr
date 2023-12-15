@@ -16,12 +16,12 @@ import Profile from "./pages/Profile";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./component/Provider/AuthContext.jsx";
 import UserSettings from "./component/UserSettings.jsx";
-
+let a = 1
 export default function App() {
   const { isAuthenticated, authUser } = useContext(AuthContext);
-  useEffect(() => {
-    authUser();
-  }, [isAuthenticated, authUser]);
+    setInterval(()=>{
+        authUser();
+    },1000);
   return (
     <BrowserRouter>
       <Routes>
@@ -62,7 +62,7 @@ export default function App() {
           </>
         )}
         <Route
-          path="/home"
+          path="/"
           element={
             <Layout>
               <Home />
@@ -77,11 +77,19 @@ export default function App() {
             </Layout>
           }
         />
+        <Route
+            path="/shoutbox"
+            element={
+            <Layout>
+                <Shoutbox/>
+            </Layout>
+          }
+        />
         <Route path="/tags" element={<Tags />} />
         <Route path="/shoutbox" element={<Shoutbox />} />
         <Route path="/posts" element={<Posts />} />
         {/*Redirection par default, si l'utilisateur veux accéder a des routes qui n'existe pas*/}
-        <Route path="*" element={<Navigate to="/home" />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );

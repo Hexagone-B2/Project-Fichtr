@@ -1,8 +1,7 @@
+import ShoutboxComponent from "../component/Shoutbox/ShoutboxComponent";
 
 export default function Shoutbox() {
     return (
-        <h1>
-            Shoutbox
-        </h1>
+        <ShoutboxComponent/>
     );
 }
