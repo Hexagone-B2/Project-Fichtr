@@ -7,7 +7,7 @@ export default function Home(props) {
   let [nb, setNb] = useState(0);
 
   return (
-    <>
+    <div className="h-full overflow-scroll">
       <ChargeContent
         endpoint={"https://dev.enzo-salson.fr/api/getPosts"}
         nb={nb}
@@ -20,6 +20,6 @@ export default function Home(props) {
         handleButton={() => setNb((prevState) => prevState + 1)}
         theme={"primary"}
       />
-    </>
+    </div>
   );
 }
