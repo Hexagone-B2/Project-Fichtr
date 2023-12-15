@@ -20,6 +20,7 @@ import UserSettings from "./component/UserSettings.jsx";
 export default function App() {
     const {isAuthenticated, authUser} = useContext(AuthContext);
     useEffect(() => {
+        authUser();
         setInterval(() => {
             authUser();
         }, 10000);
