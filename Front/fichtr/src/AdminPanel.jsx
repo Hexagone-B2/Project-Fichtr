@@ -42,7 +42,7 @@ function AdminPanel() {
                 setAddSujet(event.target.value);
                 break;
             case "SujetD":
-                setDeleteSujet(event.target.selectedIndex+1);
+                setDeleteSujet(event.target.childNodes[event.target.selectedIndex].getAttribute('id'));
                 break;
             default:
                 break;
