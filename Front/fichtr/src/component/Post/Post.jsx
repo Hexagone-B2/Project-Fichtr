@@ -21,6 +21,7 @@ function Post({ id }) {
     axios
       .post("https://dev.enzo-salson.fr/api/getPostInfo", data, { headers })
       .then((response) => {
+        console.log(response)
         const post = {
           title: response.data.title,
           body: response.data.body,
@@ -29,6 +30,7 @@ function Post({ id }) {
           liked: response.data.liked,
           owner_id: response.data.owner_id,
           username: response.data.username,
+          tags: response.data.tags
         };
         setLiked(post.liked);
         setPost(post);
