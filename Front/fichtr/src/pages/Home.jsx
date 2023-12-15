@@ -2,12 +2,14 @@ import Post from "../component/Post/Post";
 import { useState } from "react";
 import ChargeContent from "../component/ChargeContent";
 import Button from "../component/Button";
+import PostForm from "../component/Post/PostForm";
 
 export default function Home(props) {
   let [nb, setNb] = useState(0);
 
   return (
     <div className="h-full overflow-scroll">
+      <PostForm />
       <ChargeContent
         endpoint={"https://dev.enzo-salson.fr/api/getPosts"}
         nb={nb}
