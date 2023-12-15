@@ -15,7 +15,7 @@ export default function ProfilePicture({ userId, size }) {
   }
   return (
     <img
-      crossorigin="anonymous"
+      crossOrigin="anonymous"
       src={
         userId
           ? "https://dev.enzo-salson.fr/api/getProfilePic?id=" + userId

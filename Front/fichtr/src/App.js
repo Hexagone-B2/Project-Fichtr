@@ -16,12 +16,12 @@ import Profile from "./pages/Profile";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./component/Provider/AuthContext.jsx";
 import UserSettings from "./component/UserSettings.jsx";
-
+let a = 1
 export default function App() {
   const { isAuthenticated, authUser } = useContext(AuthContext);
-  useEffect(() => {
-    authUser();
-  }, [isAuthenticated, authUser]);
+    setInterval(()=>{
+        authUser();
+    },1000);
   return (
     <BrowserRouter>
       <Routes>
@@ -74,6 +74,14 @@ export default function App() {
           element={
             <Layout>
               <Questions />
+            </Layout>
+          }
+        />
+        <Route
+            path="/shoutbox"
+            element={
+            <Layout>
+                <Shoutbox/>
             </Layout>
           }
         />

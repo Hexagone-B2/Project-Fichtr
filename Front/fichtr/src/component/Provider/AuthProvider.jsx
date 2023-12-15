@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import { AuthContext } from "./AuthContext";
 import axios from "axios";
 
@@ -20,8 +20,7 @@ export function AuthProvider({ children }) {
           }
         })
         .catch((e) => {
-          console.log(e);
-          setIsAuthenticated(false);
+            setIsAuthenticated(false);
         });
     }
   }
