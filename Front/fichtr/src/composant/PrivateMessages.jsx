@@ -6,7 +6,7 @@ function ConversationList(){
         { username: "Peintre Autrichien", pfp: 6, content: "TGhnnhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" }
     ]);
     return (
-        <div class="p-10">
+        <div className="p-10">
             {conversations.map((conversation) => (
                 <div className="flex items-start gap-2.5 p-2">
                     <div style={{ flexDirection: 'row'}} className="flex flex-col border border-gray-200 w-full leading-1.5 p-4 bg-white">
