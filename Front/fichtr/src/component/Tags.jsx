@@ -4,7 +4,7 @@ export default function Tags({ tagNames }) {
     if (tagNames) return (
         <div className="flex justify-end">
             {tagNames.map((element) => (
-                <Tag title={element} />
+                <Tag key={element} title={element} />
             ))}
         </div>
     );

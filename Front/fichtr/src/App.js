@@ -2,7 +2,7 @@ import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import MyQuestions from "./pages/MyQuestions";
 import Tags from "./pages/Tags";
 import Shoutbox from "./pages/Shoutbox";
-import Posts from "./pages/Posts.jsx";
+import Posts from "./component/Post/Post.jsx";
 import Questions from "./pages/Questions";
 import MyResponses from "./pages/MyResponses";
 import MyLikes from "./pages/MyLikes";

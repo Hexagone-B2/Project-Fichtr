@@ -12,17 +12,13 @@ export default function PostOne({ id, setShowOnePost }) {
   const { isAuthenticated } = useContext(AuthContext);
   const [nbLikes, setNbLikes] = useState(0);
   const [mostLiked, setMostLiked] = useState(null);
-  // let nbLikes = 0;
 
   let headers = null;
   if (isAuthenticated)
     headers = { authorization: localStorage.getItem("authorization") };
 
   function sumLikes(list) {
-    console.log(list);
     list.forEach((item) => {
-      console.log(item);
-      // nbLikes += item.likes_count;
       setNbLikes((prevState) => prevState + parseInt(item.likes_count));
     });
   }
@@ -54,7 +50,7 @@ export default function PostOne({ id, setShowOnePost }) {
   console.log("nbLikes =" + nbLikes);
 
   return (
-    <div className="p-2">
+    <div className="p-2 overflow-scroll">
       <Button
         title={"retour"}
         theme={"pale"}

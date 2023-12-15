@@ -1,7 +1,7 @@
-import Post from "../composant/Post";
+import Post from "../component/Post/Post";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import PostOne from "../composant/PostOne";
+import PostOne from "../component/Post/PostOne";
 
 export default function Home() {
   const [idList, setIdList] = useState([]);
@@ -26,7 +26,7 @@ export default function Home() {
   }, [nb]);
 
   return showOnePost ? (
-    <PostOne id={idOnePost} />
+    <PostOne id={idOnePost} setShowOnePost={setShowOnePost} />
   ) : (
     <div>
       {idList.map((item) => (

@@ -15,8 +15,8 @@ export function AuthProvider({ children }) {
         .then((response) => {
           if (response.data.authenticated) {
             setIsAuthenticated(true);
-            setUserId(response.data.user_id);
-            setUserName(response.data.username);
+            setUserId(response.data.user.user_id);
+            setUserName(response.data.user.username);
             localStorage.setItem('authorization',response.data.refreshedToken)
           }
         })

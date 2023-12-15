@@ -12,6 +12,8 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
   const [likesCount, setLikesCount] = useState(0);
   const { isAuthenticated } = useContext(AuthContext);
   const [clickable, setClickable] = useState(true);
+    const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
     if (!setIdOnePost) setClickable(false);
     let headers = undefined;
@@ -31,9 +33,8 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
               liked: response.data.liked,
               owner_id: response.data.owner_id,
               username: response.data.username,
-              tags: response.data.tags
+              tags: response.data.tags,
           });
-          setLikesCount(post.likes);
           setIsLoading(false);
         })
         .catch((e) => console.log(e));
@@ -42,7 +43,6 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
   const handleComments = (e) => {
     if (clickable) {
       setIdOnePost(e.target.id);
-      console.log(e);
       setShowOnePost(true);
     }
   };
@@ -61,7 +61,6 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
           )
           .then((response) => {})
           .catch((e) => {
-            console.log(e);
             setLiked(false);
             setLikesCount((prevState) => prevState - 1);
           });
@@ -76,7 +75,6 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
           )
           .then((response) => {})
           .catch((e) => {
-            console.log(e);
             setLiked(true);
             setLikesCount((prevState) => prevState + 1);
           });
@@ -105,7 +103,7 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
                     <img src={"./img/heart.svg"} alt="like" />
                 </Link>
             )}
-              {likesCount}
+              {post.likes}
           </span>
           <span className="text-gray-500 flex items-center">
             <button onClick={handleComments}>
