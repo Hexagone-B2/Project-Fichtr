@@ -1,110 +1,66 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../Provider/AuthContext";
+import React, {useContext} from "react";
+import {Link} from "react-router-dom";
+import {AuthContext} from "../Provider/AuthContext";
 import Button from "../Button";
 import ProfilePicture from "../User/ProfilePic";
+import {Navbar, TextInput} from "flowbite-react";
+import {HiSearch} from "react-icons/hi";
 
 const plusCircle = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth="1.5"
-    stroke="currentColor"
-    className="w-6 h-6"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-    />
-  </svg>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="currentColor"
+        className="w-6 h-6"
+    >
+        <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+    </svg>
 );
 
 function Toolbar() {
-  const { isAuthenticated, userId } = useContext(AuthContext);
+    const {isAuthenticated, userId} = useContext(AuthContext);
 
-  return (
-    <div className="my-app-bar flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 bg-white shadow-md h-[8rem] z-10">
-      <Link to={"/"}>
-        <img src={"/img/logo.png"} alt="logo" className="w-44" />
-      </Link>
-
-      <form
-        className={
-          isAuthenticated ? "flex items-center mx-auto" : "flex items-center"
-        }
-      >
-        <label
-          htmlFor="default-search"
-          className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-        >
-          Search
-        </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg
-              className="w-4 h-4 text-gray-500"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
-          </div>
-          <input
-            type="search"
-            id="default-search"
-            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Faire une recherche..."
-            required=""
-          />
-        </div>
-      </form>
-
-      <div
-        className={
-          isAuthenticated
-            ? "flex items-center space-x-7"
-            : "flex items-center space-x-4"
-        }
-      >
-        {isAuthenticated ? (
-          <>
-            <Button
-              title={"Poser une question"}
-              theme={"primary"}
-              icon={plusCircle}
-            />
-            <Link to={"/profile"}>
-              <ProfilePicture size={"small"} userId={userId} />
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link to={"/login"}>
-              <Button
-                title={"Se connecter"}
-                type={"button"}
-                theme={"primary"}
-              />
-            </Link>
-
-            <Link to={"/register"} type="button">
-              <Button title={"Inscription"} type={"button"} theme={"pale"} />
-            </Link>
-          </>
-        )}
-      </div>
-    </div>
-  );
+    return (
+            <Navbar fluid className="fixed w-full z-10 max-h-32 top-0 shadow">
+                <Navbar.Brand as={Link} href="/">
+                    <img src={"/img/logo.png"} alt="logo" className="w-44"/>
+                </Navbar.Brand>
+                <form className={isAuthenticated ? "flex items-center mx-auto" : "flex items-center"}>
+                    <TextInput icon={HiSearch} placeHolder="Faire une recherche..."></TextInput>
+                </form>
+                {isAuthenticated ? (
+                    <>
+                        <Button
+                            title={"Poser une question"}
+                            theme={"primary"}
+                            icon={plusCircle}
+                        />
+                        <Link to={"/profile"}>
+                            <ProfilePicture size={"small"} userId={userId}/>
+                        </Link>
+                    </>
+                ) : (
+                    <div className="flex space-x-2">
+                        <Link to={"/login"}>
+                            <Button
+                                title={"Se connecter"}
+                                type={"button"}
+                                theme={"primary"}
+                            />
+                        </Link>
+                        <Link to={"/register"} type="button">
+                            <Button title={"Inscription"} type={"button"} theme={"pale"}/>
+                        </Link>
+                    </div>
+                )}
+            </Navbar>
+    );
 }
 
 export default Toolbar;

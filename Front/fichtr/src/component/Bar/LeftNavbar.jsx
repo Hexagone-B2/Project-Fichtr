@@ -27,7 +27,7 @@ function ConnectedRoot() {
     <>
       <aside
         id="default-sidebar"
-        className="w-64 top-[8rem] sticky"
+        className="w-64 bg-white"
         aria-label="Sidebar"
       >
         <div className="h-3/4 px-3 py-36 space-y-3 overflow-y-auto">
@@ -35,6 +35,27 @@ function ConnectedRoot() {
             MENU
           </div>
           <ul className="space-y-3 font-medium">
+            <li>
+              <div className="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="16"
+                  width="32"
+                  viewBox="0 0 320 512"
+                >
+                  <path
+                    fill="#808080"
+                    d="M80 160c0-35.3 28.7-64 64-64h32c35.3 0 64 28.7 64 64v3.6c0 21.8-11.1 42.1-29.4 53.8l-42.2 27.1c-25.2 16.2-40.4 44.1-40.4 74V320c0 17.7 14.3 32 32 32s32-14.3 32-32v-1.4c0-8.2 4.2-15.8 11-20.2l42.2-27.1c36.6-23.6 58.8-64.1 58.8-107.7V160c0-70.7-57.3-128-128-128H144C73.3 32 16 89.3 16 160c0 17.7 14.3 32 32 32s32-14.3 32-32zm80 320a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"
+                  />
+                </svg>
+                <Link
+                  to="/"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                >
+                  Accueil
+                </Link>
+              </div>
+            </li>
             <li>
               <div className="flex items-center">
                 <svg
@@ -94,7 +115,7 @@ function ConnectedRoot() {
                   to="/my-questions"
                   className="flex p-2 whitespace-nowrap focus:bg-gray-300"
                 >
-                  Mes Posts
+                  Mes Questions
                 </Link>
               </div>
             </li>
@@ -144,7 +165,6 @@ function ConnectedRoot() {
               <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
                   height="16"
                   width="32"
                   viewBox="0 0 448 512"
@@ -164,8 +184,9 @@ function ConnectedRoot() {
             </li>
           </ul>
         </div>
-        <div className="h-3/4 px-3 py-36 space-y-3 overflow-y-auto">
+        <div>
           <Button
+            className="mx-auto"
             title={"Deconnexion"}
             theme={"danger"}
             handleButton={() => logoutUser()}
@@ -176,14 +197,11 @@ function ConnectedRoot() {
     </>
   );
 }
+
 const NonConnectedRoot = () => {
   return (
     <>
-      <aside
-        id="default-sidebar"
-        className="w-64 top-[8rem] sticky"
-        aria-label="Sidebar"
-      >
+      <aside id="default-sidebar" className="w-64 bg-white">
         <div className="h-3/4 px-3 py-36 space-y-3 overflow-y-auto">
           <div className="flex items-center text-xs whitespace-nowrap px-11 text-gray-500 rounded-lg group">
             MENU
@@ -192,17 +210,37 @@ const NonConnectedRoot = () => {
             <li>
               <div className="flex items-center">
                 <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="16"
-                    width="32"
-                    viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="16"
+                  width="32"
+                  viewBox="0 0 320 512"
                 >
                   <path
-                      d="M345 39.1L472.8 168.4c52.4 53 52.4 138.2 0 191.2L360.8 472.9c-9.3 9.4-24.5 9.5-33.9 .2s-9.5-24.5-.2-33.9L438.6 325.9c33.9-34.3 33.9-89.4 0-123.7L310.9 72.9c-9.3-9.4-9.2-24.6 .2-33.9s24.6-9.2 33.9 .2zM0 229.5V80C0 53.5 21.5 32 48 32H197.5c17 0 33.3 6.7 45.3 18.7l168 168c25 25 25 65.5 0 90.5L277.3 442.7c-25 25-65.5 25-90.5 0l-168-168C6.7 262.7 0 246.5 0 229.5zM144 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/>
+                    fill="#808080"
+                    d="M80 160c0-35.3 28.7-64 64-64h32c35.3 0 64 28.7 64 64v3.6c0 21.8-11.1 42.1-29.4 53.8l-42.2 27.1c-25.2 16.2-40.4 44.1-40.4 74V320c0 17.7 14.3 32 32 32s32-14.3 32-32v-1.4c0-8.2 4.2-15.8 11-20.2l42.2-27.1c36.6-23.6 58.8-64.1 58.8-107.7V160c0-70.7-57.3-128-128-128H144C73.3 32 16 89.3 16 160c0 17.7 14.3 32 32 32s32-14.3 32-32zm80 320a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"
+                  />
                 </svg>
                 <Link
-                    to="tags"
-                    className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  to="/"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                >
+                  Accueil
+                </Link>
+              </div>
+            </li>
+            <li>
+              <div className="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="16"
+                  width="32"
+                  viewBox="0 0 512 512"
+                >
+                  <path d="M345 39.1L472.8 168.4c52.4 53 52.4 138.2 0 191.2L360.8 472.9c-9.3 9.4-24.5 9.5-33.9 .2s-9.5-24.5-.2-33.9L438.6 325.9c33.9-34.3 33.9-89.4 0-123.7L310.9 72.9c-9.3-9.4-9.2-24.6 .2-33.9s24.6-9.2 33.9 .2zM0 229.5V80C0 53.5 21.5 32 48 32H197.5c17 0 33.3 6.7 45.3 18.7l168 168c25 25 25 65.5 0 90.5L277.3 442.7c-25 25-65.5 25-90.5 0l-168-168C6.7 262.7 0 246.5 0 229.5zM144 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" />
+                </svg>
+                <Link
+                  to="/tags"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
                 >
                   Tags
                 </Link>
@@ -211,17 +249,16 @@ const NonConnectedRoot = () => {
             <li>
               <div className="flex items-center">
                 <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="16"
-                    width="32"
-                    viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="16"
+                  width="32"
+                  viewBox="0 0 512 512"
                 >
-                  <path
-                      d="M123.6 391.3c12.9-9.4 29.6-11.8 44.6-6.4c26.5 9.6 56.2 15.1 87.8 15.1c124.7 0 208-80.5 208-160s-83.3-160-208-160S48 160.5 48 240c0 32 12.4 62.8 35.7 89.2c8.6 9.7 12.8 22.5 11.8 35.5c-1.4 18.1-5.7 34.7-11.3 49.4c17-7.9 31.1-16.7 39.4-22.7zM21.2 431.9c1.8-2.7 3.5-5.4 5.1-8.1c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208s-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6c-15.1 6.6-32.3 12.6-50.1 16.1c-.8 .2-1.6 .3-2.4 .5c-4.4 .8-8.7 1.5-13.2 1.9c-.2 0-.5 .1-.7 .1c-5.1 .5-10.2 .8-15.3 .8c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4c4.1-4.2 7.8-8.7 11.3-13.5c1.7-2.3 3.3-4.6 4.8-6.9c.1-.2 .2-.3 .3-.5z"/>
+                  <path d="M123.6 391.3c12.9-9.4 29.6-11.8 44.6-6.4c26.5 9.6 56.2 15.1 87.8 15.1c124.7 0 208-80.5 208-160s-83.3-160-208-160S48 160.5 48 240c0 32 12.4 62.8 35.7 89.2c8.6 9.7 12.8 22.5 11.8 35.5c-1.4 18.1-5.7 34.7-11.3 49.4c17-7.9 31.1-16.7 39.4-22.7zM21.2 431.9c1.8-2.7 3.5-5.4 5.1-8.1c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208s-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6c-15.1 6.6-32.3 12.6-50.1 16.1c-.8 .2-1.6 .3-2.4 .5c-4.4 .8-8.7 1.5-13.2 1.9c-.2 0-.5 .1-.7 .1c-5.1 .5-10.2 .8-15.3 .8c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4c4.1-4.2 7.8-8.7 11.3-13.5c1.7-2.3 3.3-4.6 4.8-6.9c.1-.2 .2-.3 .3-.5z" />
                 </svg>
                 <Link
-                    to="/shoutbox"
-                    className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  to="/shoutbox"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
                 >
                   Shoutbox
                 </Link>
@@ -235,11 +272,11 @@ const NonConnectedRoot = () => {
 };
 
 export default function NavbarLeft() {
-  const {isAuthenticated} = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
 
   if (isAuthenticated) {
-    return <ConnectedRoot/>;
+    return <ConnectedRoot />;
   } else {
-    return <NonConnectedRoot/>;
+    return <NonConnectedRoot />;
   }
 }
