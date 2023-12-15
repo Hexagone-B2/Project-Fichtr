@@ -5,11 +5,19 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import ProfilePicture from "../User/ProfilePic";
 
-function Comment({ user_id, body, username, comment_id, nbLikes, opacity }) {
+function Comment({
+  user_id,
+  body,
+  username,
+  comment_id,
+  likes_count,
+  gradient,
+  isLiked,
+}) {
   const { isAuthenticated } = useContext(AuthContext);
-  const [likesCount, setLikesCount] = useState(nbLikes);
-  const [liked, setLiked] = useState(false);
-
+  const [likesCount, setLikesCount] = useState(likes_count);
+  const [liked, setLiked] = useState(isLiked);
+  console.log("gradient = " + gradient);
   // useEffect(() => {
   //   axios
   //     .post("https://dev.enzo-salson.fr/api/getLikesCountComment", {
@@ -20,6 +28,22 @@ function Comment({ user_id, body, username, comment_id, nbLikes, opacity }) {
   //     })
   //     .catch((error) => console.log(error));
   // }, []);
+  function selectBgColor() {
+    switch (gradient) {
+      case gradient < 0.1:
+        return "";
+      case gradient < 0.2:
+        return "";
+      case gradient < 0.1:
+        return "";
+      case gradient < 0.2:
+        return "";
+      case gradient < 0.1:
+        return "";
+      default:
+        return "";
+    }
+  }
 
   const handleLike = (id) => {
     const headers = { authorization: localStorage.getItem("authorization") };
@@ -61,7 +85,7 @@ function Comment({ user_id, body, username, comment_id, nbLikes, opacity }) {
     <div className="  bg-white border border-gray-200 rounded-lg  my-2 relative">
       <div className="flex">
         <div
-          className={`flex items-center p-4 mr-4 bg-green-950 rounded-s-lg opacity-[${opacity}]`}
+          className={`flex items-center p-4 mr-4 bg-green-700 gradient-[21,128, 61${gradient}] rounded-s-lg `}
         >
           {isAuthenticated ? (
             <img
