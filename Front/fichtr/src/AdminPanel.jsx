@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "./component/Button";
 import Field from "./component/Field";
-// import { title } from "process";
 
 function AdminPanel() {
 
@@ -43,7 +42,7 @@ function AdminPanel() {
                 setAddSujet(event.target.value);
                 break;
             case "SujetD":
-                setDeleteSujet(event.target.value);
+                setDeleteSujet(event.target.selectedIndex+1);
                 break;
             default:
                 break;
@@ -76,19 +75,20 @@ function AdminPanel() {
             <div className="flex flex-col gap-5 p-10 border border-gray-200">
                 <form onSubmit={handleSubmit} name="formAddSujet" className="flex flex-col">
                     <label htmlFor="SujetA" className="mb-2">Entrer un nouveau sujet:</label>
-                    <Field
+                    <input
                         type="text"
                         name="SujetA"
                         id="SujetA"
                         onChange={handleChange}
                         placeholder="Nouveau sujet"
+                        className={`shadow mb-8 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                     />
                     <Button title={"Ajouter"} type={"submit"} />
                 </form>
                 <hr />
                 <form onSubmit={handleSubmit} name="formDeleteSujet" className="flex flex-col">
                     <label htmlFor="SujetD">Supprimer un sujet:</label>
-                    <select id="SujetD" className="shadow appearance-none border rounded w-full mt-2 mb-8 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <select id="SujetD" name="SujetD" onChange={handleChange} className="shadow appearance-none border rounded w-full mt-2 mb-8 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         {subjects.map((element) => (
                             <option key={element.id}
                                 id={element.id}

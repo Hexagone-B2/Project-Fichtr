@@ -249,7 +249,7 @@ function UserSettings() {
                 maxLength={50}
                 onChange={handleChange}
                 value={username}
-                className="border-slate-300 rounded bg-gray-100 border-2"
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               />
               <input
                 type="email"
@@ -258,7 +258,7 @@ function UserSettings() {
                 placeholder="Nouveau mail"
                 value={mail}
                 onChange={handleChange}
-                className="border-slate-300 rounded bg-gray-100 border-2"
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               />
             </div>
             <label htmlFor="bio" className="my-1">
@@ -271,7 +271,7 @@ function UserSettings() {
               placeholder="Modifier la bio"
               onChange={handleChange}
               value={bio}
-              className="border-slate-300 rounded bg-gray-100 border-2 h-32 break-normal"
+              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
             />
             <br />
             <div className="flex justify-between">
@@ -280,14 +280,14 @@ function UserSettings() {
                 name="DeleteAccount"
                 id="DeleteAccount"
                 value="Supprimer le compte"
-                className="bg-red-500 rounded-full p-3 font-semibold"
+                className={`text-white flex justify-center rounded items-center min-w-[8rem] min-h-[2.5rem] gap-2 px-2 bg-[#910000] hover:bg-[#BD0101]`}
               />
               <input
                 type="submit"
                 name="SubmitAccount"
                 id="SubmitAccount"
                 value="Valider les modifications"
-                className="bg-green-500 rounded-full p-3 font-semibold"
+                className={`text-white flex justify-center rounded items-center min-w-[8rem] min-h-[2.5rem] gap-2 px-2 bg-[#310046] hover:bg-[#510273]`}
               />
             </div>
           </form>
@@ -314,7 +314,7 @@ function UserSettings() {
                 name="SubmitAccount"
                 id="SubmitAccount"
                 value="Changer l'image"
-                className="bg-green-500 rounded-r h-full p-2 font-semibold"
+                className={`text-white flex justify-center rounded items-center min-w-[8rem] min-h-[2.5rem] gap-2 px-2 bg-[#310046] hover:bg-[#510273]`}
               />
             </div>
           </form>
@@ -335,7 +335,7 @@ function UserSettings() {
                 id="password"
                 placeholder="Nouveau mot de passe"
                 onChange={handleChange}
-                className=" border-slate-300 rounded bg-gray-100 border-2"
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               />
               <input
                 type="password"
@@ -343,7 +343,7 @@ function UserSettings() {
                 id="passwordConfirm"
                 placeholder="Confirmer mot de passe"
                 onChange={handleChange}
-                className=" border-slate-300 rounded bg-gray-100 border-2"
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               />
             </div>
             <br />
@@ -352,7 +352,7 @@ function UserSettings() {
               name="SubmitAccount"
               id="SubmitAccount"
               value="Valider les modifications"
-              className="bg-green-500 rounded-full p-3 font-semibold"
+              className={`text-white flex justify-center rounded items-center min-w-[8rem] min-h-[2.5rem] gap-2 px-2 bg-[#310046] hover:bg-[#510273]`}
             />
             <br />
           </form>
