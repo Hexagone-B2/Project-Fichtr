@@ -13,15 +13,18 @@ import Layout from "./pages/Layout";
 import LayoutToolbarOnly from "./pages/LayoutToolbarOnly";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {AuthContext} from "./component/Provider/AuthContext.jsx";
 import UserSettings from "./component/UserSettings.jsx";
 
 export default function App() {
     const {isAuthenticated, authUser} = useContext(AuthContext);
-    setInterval(() => {
-        authUser();
-    }, 10000);
+    useEffect(() => {
+        setInterval(() => {
+            authUser();
+        }, 10000);
+    }, []);
+
     return (
         <BrowserRouter>
             <Routes>
