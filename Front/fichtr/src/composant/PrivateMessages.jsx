@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function ConversationList(){
     const [conversations, setConversations] = useState([
         { username: "Jesus Christ", pfp: 1, content: "Jaaj" },
-        { username: "Peintre Autrichien", pfp: 6, content: "TGhnnhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" }
+        { username: "Peintre Autrichien", pfp: 1, content: "TGhnnhhhhhhhhhhhhhhhhhTGhnnhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" }
     ]);
     return (
         <div className="p-10">
@@ -16,7 +16,7 @@ function ConversationList(){
                                 <span className="text-xl font-bold text-gray-900">{conversation.username}</span>
                                 <span className="text-sm px-2.5 font-normal text-gray-500">11:46</span>
                             </div>
-                            <p className="text-sm font-normal py-2.5 text-gray-900">{conversation.content}</p>
+                            <p className="text-sm break-all font-normal py-2.5 text-gray-900">{conversation.content}</p>
                         </div>
                     </div>
                 </div>
