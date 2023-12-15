@@ -30,6 +30,7 @@ function Post({ id }) {
           liked: response.data.liked,
           owner_id: response.data.owner_id,
           username: response.data.username,
+          tags: response.data.tags
         };
         setLiked(post.liked);
         setPost(post);
