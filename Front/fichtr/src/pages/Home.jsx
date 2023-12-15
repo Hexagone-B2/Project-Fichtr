@@ -1,8 +1,8 @@
-import Post from "../composant/Post";
+import Post from "../component/Post/Post";
 import { useState } from "react";
-import ChargeContent from "../composant/ChargeContent";
-import PrivateMessages from "../composant/PrivateMessages";
-import PrivateMessageInput from "../composant/PrivateMessageInput";
+
+import ChargeContent from "../component/ChargeContent";
+import Button from "../component/Button";
 
 export default function Home(props) {
   let [nb, setNb] = useState(0);
@@ -10,14 +10,14 @@ export default function Home(props) {
   return (
     <>
       <ChargeContent
-        endpoint={"http://dev.enzo-salson.fr/api/getPosts"}
+
+        endpoint={"https://dev.enzo-salson.fr/api/getPosts"}
         nb={nb}
       >
         <Post />
       </ChargeContent>
 
-      <PrivateMessages />
-      <PrivateMessageInput />
+
 
       <button
         onClick={() => setNb((prevState) => prevState + 1)}
@@ -25,6 +25,12 @@ export default function Home(props) {
       >
         Charger plus de posts
       </button>
+      <Button
+        title={"Charger plus de posts"}
+        handleButton={() => setNb((prevState) => prevState + 1)}
+        theme={"primary"}
+      />
+
     </>
   );
 }

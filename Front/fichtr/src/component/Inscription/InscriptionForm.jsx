@@ -2,6 +2,7 @@ import axios from "axios";
 import Field from "../Field";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Button from "../Button";
 
 export default function InscriptionForm(props) {
   let [firstName, setFirstName] = useState("");
@@ -58,7 +59,7 @@ export default function InscriptionForm(props) {
         "Content-Type": "application/json",
       };
       axios
-        .post("http://enzo-salson.fr:3001/api/register", to_send, { headers })
+        .post("https://dev.enzo-salson.fr/api/register", to_send, { headers })
         .then((res) => {
           if (res.status === 200) {
             navigate("/login");
@@ -154,12 +155,7 @@ export default function InscriptionForm(props) {
         errorText="Les mots de passe doivent être similaires"
       />
       <div className="flex items-center justify-between">
-        <button
-          className="bg-[#310046] hover:bg-[#470863] text-white font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="submit"
-        >
-          Inscription
-        </button>
+        <Button title={"Inscription"} type={"submit"} theme={"primary"} />
       </div>
     </form>
   );

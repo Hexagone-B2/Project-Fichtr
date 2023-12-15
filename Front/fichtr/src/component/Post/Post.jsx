@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../Provider/AuthContext";
 
 function Post({ id }) {
   const [post, setPost] = useState({});
@@ -18,11 +18,7 @@ function Post({ id }) {
     }
     const data = { id: id };
     axios
-      .post(
-        "http://enzo-salson.fr:3001/api/getPostInfo",
-        data,
-        { headers }
-      )
+      .post("https://dev.enzo-salson.fr/api/getPostInfo", data, { headers })
       .then((response) => {
         const post = {
           title: response.data.title,
@@ -48,7 +44,7 @@ function Post({ id }) {
 
       axios
         .post(
-          "http://enzo-salson.fr:3001/api/like",
+          "https://dev.enzo-salson.fr/api/like",
           { post_id: id },
           { headers }
         )
@@ -63,7 +59,7 @@ function Post({ id }) {
       setLikesCount((prevState) => prevState - 1);
       axios
         .post(
-          "http://enzo-salson.fr:3001/api/unLike",
+          "https://dev.enzo-salson.fr/api/unLike",
           { post_id: id },
           { headers }
         )
@@ -81,9 +77,10 @@ function Post({ id }) {
       <h2 className="text-xl font-bold mb-2">{post.title}</h2>
       <div className="flex items-center mb-4">
         <img
+          crossorigin="anonymous"
           src={
             post.owner_id
-              ? `http://enzo-salson.fr:3001/api/getProfilePic?id=${post.owner_id}`
+              ? `https://dev.enzo-salson.fr/api/getProfilePic?id=${post.owner_id}`
               : ""
           }
           alt="avatar"

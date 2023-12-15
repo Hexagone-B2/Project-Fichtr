@@ -2,7 +2,8 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import Field from "../Field";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../AuthContext";
+import { AuthContext } from "../Provider/AuthContext";
+import Button from "../Button";
 
 export default function AuthentificationForm(props) {
   let [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ export default function AuthentificationForm(props) {
       password: password,
     };
     axios
-      .post("http://enzo-salson.fr:3001/api/login", to_send, { headers })
+      .post("https://dev.enzo-salson.fr/api/login", to_send, { headers })
       .then((res) => {
         setAuthIsWrong(false);
         setAuthIsGood(false);
@@ -73,12 +74,7 @@ export default function AuthentificationForm(props) {
           {authIsGood ? "Connexion Réussi" : <br />}
         </p>
         <div className="flex items-center justify-between">
-          <button
-            className="bg-[#310046] hover:bg-[#470863] text-white font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Envoyer
-          </button>
+          <Button title={"Envoyer"} type={"submit"} theme={"primary"} />
         </div>
       </form>
     </>
