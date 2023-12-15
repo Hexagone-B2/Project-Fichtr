@@ -11,6 +11,7 @@ export default function PostOne({ id, setShowOnePost }) {
   const [allComment, setAllComment] = useState([]);
   const { isAuthenticated } = useContext(AuthContext);
   const [nbLikes, setNbLikes] = useState(0);
+  const [mostLiked, setMostLiked] = useState(null);
   // let nbLikes = 0;
 
   let headers = null;
@@ -25,6 +26,15 @@ export default function PostOne({ id, setShowOnePost }) {
       setNbLikes((prevState) => prevState + parseInt(item.likes_count));
     });
   }
+
+  function getMostLiked(list) {
+    list.forEach((item) => {
+      if (!mostLiked) setMostLiked(item);
+      if (mostLiked.likes_count < item.likes_count) setMostLiked(item);
+    });
+    console.log("mostLiked = " + mostLiked.id);
+  }
+
   useEffect(() => {
     axios
       .post(
@@ -37,6 +47,7 @@ export default function PostOne({ id, setShowOnePost }) {
       .then((response) => {
         setAllComment(response.data);
         sumLikes(response.data);
+        getMostLiked(response.data);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -51,20 +62,23 @@ export default function PostOne({ id, setShowOnePost }) {
       />
 
       <Post id={id} />
-      {/* {mostLiked.id !== "-1" ? (
-        <Comment
-          //  key={mostLiked.id}
-          user_id={mostLiked.user_id}
-          body={mostLiked.body}
-          username={mostLiked.username}
-          comment_id={mostLiked.id}
-          likes_count={mostLiked.likes_count}
-          isLiked={mostLiked.liked}
-          gradient={`${mostLiked.likes_count / nbLikes}`}
-        />
-      ) : (
-        ""
-      )} */}
+      <div>
+        <h2>Top commentaire</h2>
+        {mostLiked ? (
+          <Comment
+            //  key={mostLiked.id}
+            user_id={mostLiked.user_id}
+            body={mostLiked.body}
+            username={mostLiked.username}
+            comment_id={mostLiked.id}
+            likes_count={mostLiked.likes_count}
+            isLiked={mostLiked.liked}
+            gradient={`${mostLiked.likes_count / nbLikes}`}
+          />
+        ) : (
+          ""
+        )}
+      </div>
       <div className="flex flex-col p-1">
         <InputComment
           id={id}

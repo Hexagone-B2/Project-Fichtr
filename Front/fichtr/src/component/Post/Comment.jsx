@@ -17,7 +17,6 @@ function Comment({
   const { isAuthenticated } = useContext(AuthContext);
   const [likesCount, setLikesCount] = useState(likes_count);
   const [liked, setLiked] = useState(isLiked);
-  console.log("gradient = " + gradient);
   // useEffect(() => {
   //   axios
   //     .post("https://dev.enzo-salson.fr/api/getLikesCountComment", {
@@ -28,21 +27,13 @@ function Comment({
   //     })
   //     .catch((error) => console.log(error));
   // }, []);
-  function selectBgColor() {
-    switch (gradient) {
-      case gradient < 0.1:
-        return "";
-      case gradient < 0.2:
-        return "";
-      case gradient < 0.1:
-        return "";
-      case gradient < 0.2:
-        return "";
-      case gradient < 0.1:
-        return "";
-      default:
-        return "";
-    }
+  function selectBgColor(gradient) {
+    if (gradient < 0.1) return 100;
+    if (gradient < 0.3) return 200;
+    if (gradient < 0.5) return 300;
+    if (gradient < 0.7) return 400;
+    if (gradient < 0.9) return 500;
+    return 600;
   }
 
   const handleLike = (id) => {
@@ -85,7 +76,9 @@ function Comment({
     <div className="  bg-white border border-gray-200 rounded-lg  my-2 relative">
       <div className="flex">
         <div
-          className={`flex items-center p-4 mr-4 bg-green-700 gradient-[21,128, 61${gradient}] rounded-s-lg `}
+          className={`flex items-center p-4 mr-4 bg-green-${selectBgColor(
+            gradient
+          )} rounded-s-lg `}
         >
           {isAuthenticated ? (
             <img
