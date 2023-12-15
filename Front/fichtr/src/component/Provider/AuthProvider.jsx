@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
       axios
         .post("https://dev.enzo-salson.fr/api/isAuthenticated", {}, { headers })
         .then((response) => {
-          if (response.data.authenticated === true) {
+          if (response.data.authenticated) {
             setIsAuthenticated(true);
             setUserId(response.data.user_id);
             setUserName(response.data.username);

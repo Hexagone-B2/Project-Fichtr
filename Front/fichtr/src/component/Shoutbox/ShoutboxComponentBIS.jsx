@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import io from "socket.io-client";
 import { AuthContext } from "../Provider/AuthContext";
+import {Link} from "react-router-dom";
 import ProfilePicture from "../User/ProfilePic";
 
 const socket = io.connect("https://dev.enzo-salson.fr");
@@ -44,11 +45,14 @@ function ShoutboxSendMessage({messageList, setMessageList}) {
 }
 
 function ShoutboxMessageList({messageList, setMessageList}) {
-    socket.on("shoutbox_message_receive", (data) => {
-        console.log('receive')
-        setMessageList([...messageList, { username: data.sender, pfp: data.sender_id, content: data.message, sended:false }]);
-        scrollBottom();
+    useEffect(() => {
+        socket.on("shoutbox_message_receive", (data) => {
+            console.log('receive')
+            setMessageList([...messageList, { username: data.sender, pfp: data.sender_id, content: data.message, sended:false }]);
+            scrollBottom();
+        });
     });
+
     return (
         <div className={'pb-10'}>
             {messageList.map((message) => (
@@ -68,21 +72,21 @@ function ShoutboxMessageList({messageList, setMessageList}) {
     );
 }
 
-export default function ShoutboxComponent() {
+export default function ShoutboxComponentBIS() {
     const [messageList, setMessageList] = useState([]);
-    const { isAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated, authUser } = useContext(AuthContext);
     console.log(messageList)
     useEffect(() => {
         setMessageList(messageList)
-    }, [isAuthenticated,messageList]);
+    }, [isAuthenticated]);
 
     return (
-        <section className="h-full relative">
+        <section className="h-full">
             <ShoutboxMessageList messageList={messageList} setMessageList={setMessageList}/>
             {isAuthenticated ?
                 <ShoutboxSendMessage messageList={messageList} setMessageList={setMessageList}/>
                 :
-                    <div className="flex justify-between fixed items-center text-center bottom-0 px-3 py-2 rounded-lg bg-gray-100">
+                    <div className="flex justify-between fixed items-center text-center items-center bottom-0 px-3 py-2 rounded-lg bg-gray-100">
                         <h1
                                   className="block w-[1500px] text-2xl text-gray-900 bg-gray-100 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 h-[50px]"
                                   disabled={true}>Veuillez vous connecter pour envoyer un message</h1>
