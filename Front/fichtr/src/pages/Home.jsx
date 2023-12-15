@@ -1,6 +1,8 @@
 import Post from "../composant/Post";
 import { useState } from "react";
 import ChargeContent from "../composant/ChargeContent";
+import PrivateMessages from "../composant/PrivateMessages";
+import PrivateMessageInput from "../composant/PrivateMessageInput";
 
 export default function Home(props) {
   let [nb, setNb] = useState(0);
@@ -13,6 +15,9 @@ export default function Home(props) {
       >
         <Post />
       </ChargeContent>
+
+      <PrivateMessages />
+      <PrivateMessageInput />
 
       <button
         onClick={() => setNb((prevState) => prevState + 1)}
