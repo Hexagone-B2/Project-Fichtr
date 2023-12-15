@@ -25,7 +25,7 @@ const plusCircle = (
 
 function Toolbar() {
     const {isAuthenticated, userId} = useContext(AuthContext);
-    console.log(isAuthenticated)
+    console.log(userId)
 
     return (
             <Navbar fluid className="fixed w-full z-10 max-h-32 top-0 shadow">

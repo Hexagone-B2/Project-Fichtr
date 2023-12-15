@@ -15,7 +15,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import {useContext, useEffect} from "react";
 import {AuthContext} from "./component/Provider/AuthContext.jsx";
-import UserSettings from "./component/UserSettings.jsx";
+import UserSettings from "./pages/UserSettings.jsx";
 
 export default function App() {
     const {isAuthenticated, authUser} = useContext(AuthContext);
