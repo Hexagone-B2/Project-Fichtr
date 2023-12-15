@@ -1,24 +1,16 @@
-
-
 function MpEnvoye() {
     return (
 
-        <div>
-
-
-            <a href="#"
-               className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                    technology acquisitions 2021</h5>
-                <p className="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-                    acquisitions of 2021 so far, in reverse chronological order.</p>
-            </a>
-
-
-
-
+        <div className="mt-12">
+            <div className="block max-w-sm p-6 rounded-lg ml-auto mr-24">
+                <div className="flex items-center justify-between mb-4">
+                    <span className="text-xl font-bold ml-44">bob</span>
+                    <img src="./img/placeholder.webp" className="w-12 h-12 rounded-lg mr-4"/>
+                </div>
+                <p className="font-normal text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id imperdiet mauris.</p>
+            </div>
         </div>
+
 
     );
 }
