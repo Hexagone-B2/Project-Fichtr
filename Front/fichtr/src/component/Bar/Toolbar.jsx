@@ -25,7 +25,6 @@ const plusCircle = (
 
 function Toolbar() {
     const {isAuthenticated, userId} = useContext(AuthContext);
-    console.log(userId)
 
     return (
             <Navbar fluid className="fixed w-full z-10 max-h-32 top-0 shadow">
@@ -37,11 +36,13 @@ function Toolbar() {
                 </form>
                 {isAuthenticated ? (
                     <>
+                        <Link to="/sendpost">
                         <Button
                             title={"Poser une question"}
                             theme={"primary"}
                             icon={plusCircle}
                         />
+                        </Link>
                         <Link to={"/profile"}>
                             <ProfilePicture size={"small"} userId={userId}/>
                         </Link>

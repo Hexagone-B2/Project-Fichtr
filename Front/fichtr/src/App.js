@@ -4,7 +4,7 @@ import Tags from "./pages/Tags";
 import Shoutbox from "./pages/Shoutbox";
 import Posts from "./component/Post/Post.jsx";
 import Questions from "./pages/Questions";
-import MyResponses from "./pages/MyResponses";
+import MyResponses from "./pages/MyAnswers";
 import MyLikes from "./pages/MyLikes";
 import MyAccount from "./pages/MyAccount";
 import Register from "./pages/Register";
@@ -16,6 +16,7 @@ import Profile from "./pages/Profile";
 import {useContext, useEffect} from "react";
 import {AuthContext} from "./component/Provider/AuthContext.jsx";
 import UserSettings from "./pages/UserSettings.jsx";
+import PostPage from "./pages/PostPage";
 
 export default function App() {
     const {isAuthenticated, authUser} = useContext(AuthContext);
@@ -31,11 +32,13 @@ export default function App() {
             <Routes>
                 {isAuthenticated ? (
                     <>
-                        <Route path="/mes-questions" element={<MyQuestions/>}/>
-                        <Route path="/mon-profil" element={<Profile/>}/>
-                        <Route path="/mes-reponses" element={<MyResponses/>}/>
-                        <Route path="/mes-likes" element={<MyLikes/>}/>
-                        <Route path="/mon-compte" element={<MyAccount/>}/>
+                        <Route path="/myquestions" element={<MyQuestions/>}/>
+                        <Route path="/myprofile" element={<Profile/>}/>
+                        <Route path="/mycomments" element={<MyResponses/>}/>
+                        <Route path="/mylikes" element={<MyLikes/>}/>
+                        <Route path="/myaccount" element={<MyAccount/>}/>
+                        <Route path="/myanswers" element={<MyResponses/>}/>
+                        <Route path="/sendpost" element={<PostPage/>} />
                         <Route
                             path="/profile"
                             element={
@@ -44,7 +47,7 @@ export default function App() {
                                 </LayoutToolbarOnly>
                             }
                         />
-                    </>
+                        </>
                 ) : (
                     <>
                         <Route

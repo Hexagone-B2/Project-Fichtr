@@ -50,7 +50,7 @@ function ConnectedRoot() {
                 </svg>
                 <Link
                   to="/"
-                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrap focus:bg-gray-100 rounded-lg"
                 >
                   Accueil
                 </Link>
@@ -68,7 +68,7 @@ function ConnectedRoot() {
                 </svg>
                 <Link
                   to="/tags"
-                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrapfocus:bg-gray-100 rounded-lg"
                 >
                   Tags
                 </Link>
@@ -86,17 +86,13 @@ function ConnectedRoot() {
                 </svg>
                 <Link
                   to="/shoutbox"
-                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrapfocus:bg-gray-100 rounded-lg"
                 >
                   Shoutbox
                 </Link>
               </div>
             </li>
           </ul>
-
-          <div className="flex items-center text-xs whitespace-nowrap px-11 text-gray-500 rounded-lg group">
-            NAVIGATION PERSONNELLE
-          </div>
           <ul className="space-y-3 font-medium">
             <li>
               <div className="flex items-center">
@@ -112,8 +108,8 @@ function ConnectedRoot() {
                   />
                 </svg>
                 <Link
-                  to="/my-questions"
-                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  to="/myquestions"
+                  className="flex p-2 whitespace-nowrapfocus:bg-gray-100 rounded-lg"
                 >
                   Mes Questions
                 </Link>
@@ -133,8 +129,8 @@ function ConnectedRoot() {
                   />
                 </svg>
                 <Link
-                  to="/my-answers"
-                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  to="/myanswers"
+                  className="flex p-2 whitespace-nowrapfocus:bg-gray-100 rounded-lg"
                 >
                   Mes Réponses
                 </Link>
@@ -154,8 +150,8 @@ function ConnectedRoot() {
                   />
                 </svg>
                 <Link
-                  to="/my-likes"
-                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  to="/mylikes"
+                  className="flex p-2 whitespace-nowrapfocus:bg-gray-100 rounded-lg"
                 >
                   Mes Likes
                 </Link>
@@ -175,8 +171,8 @@ function ConnectedRoot() {
                   />
                 </svg>
                 <Link
-                  to="/my-account"
-                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  to="/myaccount"
+                  className="flex p-2 whitespace-nowrapfocus:bg-gray-100 rounded-lg"
                 >
                   Mon Compte
                 </Link>
@@ -222,7 +218,7 @@ const NonConnectedRoot = () => {
                 </svg>
                 <Link
                   to="/"
-                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrapfocus:bg-gray-100 rounded-lg"
                 >
                   Accueil
                 </Link>
@@ -240,7 +236,7 @@ const NonConnectedRoot = () => {
                 </svg>
                 <Link
                   to="/tags"
-                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrapfocus:bg-gray-100 rounded-lg"
                 >
                   Tags
                 </Link>
@@ -258,7 +254,7 @@ const NonConnectedRoot = () => {
                 </svg>
                 <Link
                   to="/shoutbox"
-                  className="flex p-2 whitespace-nowrap focus:bg-gray-300"
+                  className="flex p-2 whitespace-nowrapfocus:bg-gray-100 rounded-lg"
                 >
                   Shoutbox
                 </Link>

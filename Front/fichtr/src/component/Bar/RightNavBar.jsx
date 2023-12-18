@@ -21,7 +21,7 @@ function RightNavBar() {
           <hr/>
           <div className="flex flex-col flex-wrap pb-5 pt-2">
             {stats.tendance.map(e=>(
-              <Tag title={e}/>
+              <Tag title={e} key={Math.random()}/>
           ))}
           </div>
           <div className="flex items-center">
