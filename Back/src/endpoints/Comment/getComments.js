@@ -32,8 +32,9 @@ module.exports.getComments = (req,res)=>{
                                         result2Index[element2.comment_id] = true;
                                     });
                                     result.map((element) => {
-                                        element.liked = result2Index[element.id];
+                                        element.liked = result2Index[element.id] === true;
                                     });
+                                    res.json(result)
                                 }
                             })
                         }

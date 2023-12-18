@@ -6,7 +6,7 @@ module.exports.getSubjects = (req,res)=>{
         if (error){
             ite(res);
         }else{
-            res.json({list : result});
+            res.json(result);
         }
     })
 }

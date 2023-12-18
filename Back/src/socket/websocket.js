@@ -11,7 +11,6 @@ module.exports = (server) => {
     });
     let users = {};
     io.on('connection', (socket) => {
-        console.log('NEWUSER')
         //RECEPTION ET RENVOIE DES MESSAGES DE LA SHOUTBOX
         socket.on('shoutbox_message_send', (data) => {
             if (data.authorization && data.message) {

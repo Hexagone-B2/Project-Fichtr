@@ -1,5 +1,5 @@
 module.exports.nad = (res) => {
-    res.status(403).send('NOT_ALL_DATA');
+    res.status(400).send('NOT_ALL_DATA');
 }
 
 module.exports.ite = (res) => {

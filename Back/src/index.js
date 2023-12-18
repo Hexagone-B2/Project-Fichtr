@@ -30,14 +30,11 @@ const routes = require('./routes.js');
 const cors = require('cors');
 const helmet = require('helmet')
 app.use(cors({
-    // origin: ['http://localhost:3000','http://localhost:3001','http://localhost:3002','http://localhost:3003','https://dev.enzo-salson.fr'],
-    origin: (origin, callback) => {
-        callback(null, true)
-    },
+    origin: '*',
     methods: 'POST,GET,PUT',
     credentials: true,
-    exposedHeaders: ['set-cookie'],
 }));
+
 app.disable('x-powered-by')
 app.use(helmet({
     contentSecurityPolicy: false,
