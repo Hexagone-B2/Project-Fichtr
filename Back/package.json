@@ -7,6 +7,13 @@
     "start": "ssh -q -R 3003:localhost:3000 root@enzo-salson.fr -N >/dev/null & nodemon src/index.js",
     "local": "nodemon src/index.js"
   },
+  "contributors": [
+    {
+      "name": "Enzo Salson",
+      "email": "contact@enzo-salson.fr",
+      "url": "https://enzo-salson.fr"
+    }
+  ],
   "author": "Enzo Salson",
   "license": "Creative Commons Attribution-NonCommercial",
   "dependencies": {
