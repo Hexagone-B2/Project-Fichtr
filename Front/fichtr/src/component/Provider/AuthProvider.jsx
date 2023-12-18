@@ -30,6 +30,7 @@ export function AuthProvider({ children }) {
   //recuperer le token, le stocker en localstorage
   function loginUser(data) {
     localStorage.setItem("authorization", data);
+    authUser()
     setIsAuthenticated(true);
   }
 

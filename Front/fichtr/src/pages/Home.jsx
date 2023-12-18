@@ -10,6 +10,7 @@ export default function Home() {
   const [nb, setNb] = useState(0);
 
   useEffect(() => {
+    console.log('reset')
     function getContent() {
       axios
         .post("https://dev.enzo-salson.fr/api/getPosts", { nb: nb })
@@ -28,7 +29,7 @@ export default function Home() {
   return showOnePost ? (
     <PostOne id={idOnePost} setShowOnePost={setShowOnePost} />
   ) : (
-    <div>
+    <div className="h-full overflow-scroll">
       {idList.map((item) => (
         // Créer dynamiquement des composants enfants en fonction des éléments de la liste
         <Post
