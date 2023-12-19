@@ -87,31 +87,7 @@ function SubjectItem({ id, name, handleSubjectSelect }) {
     );
 }
 
-function ScrollTags() {
-    const [TagList, SetTagList] = useState(["Javascript", "React", "NodeJS"]);
 
-    return (
-        <div className="flex justify-center rounded items-center min-w-[8rem] min-h-[2.5rem] gap-2 px-2 bg-[#310046] hover:bg-[#510273] text-white">
-            <Dropdown
-                label="Tags"
-                dismissOnClick={false}
-            >
-                {TagList.map((element) => (
-                    <DropdownItem>{element}</DropdownItem>
-                ))}
-            </Dropdown>
-        </div>
-    );
-}
-
-
-function TagItem({ name }) {
-    return (
-        <DropdownItem>
-            {name}
-        </DropdownItem>
-    );
-}
 
 export default function PostForm() {
     return (
@@ -156,13 +132,12 @@ export default function PostForm() {
                                 <span className="sr-only">Format code</span>
                             </button>
                             <ScrollSubject />
-                            <ScrollTags />
                         </div>
                     </div>
                 </div>
                 <div className="px-4 py-2 bg-white rounded-b-lg">
                     <label htmlFor="editor" className="sr-only">
-                        Publish post
+                        Poster
                     </label>
                     <textarea
                         id="editor"

@@ -47,7 +47,6 @@ export default function PostOne({ id, setShowOnePost }) {
       })
       .catch((error) => console.log(error));
   }, []);
-  console.log("nbLikes =" + nbLikes);
 
   return (
     <div className="p-2 overflow-scroll">
