@@ -144,12 +144,22 @@ function UserSettings() {
     }
   }
 
+  const deleteAccount = ()=>{
+    if (localStorage.getItem('authorization')){
+      const headers = { authorization : localStorage.getItem('authorization') }
+      axios.post('https://dev.enzo-salson.fr/api/deleteUser',{},{headers}).then(response=>{
+        localStorage.removeItem('authorization');
+        window.location.href="/";
+      })
+    }
+  }
+
   return (
       <div className="flex justify-center items-center h-screen">
         <div className="flex justify-center gap-10">
           <div className="flex flex-col items-center border-2 h-fit w-64 p-5 gap-3">
             <img
-                crossorigin="anonymous"
+                crossOrigin="anonymous"
                 src={"https://dev.enzo-salson.fr/api/getProfilePic?id=" + id}
                 alt=""
                 className="rounded-full h-32 w-32"
@@ -214,6 +224,7 @@ function UserSettings() {
                 <input
                     type="button"
                     name="DeleteAccount"
+                    onClick={deleteAccount}
                     id="DeleteAccount"
                     value="Supprimer le compte"
                     className={`text-white flex justify-center rounded items-center min-w-[8rem] min-h-[2.5rem] gap-2 px-2 bg-[#910000] hover:bg-[#BD0101]`}
