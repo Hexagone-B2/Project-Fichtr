@@ -2,7 +2,7 @@ const {executeSQL} = require("../../func/mysql");
 const {checkAuth} = require("../../func/checkAuth");
 const {nad, ite} = require("../../func/error");
 module.exports.updateUnameMailBio = (req,res) => {
-    if (req.headers.authorization && req.body.username && req.body.bio && req.body.mail){
+    if (req.headers.authorization && req.body.username && req.body.hasOwnProperty('bio') && req.body.mail){
         checkAuth(req.headers.authorization, (error,decoded)=>{
             if (error){
                 console.log(error);
