@@ -11,6 +11,7 @@ function UserSettings() {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [image, setImage] = useState("");
+  const [confirm, setConfirm] = useState(false);
 
   useEffect(function () {
     if (localStorage.getItem("authorization")) {
@@ -50,7 +51,13 @@ function UserSettings() {
                 bio: bio,
               },
               { headers }
-          );
+          ).then(()=>{
+            setConfirm(true);
+            const timeout = setTimeout(()=>{
+                setConfirm(false)
+                clearTimeout(timeout);
+            },2000)
+          });
         } else {
           setUsernameVarErrorDiv(
               errorDiv("Le nom d'utilisateur est trop long")
@@ -215,8 +222,8 @@ function UserSettings() {
                     type="submit"
                     name="SubmitAccount"
                     id="SubmitAccount"
-                    value="Valider les modifications"
-                    className={`text-white flex justify-center rounded items-center min-w-[8rem] min-h-[2.5rem] gap-2 px-2 bg-[#310046] hover:bg-[#510273]`}
+                    value={confirm ? "Profil enregistré" : "Valider les modifications"}
+                    className={`flex justify-center rounded items-center min-w-[8rem] min-h-[2.5rem] gap-2 px-2 ${confirm ? 'bg-green-300 text-black' : 'bg-[#310046] hover:bg-[#510273] text-white'} `}
                 />
               </div>
             </form>
