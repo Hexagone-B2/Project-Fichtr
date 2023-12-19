@@ -21,7 +21,6 @@ module.exports = (server) => {
                             sender: decoded.username,
                             message: data.message
                         });
-                        console.log('ok')
                         socket.emit('send_confirmation', {error: false});
                     } else {
                         socket.emit('send_confirmation', {error: true, error_message: 'NOT_AUTHENTICATED'});
