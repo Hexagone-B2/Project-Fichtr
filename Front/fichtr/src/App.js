@@ -6,6 +6,9 @@ import Posts from "./pages/Posts.jsx";
 import Questions from "./pages/Questions";
 import MyResponses from "./pages/MyResponses";
 import MyLikes from "./pages/MyLikes";
+import Cgu from "./pages/Cgu";
+import MentionsLegales from "./pages/MentionsLegales";
+import Contact from "./pages/Contact";
 import MyAccount from "./pages/MyAccount";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -16,7 +19,12 @@ import Profile from "./pages/Profile";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./component/Provider/AuthContext.jsx";
 import UserSettings from "./component/UserSettings.jsx";
+<<<<<<< Updated upstream
 let a = 1
+=======
+
+
+>>>>>>> Stashed changes
 export default function App() {
   const { isAuthenticated, authUser } = useContext(AuthContext);
     setInterval(()=>{
@@ -30,7 +38,6 @@ export default function App() {
             <Route path="/mes-questions" element={<MyQuestions />} />
             <Route path="/mon-profil" element={<Profile />} />
             <Route path="/mes-reponses" element={<MyResponses />} />
-            <Route path="/mes-likes" element={<MyLikes />} />
             <Route path="/mon-compte" element={<MyAccount />} />
             <Route
               path="/profile"
@@ -88,6 +95,10 @@ export default function App() {
         <Route path="/tags" element={<Tags />} />
         <Route path="/shoutbox" element={<Shoutbox />} />
         <Route path="/posts" element={<Posts />} />
+        <Route path="/mes-likes" element={<MyLikes />} />
+        <Route path="/cgu" element={<Cgu />} />
+        <Route path="/mentions-legales" element={< MentionsLegales  />} />
+        <Route path="/contact" element={< Contact  />} />
         {/*Redirection par default, si l'utilisateur veux accéder a des routes qui n'existe pas*/}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
