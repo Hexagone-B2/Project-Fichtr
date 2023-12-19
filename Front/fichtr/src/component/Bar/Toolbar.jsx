@@ -29,7 +29,9 @@ function Toolbar() {
     return (
             <Navbar fluid className="fixed w-full z-10 max-h-32 top-0 shadow">
                 <Navbar.Brand as={Link} href="/">
+                    <Link to="/">
                     <img src={"/img/logo.png"} alt="logo" className="w-44"/>
+                    </Link>
                 </Navbar.Brand>
                 <form className={isAuthenticated ? "flex items-center mx-auto" : "flex items-center"}>
                     <TextInput icon={HiSearch} placeholder="Faire une recherche..."></TextInput>
