@@ -24,7 +24,6 @@ function ConnectedRoot() {
   const { logoutUser } = useContext(AuthContext);
 
   return (
-    <>
       <aside
         id="default-sidebar"
         className="w-64 bg-white"
@@ -190,13 +189,11 @@ function ConnectedRoot() {
           />
         </div>
       </aside>
-    </>
   );
 }
 
 const NonConnectedRoot = () => {
   return (
-    <>
       <aside id="default-sidebar" className="w-64 bg-white">
         <div className="h-3/4 px-3 py-36 space-y-3 overflow-y-auto">
           <div className="flex items-center text-xs whitespace-nowrap px-11 text-gray-500 rounded-lg group">
@@ -263,7 +260,6 @@ const NonConnectedRoot = () => {
           </ul>
         </div>
       </aside>
-    </>
   );
 };
 

@@ -28,7 +28,6 @@ export default function PostOne({ id, setShowOnePost }) {
       if (!mostLiked) setMostLiked(item);
       if (mostLiked.likes_count < item.likes_count) setMostLiked(item);
     });
-    console.log("mostLiked = " + mostLiked.id);
   }
 
   useEffect(() => {
@@ -52,16 +51,15 @@ export default function PostOne({ id, setShowOnePost }) {
     <div className="p-2 overflow-scroll">
       <Button
         title={"retour"}
-        theme={"pale"}
+        theme={"primary"}
         handleButton={() => setShowOnePost(false)}
       />
-
       <Post id={id} />
       <div>
         <h2>Top commentaire</h2>
         {mostLiked ? (
           <Comment
-            //  key={mostLiked.id}
+            key={mostLiked.id}
             user_id={mostLiked.user_id}
             body={mostLiked.body}
             username={mostLiked.username}
@@ -70,9 +68,7 @@ export default function PostOne({ id, setShowOnePost }) {
             isLiked={mostLiked.liked}
             gradient={`${mostLiked.likes_count / nbLikes}`}
           />
-        ) : (
-          ""
-        )}
+        ) : null}
       </div>
       <div className="flex flex-col p-1">
         <InputComment
