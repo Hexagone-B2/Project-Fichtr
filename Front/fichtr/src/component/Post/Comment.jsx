@@ -17,16 +17,7 @@ function Comment({
   const { isAuthenticated } = useContext(AuthContext);
   const [likesCount, setLikesCount] = useState(likes_count);
   const [liked, setLiked] = useState(isLiked);
-  // useEffect(() => {
-  //   axios
-  //     .post("https://dev.enzo-salson.fr/api/getLikesCountComment", {
-  //       comment_id: comment_id,
-  //     })
-  //     .then((response) => {
-  //       setLikesCount(response.data.num);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, []);
+
   function selectBgColor(gradient) {
     if (gradient < 0.1) return 100;
     if (gradient < 0.3) return 200;

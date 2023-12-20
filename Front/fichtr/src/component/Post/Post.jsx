@@ -8,8 +8,6 @@ import Loading from "../Loading";
 
 function Post({ id, setIdOnePost, setShowOnePost }) {
   const [post, setPost] = useState({});
-  const [liked, setLiked] = useState(false);
-  const [likesCount, setLikesCount] = useState(0);
   const { isAuthenticated } = useContext(AuthContext);
   const [clickable, setClickable] = useState(true);
     const [isLoading, setIsLoading] = useState(true)
@@ -24,7 +22,6 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
     }
     axios.post("https://dev.enzo-salson.fr/api/getPostInfo", { id: id }, { headers })
         .then((response) => {
-          setLiked(post.liked);
           setPost({
               title: response.data.title,
               body: response.data.body,
@@ -38,7 +35,7 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
           setIsLoading(false);
         })
         .catch((e) => console.log(e));
-  }, []);
+  },[]);
 
   const handleComments = (e) => {
     if (clickable) {
@@ -47,26 +44,25 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
     }
   };
 
-  const handleLike = (id) => {
+  const handleLike = () => {
     const headers = { authorization: localStorage.getItem("authorization") };
-    if (!liked) {
-      setLiked(true);
-      setLikesCount((prevState) => prevState + 1);
-
+    if (!post.liked) {
+      setPost(prevState => ({ ...prevState, liked : true }));
+      setPost(prevState => ({ ...prevState, likes: prevState.likes + 1 }));
       axios
           .post(
               "https://dev.enzo-salson.fr/api/like",
               { post_id: id },
               { headers }
           )
-          .then((response) => {})
+          .then(() => {})
           .catch((e) => {
-            setLiked(false);
-            setLikesCount((prevState) => prevState - 1);
+            setPost(prevState => ({ ...prevState, liked: false }));
+            setPost(prevState => ({ ...prevState, likes: prevState.likes - 1 }));
           });
     } else {
-      setLiked(false);
-      setLikesCount((prevState) => prevState - 1);
+      setPost(prevState => ({ ...prevState, liked: false }));
+      setPost(prevState => ({ ...prevState, likes: prevState.likes - 1 }));
       axios
           .post(
               "https://dev.enzo-salson.fr/api/unLike",
@@ -75,8 +71,8 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
           )
           .then((response) => {})
           .catch((e) => {
-            setLiked(true);
-            setLikesCount((prevState) => prevState + 1);
+            setPost(prevState => ({ ...prevState, liked: true }));
+            setPost(prevState => ({ ...prevState, likes: prevState.likes + 1 }));
           });
     }
   };
@@ -94,8 +90,8 @@ function Post({ id, setIdOnePost, setShowOnePost }) {
           <span className="text-gray-500 flex items-center">
             {isAuthenticated ? (
                 <img
-                    onClick={() => handleLike(id)}
-                    src={liked ? "./img/heart-solid.svg" : "./img/heart.svg"}
+                    onClick={handleLike}
+                    src={post.liked ? "./img/heart-solid.svg" : "./img/heart.svg"}
                     alt="like"
                 />
             ) : (

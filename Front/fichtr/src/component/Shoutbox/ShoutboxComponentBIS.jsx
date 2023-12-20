@@ -51,7 +51,7 @@ function ShoutboxMessageList({messageList, setMessageList}) {
             setMessageList([...messageList, { username: data.sender, pfp: data.sender_id, content: data.message, sended:false }]);
             scrollBottom();
         });
-    });
+    },[]);
 
     return (
         <div className={'pb-10'}>

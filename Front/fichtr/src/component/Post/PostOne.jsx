@@ -46,7 +46,7 @@ export default function PostOne({ id, setShowOnePost }) {
         getMostLiked(response.data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  },[]);
 
   return (
     <div className="p-2 overflow-scroll">
