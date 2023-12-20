@@ -4,11 +4,14 @@ import { useState } from "react";
 import ChargeContent from "../component/ChargeContent";
 import Button from "../component/Button";
 
+import PrivateMessages from "../composant/PrivateMessages.jsx"
+
 export default function Home(props) {
   let [nb, setNb] = useState(0);
 
   return (
     <>
+
       <ChargeContent
 
         endpoint={"https://dev.enzo-salson.fr/api/getPosts"}
@@ -17,7 +20,8 @@ export default function Home(props) {
         <Post />
       </ChargeContent>
 
-
+      <PrivateMessages/>
+        
 
       <button
         onClick={() => setNb((prevState) => prevState + 1)}

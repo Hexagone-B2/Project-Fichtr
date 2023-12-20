@@ -3,8 +3,9 @@ import Toolbar from "../component/Bar/Toolbar";
 import MpEnvoye from "../component/Mp/MpEnvoye";
 import MpRecu from "../component/Mp/MpRecu";
 import ProfileInterlocuteur from "../component/Mp/ProfileInterlocuteur";
+import Button from "../component/Button.jsx"
 
-export default function Layout(props) {
+export default function Layout({props, handleClick}) {
     return (
         <>
             <Toolbar />
