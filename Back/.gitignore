@@ -1,7 +1,4 @@
 node_modules
 .idea
 .DS_Store
-dev.enzo-salson.fr-le-ssl.conf
-chat
-/t.html
 .env
