@@ -8,7 +8,7 @@ module.exports.getPosts = (req, res) => {
                 console.log(error);
                 ite(res);
             } else {
-                res.json({tab: results.map(element => element.id)})
+                res.json(results.map(element => element.id))
             }
         })
     }else{
