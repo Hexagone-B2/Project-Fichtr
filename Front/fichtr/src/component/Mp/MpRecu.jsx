@@ -4,7 +4,7 @@ function MpRecu() {
     return (
 
         <div className="mt-12 ml-16">
-            <div className="block max-w-sm p-6 rounded-lg">
+            <div className="block max-w-sm p-6 rounded-lg bg-white">
                 <div className="flex items-center mb-4">
                     <img src="./img/placeholder.webp" className="w-12 h-12 rounded-lg mr-4"/>
                     <span className="text-xl font-bold">Mimi Mathy</span>
