@@ -2,7 +2,6 @@ import Post from "../component/Post/Post";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PostOne from "../component/Post/PostOne";
-import io from "socket.io-client";
 
 export default function Home() {
   const [idList, setIdList] = useState([]);
