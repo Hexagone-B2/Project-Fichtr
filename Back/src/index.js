@@ -20,9 +20,6 @@ require('./socket/websocket')(server);
 //Utils
 const resolve = require('path').resolve
 
-//DATA PARSER
-const bodyParser = require('body-parser');
-
 //ROUTES
 const routes = require('./routes.js');
 
@@ -41,8 +38,8 @@ app.use(helmet({
 }))
 
 // MIDDLEWARES
-app.use(bodyParser.urlencoded({extended : true}))
-app.use(bodyParser.json());
+app.use(express.urlencoded({extended : true}))
+app.use(express.json());
 app.use('/api',routes);
 
 // app.post('/t', (req, res) => {
