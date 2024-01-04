@@ -8,7 +8,7 @@ describe('API Tests', () => {
     it('https://dev.enzo-salson.fr/api/getPosts doit retourner un json de posts en requête post', (done) => {
         chai
             .request('https://dev.enzo-salson.fr')
-            .post('/api/getPosts')  // Utilisez .post() au lieu de .get() pour une requête POST
+            .post('/api/getPosts')
             .send({nb: 0})
             .end((err, res) => {
                 expect(err).to.be.null;
