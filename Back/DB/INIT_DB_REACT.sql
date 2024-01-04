@@ -91,11 +91,11 @@ VALUES
 -- Ajouter des profils
 INSERT INTO Profile (bio, url_personnal_site, user_id)
 VALUES
-    ('Lorem ipsum dolor sit amet.', 'http://www.example.com', 1),
+    ('Lorem ipsum dolor sit amet.', 'https://www.example.com', 1),
     ('Consectetur adipiscing elit.', NULL, 2),
     ('Pellentesque ac tristique elit.', NULL, 3),
-    ('Vestibulum cursus augue at neque.', 'http://www.example.net', 4),
-    ('Aenean euismod ultricies neque.', 'http://www.example.org', 5);
+    ('Vestibulum cursus augue at neque.', 'https://www.example.net', 4),
+    ('Aenean euismod ultricies neque.', 'https://www.example.org', 5);
 
 -- Ajouter des sujets
 INSERT INTO Subject (name)

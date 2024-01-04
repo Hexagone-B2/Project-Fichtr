@@ -1,1 +1,2 @@
-module.exports.SECRET_KEY = "H7o0^N$LYH6Tra.gcPGZ_n2zs&XK.v{D";
+require('dotenv').config();
+module.exports.SECRET_KEY = process.env.JWT_KEY;

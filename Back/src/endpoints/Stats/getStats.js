@@ -5,7 +5,7 @@ module.exports.getStats = (req, res) => {
                         (SELECT COUNT(*) FROM User) AS total_users,
                         (SELECT username FROM User ORDER BY id DESC LIMIT 1) AS last_user;`, [], (error, result) => {
         if (!error) {
-            executeSQL(`SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(tags, ',', n), ',', -1) AS tag_word,
+            executeSQL(`SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(replace(tags,' ',''), ',', n), ',', -1) AS tag_word,
                                COUNT(*) AS word_count
                         FROM Tags
                                  JOIN (SELECT 1 AS n
