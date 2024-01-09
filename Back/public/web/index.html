@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>testwebsocket</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<button id="sendButton">Envoyer "Salut" et vérifier en console si la serveur répond</button>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const socket = io.connect("wss://dev.enzo-salson.fr");
+        document.getElementById('sendButton').addEventListener('click', () => {
+            socket.emit('shoutbox_message_send', {
+                authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVuem8ifQ.TeX2jC9QsggA-75HF0koEBabmprVf7rfTQ4ueOYjDww',
+                message: 'coucou'
+            });
+        });
+
+        socket.on('send_confirmation', (message) => {
+            if (message.error) {
+                console.log(message.error_message);
+            }
+        });
+        socket.on('shoutbox_message_receive', (message) => {
+            console.log(message)
+        })
+    });
+</script>
+</body>
+</html>
