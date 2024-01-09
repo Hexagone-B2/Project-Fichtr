@@ -5,7 +5,7 @@ import axios from "axios";
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState("");
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(undefined);
 
   function authUser() {
     if (localStorage.getItem("authorization")) {
@@ -13,10 +13,11 @@ export function AuthProvider({ children }) {
       axios
         .post("https://dev.enzo-salson.fr/api/isAuthenticated", {}, { headers })
         .then((response) => {
-          if (response.data.authenticated === true) {
+          if (response.data.authenticated) {
             setIsAuthenticated(true);
-            setUserId(response.data.user_id);
-            setUserName(response.data.username);
+            setUserId(response.data.user.id);
+            setUserName(response.data.user.username);
+            localStorage.setItem('authorization',response.data.refreshedToken)
           }
         })
         .catch((e) => {
@@ -25,9 +26,11 @@ export function AuthProvider({ children }) {
     }
   }
 
+
   //recuperer le token, le stocker en localstorage
   function loginUser(data) {
     localStorage.setItem("authorization", data);
+    authUser()
     setIsAuthenticated(true);
   }
 

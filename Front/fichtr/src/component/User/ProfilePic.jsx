@@ -22,7 +22,7 @@ export default function ProfilePicture({ userId, size }) {
           : ""
       }
       alt="avatar"
-      className={"rounded-full mr-4" + selectSize(size)}
+      className={"rounded-full mr-4 " + selectSize(size)}
     />
   );
 }

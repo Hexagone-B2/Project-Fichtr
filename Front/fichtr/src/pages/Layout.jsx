@@ -3,20 +3,16 @@ import NavbarLeft from "../component/Bar/LeftNavbar";
 import Toolbar from "../component/Bar/Toolbar";
 
 export default function Layout(props) {
-  return (
-    <>
-      <Toolbar />
-      <div className="flex flex-row w-screen justify-between">
-        <div className="top-[8rem] relative">
-          <NavbarLeft />
+    return (
+        <div>
+            <Toolbar/>
+            <div className="mt-[7.5rem] grid grid-cols-4 gap-2 bg-[#fafafa] overflow-scroll">
+                <NavbarLeft/>
+                <div className="col-span-2 max-h-[88vh] bg-[#fafafa]">
+                    {props.children}
+                </div>
+                <RightNavBar/>
+            </div>
         </div>
-        <div className="z-0 top-[8rem] relative w-full overflow-hidden bg-[#fafafa]">
-          {props.children}
-        </div>
-        <div className="top-[8rem] relative bg-[#fafafa]">
-          <RightNavBar />
-        </div>
-      </div>
-    </>
-  );
+    );
 }
