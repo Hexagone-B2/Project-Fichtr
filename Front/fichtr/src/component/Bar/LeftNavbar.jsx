@@ -4,6 +4,7 @@ import { AuthContext } from "../Provider/AuthContext";
 import Button from "../Button";
 
 const arrowDisc = (
+
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -21,7 +22,7 @@ const arrowDisc = (
 );
 
 function ConnectedRoot() {
-  const { logoutUser } = useContext(AuthContext);
+    const { logoutUser } = useContext(AuthContext);
 
   return (
       <aside
@@ -190,6 +191,7 @@ function ConnectedRoot() {
         </div>
       </aside>
   );
+
 }
 
 const NonConnectedRoot = () => {
